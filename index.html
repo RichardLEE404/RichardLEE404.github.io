@@ -299,7 +299,7 @@
       
         
           
-            <h1 id="floor报错注入原理"><a href="#floor报错注入原理" class="headerlink" title="floor报错注入原理"></a>floor报错注入原理</h1><h2 id="0x00-废话"><a href="#0x00-废话" class="headerlink" title="0x00 废话"></a>0x00 废话</h2><p>​        对于报错注入我其实不陌生，在渗透和流量分析中经常会用到，但是并没有认真思考过产生报错的原因，今天学习了floor报错注入的原理，后面再用同样的方式继续学习其他报错注入。</p>
+            <h2 id="0x00-废话"><a href="#0x00-废话" class="headerlink" title="0x00 废话"></a>0x00 废话</h2><p>​        对于报错注入我其实不陌生，在渗透和流量分析中经常会用到，但是并没有认真思考过产生报错的原因，今天学习了floor报错注入的原理，后面再用同样的方式继续学习其他报错注入。</p>
 <h2 id="0x01-floor报错注入原理"><a href="#0x01-floor报错注入原理" class="headerlink" title="0x01 floor报错注入原理"></a>0x01 floor报错注入原理</h2><p>​        为了弄清报错注入的原理，首先先创建了一个名为sqli的数据库，然后建表插入数据：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create database sqli;</span><br><span class="line">mysql&gt; create table user (</span><br><span class="line">        id int(11) not null auto_increment primary key,</span><br><span class="line">        name varchar(20) not null,</span><br><span class="line">        pass varchar(32) not null</span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">mysql&gt; insert into user (name, pass) values (&#39;admin&#39;, md5(&#39;admin&#39;)), (&#39;guest&#39;, md5(&#39;guest&#39;));</span><br></pre></td></tr></table></figure>
 <p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/1.png" alt></p>
