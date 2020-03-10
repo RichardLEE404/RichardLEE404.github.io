@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Web安全," />
 
 
 
@@ -79,23 +79,24 @@
 
 
 
-<meta name="description" content="floor报错注入原理0x00 废话​        对于报错注入我其实不陌生，在渗透和流量分析中经常会用到，但是并没有认真思考过产生报错的原因，今天学习了floor报错注入的原理，后面再用同样的方式继续学习其他报错注入。 0x01 floor报错注入原理​        为了弄清报错注入的原理，首先先创建了一个名为sqli的数据库，然后建表插入数据： 12345678mysql&gt; crea">
+<meta name="description" content="floor报错注入原理0x00 废话对于报错注入我其实不陌生，在渗透和流量分析中经常会用到，但是并没有认真思考过产生报错的原因，今天学习了floor报错注入的原理，后面再用同样的方式继续学习其他报错注入。0x01 floor报错注入原理为了弄清报错注入的原理，首先先创建了一个名为sqli的数据库，然后建表插入数据：12345678mysql&gt; create database sqli;mys">
 <meta property="og:type" content="article">
 <meta property="og:title" content="floor报错注入原理">
 <meta property="og:url" content="http://yoursite.com/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="RichardLEE&#39;s Blog">
-<meta property="og:description" content="floor报错注入原理0x00 废话​        对于报错注入我其实不陌生，在渗透和流量分析中经常会用到，但是并没有认真思考过产生报错的原因，今天学习了floor报错注入的原理，后面再用同样的方式继续学习其他报错注入。 0x01 floor报错注入原理​        为了弄清报错注入的原理，首先先创建了一个名为sqli的数据库，然后建表插入数据： 12345678mysql&gt; crea">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328182054124-1218286893.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328182826674-90268223.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328182915619-1812693900.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328183121059-1851310734.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328184059122-1731939458.png">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328192507091-1442759645.png">
-<meta property="article:published_time" content="2020-03-10T10:21:54.234Z">
-<meta property="article:modified_time" content="2020-03-10T10:52:54.807Z">
+<meta property="og:description" content="floor报错注入原理0x00 废话对于报错注入我其实不陌生，在渗透和流量分析中经常会用到，但是并没有认真思考过产生报错的原因，今天学习了floor报错注入的原理，后面再用同样的方式继续学习其他报错注入。0x01 floor报错注入原理为了弄清报错注入的原理，首先先创建了一个名为sqli的数据库，然后建表插入数据：12345678mysql&gt; create database sqli;mys">
+<meta property="og:image" content="http://yoursite.com/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/6.png">
+<meta property="article:published_time" content="2020-03-10T11:04:01.000Z">
+<meta property="article:modified_time" content="2020-03-10T11:11:07.395Z">
 <meta property="article:author" content="Richard LEE">
+<meta property="article:tag" content="Web安全">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328182054124-1218286893.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/1.png">
 
 
 
@@ -267,7 +268,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-10T18:21:54+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-10T19:04:01+08:00">
                 2020-03-10
               </time>
             
@@ -305,37 +306,28 @@
       
 
       
-        <h1 id="floor报错注入原理"><a href="#floor报错注入原理" class="headerlink" title="floor报错注入原理"></a>floor报错注入原理</h1><h2 id="0x00-废话"><a href="#0x00-废话" class="headerlink" title="0x00 废话"></a>0x00 废话</h2><p>​        对于报错注入我其实不陌生，在渗透和流量分析中经常会用到，但是并没有认真思考过产生报错的原因，今天学习了floor报错注入的原理，后面再用同样的方式继续学习其他报错注入。</p>
-<h2 id="0x01-floor报错注入原理"><a href="#0x01-floor报错注入原理" class="headerlink" title="0x01 floor报错注入原理"></a>0x01 floor报错注入原理</h2><p>​        为了弄清报错注入的原理，首先先创建了一个名为sqli的数据库，然后建表插入数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create database sqli;</span><br><span class="line">mysql&gt; create table user (</span><br><span class="line">        id int(11) not null auto_increment primary key,</span><br><span class="line">        name varchar(20) not null,</span><br><span class="line">        pass varchar(32) not null</span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">mysql&gt; insert into user (name, pass) values (&#39;admin&#39;, md5(&#39;admin&#39;)), (&#39;guest&#39;, md5(&#39;guest&#39;));</span><br></pre></td></tr></table></figure>
-<p><img src="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328182054124-1218286893.png" alt=""></p>
-<p>​        首先先看一个基于floor的报错注入语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*),(concat(floor(rand(0)*2),(select version())))x from user group by x;</span><br></pre></td></tr></table></figure>
+        <h1 id="floor报错注入原理"><a href="#floor报错注入原理" class="headerlink" title="floor报错注入原理"></a>floor报错注入原理</h1><h2 id="0x00-废话"><a href="#0x00-废话" class="headerlink" title="0x00 废话"></a>0x00 废话</h2><pre><code>对于报错注入我其实不陌生，在渗透和流量分析中经常会用到，但是并没有认真思考过产生报错的原因，今天学习了floor报错注入的原理，后面再用同样的方式继续学习其他报错注入。</code></pre><h2 id="0x01-floor报错注入原理"><a href="#0x01-floor报错注入原理" class="headerlink" title="0x01 floor报错注入原理"></a>0x01 floor报错注入原理</h2><pre><code>为了弄清报错注入的原理，首先先创建了一个名为sqli的数据库，然后建表插入数据：</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create database sqli;</span><br><span class="line">mysql&gt; create table user (</span><br><span class="line">        id int(11) not null auto_increment primary key,</span><br><span class="line">        name varchar(20) not null,</span><br><span class="line">        pass varchar(32) not null</span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">mysql&gt; insert into user (name, pass) values (&#39;admin&#39;, md5(&#39;admin&#39;)), (&#39;guest&#39;, md5(&#39;guest&#39;));</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/1.png" alt></p>
+<pre><code>首先先看一个基于floor的报错注入语句：</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*),(concat(floor(rand(0)*2),(select version())))x from user group by x;</span><br></pre></td></tr></table></figure>
 
-<p>​        如果是第一次接触报错注入的话，一般会有这么几个问题：</p>
-<p>​        Q1.floor()函数是什么？</p>
-<p>A1.floor函数的作用是返回小于等于该值的最大整数,也可以理解为向下取整，只保留整数部分。</p>
-<p>​        Q2.rand(0)是什么意思？</p>
-<p>A2.rand()函数可以用来生成0或1，但是rand(0)和rand()还是有本质区别的，rand(0)相当于给rand()函数传递了一个参数，然后rand()函数会根据0这个参数进行随机数成成。rand()生成的数字是完全随机的，而rand(0)是有规律的生成，我们可以在数据库中尝试一下。首先测试rand()</p>
-<p><img src="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328182826674-90268223.png" alt=""></p>
+<pre><code>如果是第一次接触报错注入的话，一般会有这么几个问题：
+
+Q1.floor()函数是什么？</code></pre><p>A1.floor函数的作用是返回小于等于该值的最大整数,也可以理解为向下取整，只保留整数部分。</p>
+<pre><code>Q2.rand(0)是什么意思？</code></pre><p>A2.rand()函数可以用来生成0或1，但是rand(0)和rand()还是有本质区别的，rand(0)相当于给rand()函数传递了一个参数，然后rand()函数会根据0这个参数进行随机数成成。rand()生成的数字是完全随机的，而rand(0)是有规律的生成，我们可以在数据库中尝试一下。首先测试rand()</p>
+<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/2.png" alt></p>
 <p>　　再测试一下rand(0)的效果</p>
-<p><img src="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328182915619-1812693900.png" alt=""></p>
-<p>​        很显然rand(0)是伪随机的，有规律可循，这也是我们采用rand(0)进行报错注入的原因，rand(0)是稳定的，这样每次注入都会报错，而rand()则需要碰运气了，我们测试结果如下</p>
-<p><img src="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328183121059-1851310734.png" alt=""></p>
-<p>​        Q3.为什么会出现报错？</p>
-<p>　　A3.我们看一下报错的内容：Duplicate entry ‘15.5.53’ for key ‘group_key’。意思是说group_key条目重复。我们使用group by进行分组查询的时候，数据库会生成一张虚拟表</p>
-<p><img src="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328184059122-1731939458.png" alt=""></p>
-<p>​        在这张虚拟表中，group by后面的字段作为主键，所以这张表中主键是name，这样我们就基本弄清报错的原因了，其原因主要是因为虚拟表的主键重复。按照MySQL的官方说法，group by要进行两次运算，第一次是拿group by后面的字段值到虚拟表中去对比前，首先获取group by后面的值；第二次是假设group by后面的字段的值在虚拟表中不存在，那就需要把它插入到虚拟表中，这里在插入时会进行第二次运算，由于rand函数存在一定的随机性，所以第二次运算的结果可能与第一次运算的结果不一致，但是这个运算的结果可能在虚拟表中已经存在了，那么这时的插入必然导致主键的重复，进而引发错误。</p>
-<h2 id="0x02-案例"><a href="#0x02-案例" class="headerlink" title="0x02 案例"></a>0x02 案例</h2><p>​        数据库可以继续使用之前的数据库，我们在Web根目录下建立sqli.php</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$conn &#x3D; mysql_connect(&quot;localhost&quot;, &quot;root&quot;, &quot;123456&quot;); &#x2F;&#x2F; 连接数据库，账号root，密码root</span><br><span class="line">if (!$conn) &#123;</span><br><span class="line">    die(&quot;Connection failed: &quot; . mysql_error());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mysql_select_db(&quot;sqli&quot;, $conn);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; verify login info</span><br><span class="line">if (isset($_GET[&#39;name&#39;]) &amp;&amp; isset($_GET[&#39;pass&#39;])) &#123;</span><br><span class="line">    $name &#x3D; $_GET[&#39;name&#39;];</span><br><span class="line">    $pass &#x3D; md5($_GET[&#39;pass&#39;]);</span><br><span class="line"></span><br><span class="line">    $query &#x3D; &quot;select * from user where name&#x3D;&#39;$name&#39; and pass&#x3D;&#39;$pass&#39;&quot;;</span><br><span class="line"></span><br><span class="line">    if ($result &#x3D; mysql_query($query, $conn)) &#123;</span><br><span class="line">        $row &#x3D; mysql_fetch_array($result, MYSQL_ASSOC);</span><br><span class="line"></span><br><span class="line">        if ($row) &#123;</span><br><span class="line">            echo &quot;&lt;script&gt;alert(&#39;login successful!&#39;);&lt;&#x2F;script&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        die(&quot;Operation error: &quot; . mysql_error());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mysql_close();</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Login&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;center&gt;</span><br><span class="line">    &lt;form method&#x3D;&quot;get&quot; action&#x3D;&quot;&quot;&gt;</span><br><span class="line">        &lt;label&gt;Username:&lt;&#x2F;label&gt;&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;name&quot; value&#x3D;&quot;&quot;&#x2F;&gt;&lt;br&#x2F;&gt;</span><br><span class="line">        &lt;label&gt;Password:&lt;&#x2F;label&gt;&lt;input type&#x3D;&quot;password&quot; name&#x3D;&quot;pass&quot; value&#x3D;&quot;&quot;&#x2F;&gt;&lt;br&#x2F;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;login&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/3.png" alt></p>
+<pre><code>很显然rand(0)是伪随机的，有规律可循，这也是我们采用rand(0)进行报错注入的原因，rand(0)是稳定的，这样每次注入都会报错，而rand()则需要碰运气了，我们测试结果如下</code></pre><p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/4.png" alt></p>
+<pre><code>Q3.为什么会出现报错？</code></pre><p>　　A3.我们看一下报错的内容：Duplicate entry ‘15.5.53’ for key ‘group_key’。意思是说group_key条目重复。我们使用group by进行分组查询的时候，数据库会生成一张虚拟表</p>
+<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/5.png" alt></p>
+<pre><code>在这张虚拟表中，group by后面的字段作为主键，所以这张表中主键是name，这样我们就基本弄清报错的原因了，其原因主要是因为虚拟表的主键重复。按照MySQL的官方说法，group by要进行两次运算，第一次是拿group by后面的字段值到虚拟表中去对比前，首先获取group by后面的值；第二次是假设group by后面的字段的值在虚拟表中不存在，那就需要把它插入到虚拟表中，这里在插入时会进行第二次运算，由于rand函数存在一定的随机性，所以第二次运算的结果可能与第一次运算的结果不一致，但是这个运算的结果可能在虚拟表中已经存在了，那么这时的插入必然导致主键的重复，进而引发错误。</code></pre><h2 id="0x02-案例"><a href="#0x02-案例" class="headerlink" title="0x02 案例"></a>0x02 案例</h2><pre><code>数据库可以继续使用之前的数据库，我们在Web根目录下建立sqli.php</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$conn &#x3D; mysql_connect(&quot;localhost&quot;, &quot;root&quot;, &quot;123456&quot;); &#x2F;&#x2F; 连接数据库，账号root，密码root</span><br><span class="line">if (!$conn) &#123;</span><br><span class="line">    die(&quot;Connection failed: &quot; . mysql_error());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mysql_select_db(&quot;sqli&quot;, $conn);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; verify login info</span><br><span class="line">if (isset($_GET[&#39;name&#39;]) &amp;&amp; isset($_GET[&#39;pass&#39;])) &#123;</span><br><span class="line">    $name &#x3D; $_GET[&#39;name&#39;];</span><br><span class="line">    $pass &#x3D; md5($_GET[&#39;pass&#39;]);</span><br><span class="line"></span><br><span class="line">    $query &#x3D; &quot;select * from user where name&#x3D;&#39;$name&#39; and pass&#x3D;&#39;$pass&#39;&quot;;</span><br><span class="line"></span><br><span class="line">    if ($result &#x3D; mysql_query($query, $conn)) &#123;</span><br><span class="line">        $row &#x3D; mysql_fetch_array($result, MYSQL_ASSOC);</span><br><span class="line"></span><br><span class="line">        if ($row) &#123;</span><br><span class="line">            echo &quot;&lt;script&gt;alert(&#39;login successful!&#39;);&lt;&#x2F;script&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        die(&quot;Operation error: &quot; . mysql_error());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mysql_close();</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Login&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;center&gt;</span><br><span class="line">    &lt;form method&#x3D;&quot;get&quot; action&#x3D;&quot;&quot;&gt;</span><br><span class="line">        &lt;label&gt;Username:&lt;&#x2F;label&gt;&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;name&quot; value&#x3D;&quot;&quot;&#x2F;&gt;&lt;br&#x2F;&gt;</span><br><span class="line">        &lt;label&gt;Password:&lt;&#x2F;label&gt;&lt;input type&#x3D;&quot;password&quot; name&#x3D;&quot;pass&quot; value&#x3D;&quot;&quot;&#x2F;&gt;&lt;br&#x2F;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;login&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
 
-<p>​        在代码的11-14行是登陆验证模块，可以看到程序以GET形式获取了name和pass参数，没有经过任何过滤直接带入了查询语句，这里明显的存在SQL注入漏洞，我们用floor()报错注入进行尝试。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost&#x2F;sqli.php?name&#x3D;&#39; or (select 1 from(select count(*),concat(user(),0x7e,floor(rand(0)*2))x from information_schema.tables group by x)a) # &amp;pass&#x3D;123</span><br></pre></td></tr></table></figure>
+<pre><code>在代码的11-14行是登陆验证模块，可以看到程序以GET形式获取了name和pass参数，没有经过任何过滤直接带入了查询语句，这里明显的存在SQL注入漏洞，我们用floor()报错注入进行尝试。</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost&#x2F;sqli.php?name&#x3D;&#39; or (select 1 from(select count(*),concat(user(),0x7e,floor(rand(0)*2))x from information_schema.tables group by x)a) # &amp;pass&#x3D;123</span><br></pre></td></tr></table></figure>
 
 <p>　　我们再分别用updatexml()和extractvalue()分别进行尝试（原理各不相同，但是思路均是认为构造数据库的错误）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost&#x2F;sqli.php?name&#x3D;&#39; or extractvalue(1,concat(user(),0x7e,version())) # &amp;pass&#x3D;1</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;localhost&#x2F;index.php?name&#x3D;&#39; or updatexml(1,concat(user(),0x7e,version()),1) # &amp;pass&#x3D;1</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img2018.cnblogs.com/blog/1407441/201903/1407441-20190328192507091-1442759645.png" alt=""></p>
+<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/6.png" alt></p>
 
       
     </div>
@@ -351,11 +343,33 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
+          
+        </div>
+      
 
       
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/10/1/" rel="next" title="1">
+                <i class="fa fa-chevron-left"></i> 1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
@@ -429,7 +443,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -437,6 +451,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
             
 
           </nav>
