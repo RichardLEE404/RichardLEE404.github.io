@@ -79,23 +79,20 @@
 
 
 
-<meta name="description" content="Forensics1这个题目提示了关注HTTP部分，下载之后用wireshark打开，过滤出http，观察一下数据包。  发现以GET方式请求了一张名为s3cret.png的图片，怀疑flag就在图片里，下一步需要把图片还原。方法是file-Export Objects-HTTP，然后选中需要还原的图片即可。打开图片拿到flag。  Forensics2题目提示something about fi">
+<meta name="description" content="Reverse Sign In是一道逆向签到题，签到级别的逆向暂时还在我能力范围内…首先下载文件扔进IDA，然后shift+F12搜索字符串，进入sub_4006E1，f5大法查看伪代码： 1234567891011121314151617181920212223242526__int64 sub_4006E1()&amp;#123;  __int64 result; &#x2F;&#x2F; rax@2  __int64">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Forensics">
-<meta property="og:url" content="http://yoursite.com/2020/03/13/Forensics/index.html">
+<meta property="og:title" content="Reverse Sign In">
+<meta property="og:url" content="http://yoursite.com/2020/03/14/Reverse-Sign-In/index.html">
 <meta property="og:site_name" content="RichardLEE&#39;s Blog">
-<meta property="og:description" content="Forensics1这个题目提示了关注HTTP部分，下载之后用wireshark打开，过滤出http，观察一下数据包。  发现以GET方式请求了一张名为s3cret.png的图片，怀疑flag就在图片里，下一步需要把图片还原。方法是file-Export Objects-HTTP，然后选中需要还原的图片即可。打开图片拿到flag。  Forensics2题目提示something about fi">
-<meta property="og:image" content="http://yoursite.com/2020/03/13/Forensics/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/13/Forensics/2.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/13/Forensics/3.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/13/Forensics/4.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/13/Forensics/5.png">
-<meta property="article:published_time" content="2020-03-13T04:24:36.000Z">
-<meta property="article:modified_time" content="2020-03-13T05:37:01.756Z">
+<meta property="og:description" content="Reverse Sign In是一道逆向签到题，签到级别的逆向暂时还在我能力范围内…首先下载文件扔进IDA，然后shift+F12搜索字符串，进入sub_4006E1，f5大法查看伪代码： 1234567891011121314151617181920212223242526__int64 sub_4006E1()&amp;#123;  __int64 result; &#x2F;&#x2F; rax@2  __int64">
+<meta property="og:image" content="http://yoursite.com/2020/03/14/Reverse-Sign-In/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/14/Reverse-Sign-In/2.png">
+<meta property="article:published_time" content="2020-03-14T05:29:36.000Z">
+<meta property="article:modified_time" content="2020-03-14T06:12:33.638Z">
 <meta property="article:author" content="Richard LEE">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/13/Forensics/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/14/Reverse-Sign-In/1.png">
 
 
 
@@ -125,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/13/Forensics/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/14/Reverse-Sign-In/"/>
 
 
 
 
 
-  <title>Forensics | RichardLEE's Blog</title>
+  <title>Reverse Sign In | RichardLEE's Blog</title>
   
 
 
@@ -238,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/13/Forensics/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/Reverse-Sign-In/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Richard LEE">
@@ -255,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Forensics</h1>
+          <h1 class="post-title" itemprop="name headline">Reverse Sign In</h1>
         
 
         <div class="post-meta">
@@ -267,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-13T12:24:36+08:00">
-                2020-03-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T13:29:36+08:00">
+                2020-03-14
               </time>
             
 
@@ -305,19 +302,18 @@
       
 
       
-        <h2 id="Forensics1"><a href="#Forensics1" class="headerlink" title="Forensics1"></a>Forensics1</h2><p>这个题目提示了关注HTTP部分，下载之后用wireshark打开，过滤出http，观察一下数据包。</p>
-<p><img src="/2020/03/13/Forensics/1.png" alt></p>
-<p>发现以GET方式请求了一张名为s3cret.png的图片，怀疑flag就在图片里，下一步需要把图片还原。方法是file-Export Objects-HTTP，然后选中需要还原的图片即可。打开图片拿到flag。</p>
-<p><img src="/2020/03/13/Forensics/2.png" alt></p>
-<h2 id="Forensics2"><a href="#Forensics2" class="headerlink" title="Forensics2"></a>Forensics2</h2><p>题目提示something about file，打开数据包发现协议还不少，简单梳理一下数据包的内容：首先ping了一下，然后三次握手建立TCP连接，SSH远程连接之后使用NFS网络文件系统远程访问文件。结合题目给出的提示，高度怀疑flag在远程访问文件的时候出现，因此首先过滤出NFS协议。</p>
-<p><img src="/2020/03/13/Forensics/3.png" alt></p>
-<p>这里其实是NFS执行的一个写操作，虽然题很简单，但是也借此机会回顾一下NFS写操作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">No.375 客户端向服务器查询自己的权限，RD、LU、MD、XT、DL</span><br><span class="line">No.376 服务器收到请求，返回allowed的权限 RD、LU、MD、XT、DL</span><br><span class="line">No.378 客户端请求服务器查找flag.txt.gz文件，要求返回其句柄</span><br><span class="line">No.379 服务器回应查找失败，没有此文件，并创建此文件，返回给客户端此文件句柄</span><br><span class="line">No.391 客户端利用句柄请求打开此文件</span><br><span class="line">No.395 服务器回应打开状态，返回操作的新的句柄</span><br><span class="line">No.400 客户端利用句柄在write文件写入信息</span><br><span class="line">No.401 服务器回应写入成功</span><br><span class="line">No.402 客户端请求关闭此文件</span><br><span class="line">No.403 服务器回应已经关闭</span><br></pre></td></tr></table></figure>
+        <h2 id="Reverse-Sign-In"><a href="#Reverse-Sign-In" class="headerlink" title="Reverse Sign In"></a>Reverse Sign In</h2><p>是一道逆向签到题，签到级别的逆向暂时还在我能力范围内…首先下载文件扔进IDA，然后shift+F12搜索字符串，进入sub_4006E1，f5大法查看伪代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 <span class="title">sub_4006E1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 result; <span class="comment">// rax@2</span></span><br><span class="line">  __int64 v1; <span class="comment">// rdx@7</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [sp+0h] [bp-30h]@1</span></span><br><span class="line">  __int64 v3; <span class="comment">// [sp+28h] [bp-8h]@1</span></span><br><span class="line"></span><br><span class="line">  v3 = *MK_FP(__FS__, <span class="number">40L</span>L);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Please input your flag:"</span>);</span><br><span class="line">  __isoc99_scanf();</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strlen</span>(&amp;s) == <span class="number">32</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)sub_400686((__int64)&amp;s) )</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Right!"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Wrong!"</span>);</span><br><span class="line">    result = <span class="number">0L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Wrong!"</span>);</span><br><span class="line">    result = <span class="number">0L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  v1 = *MK_FP(__FS__, <span class="number">40L</span>L) ^ v3;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>很显然，要找flag就应该在No.400处还原write文件写入的信息，果然在OpCode:Write 38中找到了data。</p>
-<p><img src="/2020/03/13/Forensics/4.png" alt></p>
-<p>在data这里右键-Show Packet Bytes-Decode As-Compressed即可解压查看flag。</p>
-<p><img src="/2020/03/13/Forensics/5.png" alt></p>
+<p>从代码中可以看出当 s 符合sub_400686(&amp;s)函数的要求时输出“Right”，因此我们要跟进这个函数：</p>
+<p><img src="/2020/03/14/Reverse-Sign-In/1.png" alt></p>
+<p>很好懂，就是进行了简单的异或，这里的a1是形参，实参是main函数的字符串s，现在需要提取byte_400818的数据，双击即可进入byte_400818：</p>
+<p><img src="/2020/03/14/Reverse-Sign-In/2.png" alt></p>
+<p>2 dup(60h)的意思是两个60h，按h可以将其转换为十进制。到此为止可以写脚本解决这道题目了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8       </span></span><br><span class="line">n =  [<span class="number">102</span>, <span class="number">109</span>, <span class="number">99</span>, <span class="number">100</span>, <span class="number">127</span>, <span class="number">60</span>, <span class="number">54</span>, <span class="number">114</span>, <span class="number">87</span>, <span class="number">66</span>, <span class="number">100</span>, <span class="number">59</span>,<span class="number">123</span>, <span class="number">82</span>, <span class="number">124</span>, <span class="number">60</span>, <span class="number">102</span>, <span class="number">84</span>, <span class="number">96</span>, <span class="number">96</span>, <span class="number">39</span>, <span class="number">74</span>, <span class="number">73</span>, <span class="number">127</span>,<span class="number">113</span>, <span class="number">88</span>, <span class="number">82</span>, <span class="number">114</span>, <span class="number">125</span>, <span class="number">117</span>, <span class="number">42</span>, <span class="number">98</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">31</span>):</span><br><span class="line">    print(chr(n[i] ^ i)),</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
@@ -348,8 +344,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" rel="next" title="Blue-Whale CTF Writeup 持续更新">
-                <i class="fa fa-chevron-left"></i> Blue-Whale CTF Writeup 持续更新
+              <a href="/2020/03/13/Forensics/" rel="next" title="Forensics">
+                <i class="fa fa-chevron-left"></i> Forensics
               </a>
             
           </div>
@@ -358,8 +354,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/03/14/Reverse-Sign-In/" rel="prev" title="Reverse Sign In">
-                Reverse Sign In <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/14/Global-Page/" rel="prev" title="Global Page">
+                Global Page <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -483,7 +479,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Forensics1"><span class="nav-number">1.</span> <span class="nav-text">Forensics1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Forensics2"><span class="nav-number">2.</span> <span class="nav-text">Forensics2</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Sign-In"><span class="nav-number">1.</span> <span class="nav-text">Reverse Sign In</span></a></li></ol></div>
             
 
           </div>
