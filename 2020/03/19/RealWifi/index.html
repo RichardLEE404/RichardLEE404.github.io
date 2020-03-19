@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="CTF," />
 
 
 
@@ -79,12 +79,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="RichardLEE&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+<meta name="description" content="RealWifi用 Wireshark打开发现是802.11协议，结合题目知道考察的WiFi流量分析，首先利用aircrack-ng暴破密码并查看ESSID和加密类型。 1aircrack-ng -w 1.txt wifi.pcap   得到密码为12345678，ESSID为Blue-Whale，加密类型为WPA。以此可以进一步得到揭秘后的文件： 1airdecap-ng -e Blue-Wha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RealWifi">
+<meta property="og:url" content="http://yoursite.com/2020/03/19/RealWifi/index.html">
 <meta property="og:site_name" content="RichardLEE&#39;s Blog">
+<meta property="og:description" content="RealWifi用 Wireshark打开发现是802.11协议，结合题目知道考察的WiFi流量分析，首先利用aircrack-ng暴破密码并查看ESSID和加密类型。 1aircrack-ng -w 1.txt wifi.pcap   得到密码为12345678，ESSID为Blue-Whale，加密类型为WPA。以此可以进一步得到揭秘后的文件： 1airdecap-ng -e Blue-Wha">
+<meta property="og:image" content="http://yoursite.com/2020/03/19/RealWifi/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/19/RealWifi/2.png">
+<meta property="article:published_time" content="2020-03-19T05:51:22.000Z">
+<meta property="article:modified_time" content="2020-03-19T06:05:38.871Z">
 <meta property="article:author" content="Richard LEE">
+<meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/19/RealWifi/1.png">
 
 
 
@@ -114,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2020/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/19/RealWifi/"/>
 
 
 
 
 
-  <title>归档 | RichardLEE's Blog</title>
+  <title>RealWifi | RichardLEE's Blog</title>
   
 
 
@@ -139,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -213,407 +221,155 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/19/RealWifi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Richard LEE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RichardLEE's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">RealWifi</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-19T13:51:22+08:00">
+                2020-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 10 篇日志。 继续努力。
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2020">2020</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/19/RealWifi/" itemprop="url">
-              
-                <span itemprop="name">RealWifi</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-19T13:51:22+08:00"
-              content="2020-03-19" >
-          03-19
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/18/Terminal-Log/" itemprop="url">
-              
-                <span itemprop="name">Terminal&Log</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-18T18:25:23+08:00"
-              content="2020-03-18" >
-          03-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h2 id="RealWifi"><a href="#RealWifi" class="headerlink" title="RealWifi"></a>RealWifi</h2><p>用 Wireshark打开发现是802.11协议，结合题目知道考察的WiFi流量分析，首先利用aircrack-ng暴破密码并查看ESSID和加密类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng -w 1.txt wifi.pcap</span><br></pre></td></tr></table></figure>
 
-        
-        
+<p><img src="/2020/03/19/RealWifi/1.png" alt></p>
+<p>得到密码为12345678，ESSID为Blue-Whale，加密类型为WPA。以此可以进一步得到揭秘后的文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airdecap-ng -e Blue-Whale -p 12345678 wifi.pcap</span><br></pre></td></tr></table></figure>
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/17/shell/" itemprop="url">
-              
-                <span itemprop="name">shell</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-17T18:52:30+08:00"
-              content="2020-03-17" >
-          03-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<p>用 Wireshark打开揭秘后的文件，过滤出http协议后得到flag</p>
+<p><img src="/2020/03/19/RealWifi/2.png" alt></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/16/RSA-babyBase-babyTirck%E5%88%9D%E5%B0%9D%E8%AF%95/" itemprop="url">
-              
-                <span itemprop="name">RSA&babyBase&babyTirck初尝试</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-16T23:08:57+08:00"
-              content="2020-03-16" >
-          03-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/15/Confusion1/" itemprop="url">
-              
-                <span itemprop="name">Confusion1</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-15T14:48:34+08:00"
-              content="2020-03-15" >
-          03-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/14/Global-Page/" itemprop="url">
-              
-                <span itemprop="name">Global Page</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-14T18:12:49+08:00"
-              content="2020-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/14/Reverse-Sign-In/" itemprop="url">
-              
-                <span itemprop="name">Reverse Sign In</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-14T13:29:36+08:00"
-              content="2020-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/13/Forensics/" itemprop="url">
-              
-                <span itemprop="name">Forensics</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-13T12:24:36+08:00"
-              content="2020-03-13" >
-          03-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" itemprop="url">
-              
-                <span itemprop="name">Blue-Whale CTF Writeup 持续更新</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-11T14:40:53+08:00"
-              content="2020-03-11" >
-          03-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/" itemprop="url">
-              
-                <span itemprop="name">floor报错注入原理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-03-10T19:04:01+08:00"
-              content="2020-03-10" >
-          03-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/18/Terminal-Log/" rel="next" title="Terminal&Log">
+                <i class="fa fa-chevron-left"></i> Terminal&Log
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -621,6 +377,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -641,8 +401,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -693,6 +462,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RealWifi"><span class="nav-number">1.</span> <span class="nav-text">RealWifi</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -826,6 +611,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
