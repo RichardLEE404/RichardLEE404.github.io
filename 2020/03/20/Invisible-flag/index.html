@@ -79,20 +79,19 @@
 
 
 
-<meta name="description" content="Global Page虽然已经完成了规定的Web题，但还是打算继续往下做作，这个题的考察点就是抓包尝试拼接+LFI。首先打开题目，然后点CTF抓个包观送进Repeater里观察一下。  发现Accept-Language的参数疑似被拼接到了要包含的文件中，再试一次，把Accept-Language的参数设置为flag发现确实被拼接进去了。那这道题的思路就很明确了，利用拼接和php:&#x2F;&#x2F;filter">
+<meta name="description" content="说的很明白，改图片高度，但是很久没做这种签到题了，png的数据块居然忘了…回顾一下 知识点典型的png高度隐写，需要对png文件结构和数据块有所了解。 PNG的文件结构根据PNG文件的定义来说，其文件头位置总是由位固定的字节来描述的： 1234十进制数137 80 78 71 13 10 26 10十六进制数89 50 4E 47 0D 0A 1A 0A  其中第一个字节0x89超出了ASCII字">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Global Page">
-<meta property="og:url" content="http://yoursite.com/2020/03/14/Global-Page/index.html">
+<meta property="og:title" content="Invisible flag">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/Invisible-flag/index.html">
 <meta property="og:site_name" content="RichardLEE&#39;s Blog">
-<meta property="og:description" content="Global Page虽然已经完成了规定的Web题，但还是打算继续往下做作，这个题的考察点就是抓包尝试拼接+LFI。首先打开题目，然后点CTF抓个包观送进Repeater里观察一下。  发现Accept-Language的参数疑似被拼接到了要包含的文件中，再试一次，把Accept-Language的参数设置为flag发现确实被拼接进去了。那这道题的思路就很明确了，利用拼接和php:&#x2F;&#x2F;filter">
-<meta property="og:image" content="http://yoursite.com/2020/03/14/Global-Page/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/14/Global-Page/2.png">
-<meta property="article:published_time" content="2020-03-14T10:12:49.000Z">
-<meta property="article:modified_time" content="2020-03-14T10:38:34.786Z">
+<meta property="og:description" content="说的很明白，改图片高度，但是很久没做这种签到题了，png的数据块居然忘了…回顾一下 知识点典型的png高度隐写，需要对png文件结构和数据块有所了解。 PNG的文件结构根据PNG文件的定义来说，其文件头位置总是由位固定的字节来描述的： 1234十进制数137 80 78 71 13 10 26 10十六进制数89 50 4E 47 0D 0A 1A 0A  其中第一个字节0x89超出了ASCII字">
+<meta property="og:image" content="http://yoursite.com/2020/03/20/Invisible-flag/1.png">
+<meta property="article:published_time" content="2020-03-20T08:01:24.000Z">
+<meta property="article:modified_time" content="2020-03-20T08:04:37.708Z">
 <meta property="article:author" content="Richard LEE">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/14/Global-Page/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/20/Invisible-flag/1.png">
 
 
 
@@ -122,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/14/Global-Page/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/20/Invisible-flag/"/>
 
 
 
 
 
-  <title>Global Page | RichardLEE's Blog</title>
+  <title>Invisible flag | RichardLEE's Blog</title>
   
 
 
@@ -235,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/Global-Page/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/Invisible-flag/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Richard LEE">
@@ -252,7 +251,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Global Page</h1>
+          <h1 class="post-title" itemprop="name headline">Invisible flag</h1>
         
 
         <div class="post-meta">
@@ -264,8 +263,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T18:12:49+08:00">
-                2020-03-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-20T16:01:24+08:00">
+                2020-03-20
               </time>
             
 
@@ -302,11 +301,26 @@
       
 
       
-        <h2 id="Global-Page"><a href="#Global-Page" class="headerlink" title="Global Page"></a>Global Page</h2><p>虽然已经完成了规定的Web题，但还是打算继续往下做作，这个题的考察点就是抓包尝试拼接+LFI。首先打开题目，然后点CTF抓个包观送进Repeater里观察一下。</p>
-<p><img src="/2020/03/14/Global-Page/1.png" alt></p>
-<p>发现Accept-Language的参数疑似被拼接到了要包含的文件中，再试一次，把Accept-Language的参数设置为flag发现确实被拼接进去了。那这道题的思路就很明确了，利用拼接和php://filter伪协议获取flag.php源码。</p>
-<p><img src="/2020/03/14/Global-Page/2.png" alt></p>
-<p>在GET参数中配置php:拼接/再拼接Accept-Language中的/filter/convert.base64-encode/resource=flag最后再拼接上.php就可以完成本地文件包含了，base64解码即可得到flag。</p>
+        <p>说的很明白，改图片高度，但是很久没做这种签到题了，png的数据块居然忘了…回顾一下</p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>典型的png高度隐写，需要对png文件结构和数据块有所了解。</p>
+<h3 id="PNG的文件结构"><a href="#PNG的文件结构" class="headerlink" title="PNG的文件结构"></a>PNG的文件结构</h3><p>根据PNG文件的定义来说，其文件头位置总是由位固定的字节来描述的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">十进制数</span><br><span class="line">137 80 78 71 13 10 26 10</span><br><span class="line">十六进制数</span><br><span class="line">89 50 4E 47 0D 0A 1A 0A</span><br></pre></td></tr></table></figure>
+
+<p>其中第一个字节0x89超出了ASCII字符的范围，这是为了避免某些软件将PNG文件当做文本文件来处理。文件中剩余的部分由3个以上的PNG的数据块（Chunk）按照特定的顺序组成，因此，一个标准的PNG文件结构应该如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PNG文件标志 PNG数据块 …  PNG数据块</span><br></pre></td></tr></table></figure>
+
+<h3 id="PNG数据块（Chunk）"><a href="#PNG数据块（Chunk）" class="headerlink" title="PNG数据块（Chunk）"></a>PNG数据块（Chunk）</h3><p>PNG定义了两种类型的数据块，一种是称为关键数据块(critical chunk)，这是标准的数据块，另一种叫做辅助数据块(ancillary chunks)，这是可选的数据块。关键数据块定义了4个标准数据块，每个PNG文件都必须包含它们，PNG读写软件也都必须要支持这些数据块。虽然PNG文件规范没有要求PNG编译码器对可选数据块进行编码和译码，但规范提倡支持可选数据块。</p>
+<h3 id="数据块结构"><a href="#数据块结构" class="headerlink" title="数据块结构"></a>数据块结构</h3><p>PNG文件中，每个数据块由4个部分组成，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">名称                             字节数                    	说明</span><br><span class="line">Length (长度)                4字节                         指定数据块中数据域的长度，其长度不超过(231－1)字节</span><br><span class="line">Chunk Type Code (数据块类型码)    4字节                     数据块类型码由ASCII字母(A-Z和a-z)组成</span><br><span class="line">Chunk Data (数据块数据)           可变长度                  存储按照Chunk Type Code指定的数据</span><br><span class="line">CRC (循环冗余检测)                4字节                     存储用来检测是否有错误的循环冗余码</span><br></pre></td></tr></table></figure>
+
+<p>CRC(cyclic redundancy check)域中的值是对Chunk Type Code域和Chunk Data域中的数据进行计算得到的。CRC具体算法定义在ISO 3309和ITU-T V.42中，其值按下面的CRC码生成多项式进行计算：<br>x32+x26+x23+x22+x16+x12+x11+x10+x8+x7+x5+x4+x2+x+1<br>CRC: 一种校验算法。仅仅用来校验数据的正确性的</p>
+<h4 id="ps-有的png隐写会要求我们计算crc，来校检哪里的数据被改变了。"><a href="#ps-有的png隐写会要求我们计算crc，来校检哪里的数据被改变了。" class="headerlink" title="ps:有的png隐写会要求我们计算crc，来校检哪里的数据被改变了。"></a>ps:有的png隐写会要求我们计算crc，来校检哪里的数据被改变了。</h4><p>下面是我们此次题目涉及到的知识点：</p>
+<h3 id="IHDR"><a href="#IHDR" class="headerlink" title="IHDR"></a>IHDR</h3><p>文件头数据块IHDR(header chunk)：它包含有PNG文件中存储的图像数据的基本信息，并要作为第一个数据块出现在PNG数据流中，而且一个PNG数据流中只能有一个文件头数据块。<br>文件头数据块由13字节组成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- （固定）八个字节89 50 4E 47 0D 0A 1A 0A为png的文件头</span><br><span class="line">- （固定）四个字节00 00 00 0D（即为十进制的13）代表数据块的长度为13</span><br><span class="line">- （固定）四个字节49 48 44 52（即为ASCII码的IHDR）是文件头数据块的标示（IDCH）</span><br><span class="line">- （可变）13位数据块（IHDR)</span><br><span class="line">- 前四个字节代表该图片的宽</span><br><span class="line">- 后四个字节代表该图片的高</span><br><span class="line">- 后五个字节依次为：</span><br><span class="line">Bit depth、ColorType、Compression method、Filter method、Interlace method</span><br><span class="line">- （可变）剩余四字节为该png的CRC检验码，由从IDCH到IHDR的十七位字节进行crc计算得到。</span><br></pre></td></tr></table></figure>
+
+<p>了解了这些后我们就可以做题了。</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>解压压缩包，看到图片高度明显有问题<br>查看图片属性，发现高度像素太低了。我们开始调高<br>这里有2种方法，<br>一个是选择一个像素把他直接用python转换一下16进制直接改填到高度数据块就行。<br>第二个方法简单粗暴，我们已经知道了哪些数据块代表png长度宽度，我们直接把后面的高度数据块中的数据改成和前面相同的就行了（比如此题，我们把宽度高度都改成00 00 02 34，保存拿到flag)</p>
+<p><img src="/2020/03/20/Invisible-flag/1.png" alt></p>
 
       
     </div>
@@ -337,8 +351,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/14/Reverse-Sign-In/" rel="next" title="Reverse Sign In">
-                <i class="fa fa-chevron-left"></i> Reverse Sign In
+              <a href="/2020/03/19/RealWifi/" rel="next" title="RealWifi">
+                <i class="fa fa-chevron-left"></i> RealWifi
               </a>
             
           </div>
@@ -346,10 +360,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/15/Confusion1/" rel="prev" title="Confusion1">
-                Confusion1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -472,7 +482,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-Page"><span class="nav-number">1.</span> <span class="nav-text">Global Page</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PNG的文件结构"><span class="nav-number">1.1.</span> <span class="nav-text">PNG的文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PNG数据块（Chunk）"><span class="nav-number">1.2.</span> <span class="nav-text">PNG数据块（Chunk）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据块结构"><span class="nav-number">1.3.</span> <span class="nav-text">数据块结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ps-有的png隐写会要求我们计算crc，来校检哪里的数据被改变了。"><span class="nav-number">1.3.1.</span> <span class="nav-text">ps:有的png隐写会要求我们计算crc，来校检哪里的数据被改变了。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IHDR"><span class="nav-number">1.4.</span> <span class="nav-text">IHDR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题"><span class="nav-number">2.</span> <span class="nav-text">解题</span></a></li></ol></div>
             
 
           </div>

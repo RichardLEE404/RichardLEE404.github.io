@@ -228,6 +228,145 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/Invisible-flag/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Richard LEE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RichardLEE's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/20/Invisible-flag/" itemprop="url">Invisible flag</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-20T16:01:24+08:00">
+                2020-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>说的很明白，改图片高度，但是很久没做这种签到题了，png的数据块居然忘了…回顾一下</p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>典型的png高度隐写，需要对png文件结构和数据块有所了解。</p>
+<h3 id="PNG的文件结构"><a href="#PNG的文件结构" class="headerlink" title="PNG的文件结构"></a>PNG的文件结构</h3><p>根据PNG文件的定义来说，其文件头位置总是由位固定的字节来描述的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">十进制数</span><br><span class="line">137 80 78 71 13 10 26 10</span><br><span class="line">十六进制数</span><br><span class="line">89 50 4E 47 0D 0A 1A 0A</span><br></pre></td></tr></table></figure>
+
+<p>其中第一个字节0x89超出了ASCII字符的范围，这是为了避免某些软件将PNG文件当做文本文件来处理。文件中剩余的部分由3个以上的PNG的数据块（Chunk）按照特定的顺序组成，因此，一个标准的PNG文件结构应该如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PNG文件标志 PNG数据块 …  PNG数据块</span><br></pre></td></tr></table></figure>
+
+<h3 id="PNG数据块（Chunk）"><a href="#PNG数据块（Chunk）" class="headerlink" title="PNG数据块（Chunk）"></a>PNG数据块（Chunk）</h3><p>PNG定义了两种类型的数据块，一种是称为关键数据块(critical chunk)，这是标准的数据块，另一种叫做辅助数据块(ancillary chunks)，这是可选的数据块。关键数据块定义了4个标准数据块，每个PNG文件都必须包含它们，PNG读写软件也都必须要支持这些数据块。虽然PNG文件规范没有要求PNG编译码器对可选数据块进行编码和译码，但规范提倡支持可选数据块。</p>
+<h3 id="数据块结构"><a href="#数据块结构" class="headerlink" title="数据块结构"></a>数据块结构</h3><p>PNG文件中，每个数据块由4个部分组成，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">名称                             字节数                    	说明</span><br><span class="line">Length (长度)                4字节                         指定数据块中数据域的长度，其长度不超过(231－1)字节</span><br><span class="line">Chunk Type Code (数据块类型码)    4字节                     数据块类型码由ASCII字母(A-Z和a-z)组成</span><br><span class="line">Chunk Data (数据块数据)           可变长度                  存储按照Chunk Type Code指定的数据</span><br><span class="line">CRC (循环冗余检测)                4字节                     存储用来检测是否有错误的循环冗余码</span><br></pre></td></tr></table></figure>
+
+<p>CRC(cyclic redundancy check)域中的值是对Chunk Type Code域和Chunk Data域中的数据进行计算得到的。CRC具体算法定义在ISO 3309和ITU-T V.42中，其值按下面的CRC码生成多项式进行计算：<br>x32+x26+x23+x22+x16+x12+x11+x10+x8+x7+x5+x4+x2+x+1<br>CRC: 一种校验算法。仅仅用来校验数据的正确性的</p>
+<h4 id="ps-有的png隐写会要求我们计算crc，来校检哪里的数据被改变了。"><a href="#ps-有的png隐写会要求我们计算crc，来校检哪里的数据被改变了。" class="headerlink" title="ps:有的png隐写会要求我们计算crc，来校检哪里的数据被改变了。"></a>ps:有的png隐写会要求我们计算crc，来校检哪里的数据被改变了。</h4><p>下面是我们此次题目涉及到的知识点：</p>
+<h3 id="IHDR"><a href="#IHDR" class="headerlink" title="IHDR"></a>IHDR</h3><p>文件头数据块IHDR(header chunk)：它包含有PNG文件中存储的图像数据的基本信息，并要作为第一个数据块出现在PNG数据流中，而且一个PNG数据流中只能有一个文件头数据块。<br>文件头数据块由13字节组成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- （固定）八个字节89 50 4E 47 0D 0A 1A 0A为png的文件头</span><br><span class="line">- （固定）四个字节00 00 00 0D（即为十进制的13）代表数据块的长度为13</span><br><span class="line">- （固定）四个字节49 48 44 52（即为ASCII码的IHDR）是文件头数据块的标示（IDCH）</span><br><span class="line">- （可变）13位数据块（IHDR)</span><br><span class="line">- 前四个字节代表该图片的宽</span><br><span class="line">- 后四个字节代表该图片的高</span><br><span class="line">- 后五个字节依次为：</span><br><span class="line">Bit depth、ColorType、Compression method、Filter method、Interlace method</span><br><span class="line">- （可变）剩余四字节为该png的CRC检验码，由从IDCH到IHDR的十七位字节进行crc计算得到。</span><br></pre></td></tr></table></figure>
+
+<p>了解了这些后我们就可以做题了。</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>解压压缩包，看到图片高度明显有问题<br>查看图片属性，发现高度像素太低了。我们开始调高<br>这里有2种方法，<br>一个是选择一个像素把他直接用python转换一下16进制直接改填到高度数据块就行。<br>第二个方法简单粗暴，我们已经知道了哪些数据块代表png长度宽度，我们直接把后面的高度数据块中的数据改成和前面相同的就行了（比如此题，我们把宽度高度都改成00 00 02 34，保存拿到flag)</p>
+<p><img src="/2020/03/20/Invisible-flag/1.png" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/19/RealWifi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1517,158 +1656,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Richard LEE">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RichardLEE's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/" itemprop="url">floor报错注入原理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-10T19:04:01+08:00">
-                2020-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-废话"><a href="#0x00-废话" class="headerlink" title="0x00 废话"></a>0x00 废话</h2><p>​        对于报错注入我其实不陌生，在渗透和流量分析中经常会用到，但是并没有认真思考过产生报错的原因，今天学习了floor报错注入的原理，后面再用同样的方式继续学习其他报错注入。</p>
-<h2 id="0x01-floor报错注入原理"><a href="#0x01-floor报错注入原理" class="headerlink" title="0x01 floor报错注入原理"></a>0x01 floor报错注入原理</h2><p>​        为了弄清报错注入的原理，首先先创建了一个名为sqli的数据库，然后建表插入数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create database sqli;</span><br><span class="line">mysql&gt; create table user (</span><br><span class="line">        id int(11) not null auto_increment primary key,</span><br><span class="line">        name varchar(20) not null,</span><br><span class="line">        pass varchar(32) not null</span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">mysql&gt; insert into user (name, pass) values (&#39;admin&#39;, md5(&#39;admin&#39;)), (&#39;guest&#39;, md5(&#39;guest&#39;));</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/1.png" alt></p>
-<p>​        首先先看一个基于floor的报错注入语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*),(concat(floor(rand(0)*2),(select version())))x from user group by x;</span><br></pre></td></tr></table></figure>
-
-<p>如果是第一次接触报错注入的话，一般会有这么几个问题：<br>Q1.floor()函数是什么？</p>
-<p>A1.floor函数的作用是返回小于等于该值的最大整数,也可以理解为向下取整，只保留整数部分。</p>
-<p>Q2.rand(0)是什么意思？</p>
-<p>A2.rand()函数可以用来生成0或1，但是rand(0)和rand()还是有本质区别的，rand(0)相当于给rand()函数传递了一个参数，然后rand()函数会根据0这个参数进行随机数成成。rand()生成的数字是完全随机的，而rand(0)是有规律的生成，我们可以在数据库中尝试一下。首先测试rand()</p>
-<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/2.png" alt></p>
-<p>　　再测试一下rand(0)的效果</p>
-<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/3.png" alt></p>
-<p>很显然rand(0)是伪随机的，有规律可循，这也是我们采用rand(0)进行报错注入的原因，rand(0)是稳定的，这样每次注入都会报错，而rand()则需要碰运气了，我们测试结果如下</p>
-<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/4.png" alt></p>
-<p>Q3.为什么会出现报错？</p>
-<p>A3.我们看一下报错的内容：Duplicate entry ‘15.5.53’ for key ‘group_key’。意思是说group_key条目重复。我们使用group by进行分组查询的时候，数据库会生成一张虚拟表</p>
-<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/5.png" alt></p>
-<p>在这张虚拟表中，group by后面的字段作为主键，所以这张表中主键是name，这样我们就基本弄清报错的原因了，其原因主要是因为虚拟表的主键重复。按照MySQL的官方说法，group by要进行两次运算，第一次是拿group by后面的字段值到虚拟表中去对比前，首先获取group by后面的值；第二次是假设group by后面的字段的值在虚拟表中不存在，那就需要把它插入到虚拟表中，这里在插入时会进行第二次运算，由于rand函数存在一定的随机性，所以第二次运算的结果可能与第一次运算的结果不一致，但是这个运算的结果可能在虚拟表中已经存在了，那么这时的插入必然导致主键的重复，进而引发错误。</p>
-<h2 id="0x02-案例"><a href="#0x02-案例" class="headerlink" title="0x02 案例"></a>0x02 案例</h2><p>数据库可以继续使用之前的数据库，我们在Web根目录下建立sqli.php</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$conn &#x3D; mysql_connect(&quot;localhost&quot;, &quot;root&quot;, &quot;123456&quot;); &#x2F;&#x2F; 连接数据库，账号root，密码root</span><br><span class="line">if (!$conn) &#123;</span><br><span class="line">    die(&quot;Connection failed: &quot; . mysql_error());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mysql_select_db(&quot;sqli&quot;, $conn);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; verify login info</span><br><span class="line">if (isset($_GET[&#39;name&#39;]) &amp;&amp; isset($_GET[&#39;pass&#39;])) &#123;</span><br><span class="line">    $name &#x3D; $_GET[&#39;name&#39;];</span><br><span class="line">    $pass &#x3D; md5($_GET[&#39;pass&#39;]);</span><br><span class="line"></span><br><span class="line">    $query &#x3D; &quot;select * from user where name&#x3D;&#39;$name&#39; and pass&#x3D;&#39;$pass&#39;&quot;;</span><br><span class="line"></span><br><span class="line">    if ($result &#x3D; mysql_query($query, $conn)) &#123;</span><br><span class="line">        $row &#x3D; mysql_fetch_array($result, MYSQL_ASSOC);</span><br><span class="line"></span><br><span class="line">        if ($row) &#123;</span><br><span class="line">            echo &quot;&lt;script&gt;alert(&#39;login successful!&#39;);&lt;&#x2F;script&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        die(&quot;Operation error: &quot; . mysql_error());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mysql_close();</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Login&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;center&gt;</span><br><span class="line">    &lt;form method&#x3D;&quot;get&quot; action&#x3D;&quot;&quot;&gt;</span><br><span class="line">        &lt;label&gt;Username:&lt;&#x2F;label&gt;&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;name&quot; value&#x3D;&quot;&quot;&#x2F;&gt;&lt;br&#x2F;&gt;</span><br><span class="line">        &lt;label&gt;Password:&lt;&#x2F;label&gt;&lt;input type&#x3D;&quot;password&quot; name&#x3D;&quot;pass&quot; value&#x3D;&quot;&quot;&#x2F;&gt;&lt;br&#x2F;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;login&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
-
-<p>在代码的11-14行是登陆验证模块，可以看到程序以GET形式获取了name和pass参数，没有经过任何过滤直接带入了查询语句，这里明显的存在SQL注入漏洞，我们用floor()报错注入进行尝试。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost&#x2F;sqli.php?name&#x3D;&#39; or (select 1 from(select count(*),concat(user(),0x7e,floor(rand(0)*2))x from information_schema.tables group by x)a) # &amp;pass&#x3D;123</span><br></pre></td></tr></table></figure>
-
-<p>　　我们再分别用updatexml()和extractvalue()分别进行尝试（原理各不相同，但是思路均是认为构造数据库的错误）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost&#x2F;sqli.php?name&#x3D;&#39; or extractvalue(1,concat(user(),0x7e,version())) # &amp;pass&#x3D;1</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;localhost&#x2F;index.php?name&#x3D;&#39; or updatexml(1,concat(user(),0x7e,version()),1) # &amp;pass&#x3D;1</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/03/10/floor%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86/6.png" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+  </nav>
+
 
 
           </div>
@@ -1712,7 +1706,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
