@@ -228,6 +228,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/Reverse-Sign-In/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Richard LEE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RichardLEE's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/14/Reverse-Sign-In/" itemprop="url">Reverse Sign In</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T13:29:36+08:00">
+                2020-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Reverse-Sign-In"><a href="#Reverse-Sign-In" class="headerlink" title="Reverse Sign In"></a>Reverse Sign In</h2><p>是一道逆向签到题，签到级别的逆向暂时还在我能力范围内…首先下载文件扔进IDA，然后shift+F12搜索字符串，进入sub_4006E1，f5大法查看伪代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 <span class="title">sub_4006E1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __int64 result; <span class="comment">// rax@2</span></span><br><span class="line">  __int64 v1; <span class="comment">// rdx@7</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [sp+0h] [bp-30h]@1</span></span><br><span class="line">  __int64 v3; <span class="comment">// [sp+28h] [bp-8h]@1</span></span><br><span class="line"></span><br><span class="line">  v3 = *MK_FP(__FS__, <span class="number">40L</span>L);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Please input your flag:"</span>);</span><br><span class="line">  __isoc99_scanf();</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strlen</span>(&amp;s) == <span class="number">32</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)sub_400686((__int64)&amp;s) )</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Right!"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Wrong!"</span>);</span><br><span class="line">    result = <span class="number">0L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Wrong!"</span>);</span><br><span class="line">    result = <span class="number">0L</span>L;</span><br><span class="line">  &#125;</span><br><span class="line">  v1 = *MK_FP(__FS__, <span class="number">40L</span>L) ^ v3;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从代码中可以看出当 s 符合sub_400686(&amp;s)函数的要求时输出“Right”，因此我们要跟进这个函数：</p>
+<p><img src="/2020/03/14/Reverse-Sign-In/1.png" alt></p>
+<p>很好懂，就是进行了简单的异或，这里的a1是形参，实参是main函数的字符串s，现在需要提取byte_400818的数据，双击即可进入byte_400818：</p>
+<p><img src="/2020/03/14/Reverse-Sign-In/2.png" alt></p>
+<p>2 dup(60h)的意思是两个60h，按h可以将其转换为十进制。到此为止可以写脚本解决这道题目了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8       </span></span><br><span class="line">n =  [<span class="number">102</span>, <span class="number">109</span>, <span class="number">99</span>, <span class="number">100</span>, <span class="number">127</span>, <span class="number">60</span>, <span class="number">54</span>, <span class="number">114</span>, <span class="number">87</span>, <span class="number">66</span>, <span class="number">100</span>, <span class="number">59</span>,<span class="number">123</span>, <span class="number">82</span>, <span class="number">124</span>, <span class="number">60</span>, <span class="number">102</span>, <span class="number">84</span>, <span class="number">96</span>, <span class="number">96</span>, <span class="number">39</span>, <span class="number">74</span>, <span class="number">73</span>, <span class="number">127</span>,<span class="number">113</span>, <span class="number">88</span>, <span class="number">82</span>, <span class="number">114</span>, <span class="number">125</span>, <span class="number">117</span>, <span class="number">42</span>, <span class="number">98</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">31</span>):</span><br><span class="line">    print(chr(n[i] ^ i)),</span><br></pre></td></tr></table></figure>
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/13/Forensics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -786,7 +917,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
