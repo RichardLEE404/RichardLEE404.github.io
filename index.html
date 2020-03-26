@@ -228,6 +228,145 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Richard LEE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RichardLEE's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/" itemprop="url">二进制炸弹-phase4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-26T20:05:22+08:00">
+                2020-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>还是像前几关一样，在phase_4处下断，然后disass查看反汇编。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function phase_4:</span><br><span class="line">&#x3D;&gt; 0x08048dbb &lt;+0&gt;:		sub    esp,0x2c</span><br><span class="line">   0x08048dbe &lt;+3&gt;:		lea    eax,[esp+0x1c]</span><br><span class="line">   0x08048dc2 &lt;+7&gt;:		mov    DWORD PTR [esp+0xc],eax</span><br><span class="line">   0x08048dc6 &lt;+11&gt;:	lea    eax,[esp+0x18]</span><br><span class="line">   0x08048dca &lt;+15&gt;:	mov    DWORD PTR [esp+0x8],eax</span><br><span class="line">   0x08048dce &lt;+19&gt;:	mov    DWORD PTR [esp+0x4],0x804a3cf</span><br><span class="line">   0x08048dd6 &lt;+27&gt;:	mov    eax,DWORD PTR [esp+0x30]</span><br><span class="line">   0x08048dda &lt;+31&gt;:	mov    DWORD PTR [esp],eax</span><br><span class="line">   0x08048ddd &lt;+34&gt;:	call   0x8048860 &lt;__isoc99_sscanf@plt&gt;</span><br><span class="line">   0x08048de2 &lt;+39&gt;:	cmp    eax,0x2</span><br><span class="line">   0x08048de5 &lt;+42&gt;:	jne    0x8048dee &lt;phase_4+51&gt;</span><br><span class="line">   0x08048de7 &lt;+44&gt;:	cmp    DWORD PTR [esp+0x18],0xe</span><br><span class="line">   0x08048dec &lt;+49&gt;:	jbe    0x8048df3 &lt;phase_4+56&gt;</span><br><span class="line">   0x08048dee &lt;+51&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048df3 &lt;+56&gt;:	mov    DWORD PTR [esp+0x8],0xe</span><br><span class="line">   0x08048dfb &lt;+64&gt;:	mov    DWORD PTR [esp+0x4],0x0</span><br><span class="line">   0x08048e03 &lt;+72&gt;:	mov    eax,DWORD PTR [esp+0x18]</span><br><span class="line">   0x08048e07 &lt;+76&gt;:	mov    DWORD PTR [esp],eax</span><br><span class="line">   0x08048e0a &lt;+79&gt;:	call   0x8048d5a &lt;func4&gt;</span><br><span class="line">   0x08048e0f &lt;+84&gt;:	cmp    eax,0x7</span><br><span class="line">   0x08048e12 &lt;+87&gt;:	jne    0x8048e1b &lt;phase_4+96&gt;</span><br><span class="line">   0x08048e14 &lt;+89&gt;:	cmp    DWORD PTR [esp+0x1c],0x7</span><br><span class="line">   0x08048e19 &lt;+94&gt;:	je     0x8048e20 &lt;phase_4+101&gt;</span><br><span class="line">   0x08048e1b &lt;+96&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048e20 &lt;+101&gt;:	add    esp,0x2c</span><br><span class="line">   0x08048e23 &lt;+104&gt;:	ret    </span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+
+<p>分析这段反汇编，以开始先输入两个值，然后于0x08048ddd处调用函数，0x08048de2处比较返回值是否为2，如果不是则引爆炸弹。0x08048de7处比较第一个输入值是否小于等于14，如果不是则爆炸。</p>
+<p>0x08048df3处定义了两个变量0和14，于0x08048e0a处作为参数被fun4函数调用，0x08048e14处判断fun4的返回值是否为7，不是则爆炸。同时0x08048e14处判断第二个参数是否为7，不是则爆炸，以此判断输入的第二个数值为7。</p>
+<p>到此为止程序分析完毕，现在想知道第一个数值就必须知道fun4函数做了什么，用IDA打开找到fun4函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">.text:08048D5A ; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; S U B R O U T I N E &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">.text:08048D5A</span><br><span class="line">.text:08048D5A</span><br><span class="line">.text:08048D5A                 public func4</span><br><span class="line">.text:08048D5A func4           proc near               ; CODE XREF: func4+32p</span><br><span class="line">.text:08048D5A                                         ; func4+52p ...</span><br><span class="line">.text:08048D5A</span><br><span class="line">.text:08048D5A var_1C          &#x3D; dword ptr -1Ch</span><br><span class="line">.text:08048D5A var_18          &#x3D; dword ptr -18h</span><br><span class="line">.text:08048D5A var_14          &#x3D; dword ptr -14h</span><br><span class="line">.text:08048D5A arg_0           &#x3D; dword ptr  4</span><br><span class="line">.text:08048D5A arg_4           &#x3D; dword ptr  8</span><br><span class="line">.text:08048D5A arg_8           &#x3D; dword ptr  0Ch</span><br><span class="line">.text:08048D5A</span><br><span class="line">.text:08048D5A                 push    esi</span><br><span class="line">.text:08048D5B                 push    ebx</span><br><span class="line">.text:08048D5C                 sub     esp, 14h</span><br><span class="line">.text:08048D5F                 mov     edx, [esp+1Ch+arg_0]</span><br><span class="line">.text:08048D63                 mov     eax, [esp+1Ch+arg_4]</span><br><span class="line">.text:08048D67                 mov     ebx, [esp+1Ch+arg_8]</span><br><span class="line">.text:08048D6B                 mov     ecx, ebx</span><br><span class="line">.text:08048D6D                 sub     ecx, eax</span><br><span class="line">.text:08048D6F                 mov     esi, ecx</span><br><span class="line">.text:08048D71                 shr     esi, 1Fh</span><br><span class="line">.text:08048D74                 add     ecx, esi</span><br><span class="line">.text:08048D76                 sar     ecx, 1</span><br><span class="line">.text:08048D78                 add     ecx, eax</span><br><span class="line">.text:08048D7A                 cmp     ecx, edx</span><br><span class="line">.text:08048D7C                 jle     short loc_8048D95</span><br><span class="line">.text:08048D7E                 sub     ecx, 1</span><br><span class="line">.text:08048D81                 mov     [esp+1Ch+var_14], ecx</span><br><span class="line">.text:08048D85                 mov     [esp+1Ch+var_18], eax</span><br><span class="line">.text:08048D89                 mov     [esp+1Ch+var_1C], edx</span><br><span class="line">.text:08048D8C                 call    func4</span><br><span class="line">.text:08048D91                 add     eax, eax</span><br><span class="line">.text:08048D93                 jmp     short loc_8048DB5</span><br><span class="line">.text:08048D95 ; ---------------------------------------------------------------------------</span><br><span class="line">.text:08048D95</span><br><span class="line">.text:08048D95 loc_8048D95:                            ; CODE XREF: func4+22j</span><br><span class="line">.text:08048D95                 mov     eax, 0</span><br><span class="line">.text:08048D9A                 cmp     ecx, edx</span><br><span class="line">.text:08048D9C                 jge     short loc_8048DB5</span><br><span class="line">.text:08048D9E                 mov     [esp+1Ch+var_14], ebx</span><br><span class="line">.text:08048DA2                 add     ecx, 1</span><br><span class="line">.text:08048DA5                 mov     [esp+1Ch+var_18], ecx</span><br><span class="line">.text:08048DA9                 mov     [esp+1Ch+var_1C], edx</span><br><span class="line">.text:08048DAC                 call    func4</span><br><span class="line">.text:08048DB1                 lea     eax, [eax+eax+1]</span><br><span class="line">.text:08048DB5</span><br><span class="line">.text:08048DB5 loc_8048DB5:                            ; CODE XREF: func4+39j</span><br><span class="line">.text:08048DB5                                         ; func4+42j</span><br><span class="line">.text:08048DB5                 add     esp, 14h</span><br><span class="line">.text:08048DB8                 pop     ebx</span><br><span class="line">.text:08048DB9                 pop     esi</span><br><span class="line">.text:08048DBA                 retn</span><br><span class="line">.text:08048DBA func4           endp</span><br><span class="line">.text:08048DBA</span><br><span class="line">.text:08048DBB</span><br><span class="line">.text:08048DBB ; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; S U B R O U T I N E &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
+
+<p>IDA F5大法得到伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int __cdecl func4(int a1, int a2, int a3)</span><br><span class="line">&#123;</span><br><span class="line">  int v3; &#x2F;&#x2F; ecx@1</span><br><span class="line">  int result; &#x2F;&#x2F; eax@2</span><br><span class="line"></span><br><span class="line">  v3 &#x3D; a2 + (a3 - a2) &#x2F; 2;</span><br><span class="line">  if ( v3 &lt;&#x3D; a1 )</span><br><span class="line">  &#123;</span><br><span class="line">    result &#x3D; 0;</span><br><span class="line">    if ( v3 &lt; a1 )</span><br><span class="line">      result &#x3D; 2 * func4(a1, v3 + 1, a3) + 1;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    result &#x3D; 2 * func4(a1, a2, v3 - 1);</span><br><span class="line">  &#125;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面是我得到的递归结构，根据前面对程序的分析，完整代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int func4(int a1, int a2, int a3)</span><br><span class="line">&#123;</span><br><span class="line">  int v3; &#x2F;&#x2F; ecx@1</span><br><span class="line">  int result; &#x2F;&#x2F; eax@2</span><br><span class="line"></span><br><span class="line">  v3 &#x3D; a2 + (a3 - a2) &#x2F; 2;</span><br><span class="line">  if ( v3 &lt;&#x3D; a1 )</span><br><span class="line">  &#123;</span><br><span class="line">    result &#x3D; 0;</span><br><span class="line">    if ( v3 &lt; a1 )</span><br><span class="line">      result &#x3D; 2 * func4(a1, v3 + 1, a3) + 1;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    result &#x3D; 2 * func4(a1, a2, v3 - 1);</span><br><span class="line">  &#125;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	int a &#x3D; 0;</span><br><span class="line">	while(1)&#123;</span><br><span class="line">		cin &gt;&gt; a;</span><br><span class="line">		cout &lt;&lt; func4(a,0,14);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后就挨个试呗，最后发现a为14时返回值为7，满足前面对程序的分析。</p>
+<p><img src="/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/1.png" alt></p>
+<p>因此输入为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14 7</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/2.png" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1425,130 +1564,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/Global-Page/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Richard LEE">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RichardLEE's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/14/Global-Page/" itemprop="url">Global Page</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T18:12:49+08:00">
-                2020-03-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Global-Page"><a href="#Global-Page" class="headerlink" title="Global Page"></a>Global Page</h2><p>虽然已经完成了规定的Web题，但还是打算继续往下做作，这个题的考察点就是抓包尝试拼接+LFI。首先打开题目，然后点CTF抓个包观送进Repeater里观察一下。</p>
-<p><img src="/2020/03/14/Global-Page/1.png" alt></p>
-<p>发现Accept-Language的参数疑似被拼接到了要包含的文件中，再试一次，把Accept-Language的参数设置为flag发现确实被拼接进去了。那这道题的思路就很明确了，利用拼接和php://filter伪协议获取flag.php源码。</p>
-<p><img src="/2020/03/14/Global-Page/2.png" alt></p>
-<p>在GET参数中配置php:拼接/再拼接Accept-Language中的/filter/convert.base64-encode/resource=flag最后再拼接上.php就可以完成本地文件包含了，base64解码即可得到flag。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1599,7 +1614,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

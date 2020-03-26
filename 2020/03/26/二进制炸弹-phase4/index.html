@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="bin," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="还是像前几关一样，在phase_4处下断，然后disass查看反汇编。 12345678910111213141516171819202122232425262728Dump of assembler code for function phase_4:&#x3D;&gt; 0x08048dbb &lt;+0&gt;:		sub    esp,0x2c   0x08048dbe &lt;+3&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二进制炸弹-phase4">
+<meta property="og:url" content="http://yoursite.com/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/index.html">
+<meta property="og:site_name" content="RichardLEE&#39;s Blog">
+<meta property="og:description" content="还是像前几关一样，在phase_4处下断，然后disass查看反汇编。 12345678910111213141516171819202122232425262728Dump of assembler code for function phase_4:&#x3D;&gt; 0x08048dbb &lt;+0&gt;:		sub    esp,0x2c   0x08048dbe &lt;+3&amp;gt">
+<meta property="og:image" content="http://yoursite.com/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/2.png">
+<meta property="article:published_time" content="2020-03-26T12:05:22.000Z">
+<meta property="article:modified_time" content="2020-03-26T12:07:27.798Z">
+<meta property="article:author" content="Richard LEE">
+<meta property="article:tag" content="bin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/26/二进制炸弹-phase4/"/>
+
+
+
+
+
+  <title>二进制炸弹-phase4 | RichardLEE's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RichardLEE's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Richard LEE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RichardLEE's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">二进制炸弹-phase4</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-26T20:05:22+08:00">
+                2020-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>还是像前几关一样，在phase_4处下断，然后disass查看反汇编。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function phase_4:</span><br><span class="line">&#x3D;&gt; 0x08048dbb &lt;+0&gt;:		sub    esp,0x2c</span><br><span class="line">   0x08048dbe &lt;+3&gt;:		lea    eax,[esp+0x1c]</span><br><span class="line">   0x08048dc2 &lt;+7&gt;:		mov    DWORD PTR [esp+0xc],eax</span><br><span class="line">   0x08048dc6 &lt;+11&gt;:	lea    eax,[esp+0x18]</span><br><span class="line">   0x08048dca &lt;+15&gt;:	mov    DWORD PTR [esp+0x8],eax</span><br><span class="line">   0x08048dce &lt;+19&gt;:	mov    DWORD PTR [esp+0x4],0x804a3cf</span><br><span class="line">   0x08048dd6 &lt;+27&gt;:	mov    eax,DWORD PTR [esp+0x30]</span><br><span class="line">   0x08048dda &lt;+31&gt;:	mov    DWORD PTR [esp],eax</span><br><span class="line">   0x08048ddd &lt;+34&gt;:	call   0x8048860 &lt;__isoc99_sscanf@plt&gt;</span><br><span class="line">   0x08048de2 &lt;+39&gt;:	cmp    eax,0x2</span><br><span class="line">   0x08048de5 &lt;+42&gt;:	jne    0x8048dee &lt;phase_4+51&gt;</span><br><span class="line">   0x08048de7 &lt;+44&gt;:	cmp    DWORD PTR [esp+0x18],0xe</span><br><span class="line">   0x08048dec &lt;+49&gt;:	jbe    0x8048df3 &lt;phase_4+56&gt;</span><br><span class="line">   0x08048dee &lt;+51&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048df3 &lt;+56&gt;:	mov    DWORD PTR [esp+0x8],0xe</span><br><span class="line">   0x08048dfb &lt;+64&gt;:	mov    DWORD PTR [esp+0x4],0x0</span><br><span class="line">   0x08048e03 &lt;+72&gt;:	mov    eax,DWORD PTR [esp+0x18]</span><br><span class="line">   0x08048e07 &lt;+76&gt;:	mov    DWORD PTR [esp],eax</span><br><span class="line">   0x08048e0a &lt;+79&gt;:	call   0x8048d5a &lt;func4&gt;</span><br><span class="line">   0x08048e0f &lt;+84&gt;:	cmp    eax,0x7</span><br><span class="line">   0x08048e12 &lt;+87&gt;:	jne    0x8048e1b &lt;phase_4+96&gt;</span><br><span class="line">   0x08048e14 &lt;+89&gt;:	cmp    DWORD PTR [esp+0x1c],0x7</span><br><span class="line">   0x08048e19 &lt;+94&gt;:	je     0x8048e20 &lt;phase_4+101&gt;</span><br><span class="line">   0x08048e1b &lt;+96&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048e20 &lt;+101&gt;:	add    esp,0x2c</span><br><span class="line">   0x08048e23 &lt;+104&gt;:	ret    </span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+
+<p>分析这段反汇编，以开始先输入两个值，然后于0x08048ddd处调用函数，0x08048de2处比较返回值是否为2，如果不是则引爆炸弹。0x08048de7处比较第一个输入值是否小于等于14，如果不是则爆炸。</p>
+<p>0x08048df3处定义了两个变量0和14，于0x08048e0a处作为参数被fun4函数调用，0x08048e14处判断fun4的返回值是否为7，不是则爆炸。同时0x08048e14处判断第二个参数是否为7，不是则爆炸，以此判断输入的第二个数值为7。</p>
+<p>到此为止程序分析完毕，现在想知道第一个数值就必须知道fun4函数做了什么，用IDA打开找到fun4函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">.text:08048D5A ; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; S U B R O U T I N E &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">.text:08048D5A</span><br><span class="line">.text:08048D5A</span><br><span class="line">.text:08048D5A                 public func4</span><br><span class="line">.text:08048D5A func4           proc near               ; CODE XREF: func4+32p</span><br><span class="line">.text:08048D5A                                         ; func4+52p ...</span><br><span class="line">.text:08048D5A</span><br><span class="line">.text:08048D5A var_1C          &#x3D; dword ptr -1Ch</span><br><span class="line">.text:08048D5A var_18          &#x3D; dword ptr -18h</span><br><span class="line">.text:08048D5A var_14          &#x3D; dword ptr -14h</span><br><span class="line">.text:08048D5A arg_0           &#x3D; dword ptr  4</span><br><span class="line">.text:08048D5A arg_4           &#x3D; dword ptr  8</span><br><span class="line">.text:08048D5A arg_8           &#x3D; dword ptr  0Ch</span><br><span class="line">.text:08048D5A</span><br><span class="line">.text:08048D5A                 push    esi</span><br><span class="line">.text:08048D5B                 push    ebx</span><br><span class="line">.text:08048D5C                 sub     esp, 14h</span><br><span class="line">.text:08048D5F                 mov     edx, [esp+1Ch+arg_0]</span><br><span class="line">.text:08048D63                 mov     eax, [esp+1Ch+arg_4]</span><br><span class="line">.text:08048D67                 mov     ebx, [esp+1Ch+arg_8]</span><br><span class="line">.text:08048D6B                 mov     ecx, ebx</span><br><span class="line">.text:08048D6D                 sub     ecx, eax</span><br><span class="line">.text:08048D6F                 mov     esi, ecx</span><br><span class="line">.text:08048D71                 shr     esi, 1Fh</span><br><span class="line">.text:08048D74                 add     ecx, esi</span><br><span class="line">.text:08048D76                 sar     ecx, 1</span><br><span class="line">.text:08048D78                 add     ecx, eax</span><br><span class="line">.text:08048D7A                 cmp     ecx, edx</span><br><span class="line">.text:08048D7C                 jle     short loc_8048D95</span><br><span class="line">.text:08048D7E                 sub     ecx, 1</span><br><span class="line">.text:08048D81                 mov     [esp+1Ch+var_14], ecx</span><br><span class="line">.text:08048D85                 mov     [esp+1Ch+var_18], eax</span><br><span class="line">.text:08048D89                 mov     [esp+1Ch+var_1C], edx</span><br><span class="line">.text:08048D8C                 call    func4</span><br><span class="line">.text:08048D91                 add     eax, eax</span><br><span class="line">.text:08048D93                 jmp     short loc_8048DB5</span><br><span class="line">.text:08048D95 ; ---------------------------------------------------------------------------</span><br><span class="line">.text:08048D95</span><br><span class="line">.text:08048D95 loc_8048D95:                            ; CODE XREF: func4+22j</span><br><span class="line">.text:08048D95                 mov     eax, 0</span><br><span class="line">.text:08048D9A                 cmp     ecx, edx</span><br><span class="line">.text:08048D9C                 jge     short loc_8048DB5</span><br><span class="line">.text:08048D9E                 mov     [esp+1Ch+var_14], ebx</span><br><span class="line">.text:08048DA2                 add     ecx, 1</span><br><span class="line">.text:08048DA5                 mov     [esp+1Ch+var_18], ecx</span><br><span class="line">.text:08048DA9                 mov     [esp+1Ch+var_1C], edx</span><br><span class="line">.text:08048DAC                 call    func4</span><br><span class="line">.text:08048DB1                 lea     eax, [eax+eax+1]</span><br><span class="line">.text:08048DB5</span><br><span class="line">.text:08048DB5 loc_8048DB5:                            ; CODE XREF: func4+39j</span><br><span class="line">.text:08048DB5                                         ; func4+42j</span><br><span class="line">.text:08048DB5                 add     esp, 14h</span><br><span class="line">.text:08048DB8                 pop     ebx</span><br><span class="line">.text:08048DB9                 pop     esi</span><br><span class="line">.text:08048DBA                 retn</span><br><span class="line">.text:08048DBA func4           endp</span><br><span class="line">.text:08048DBA</span><br><span class="line">.text:08048DBB</span><br><span class="line">.text:08048DBB ; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; S U B R O U T I N E &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
+
+<p>IDA F5大法得到伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int __cdecl func4(int a1, int a2, int a3)</span><br><span class="line">&#123;</span><br><span class="line">  int v3; &#x2F;&#x2F; ecx@1</span><br><span class="line">  int result; &#x2F;&#x2F; eax@2</span><br><span class="line"></span><br><span class="line">  v3 &#x3D; a2 + (a3 - a2) &#x2F; 2;</span><br><span class="line">  if ( v3 &lt;&#x3D; a1 )</span><br><span class="line">  &#123;</span><br><span class="line">    result &#x3D; 0;</span><br><span class="line">    if ( v3 &lt; a1 )</span><br><span class="line">      result &#x3D; 2 * func4(a1, v3 + 1, a3) + 1;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    result &#x3D; 2 * func4(a1, a2, v3 - 1);</span><br><span class="line">  &#125;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面是我得到的递归结构，根据前面对程序的分析，完整代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int func4(int a1, int a2, int a3)</span><br><span class="line">&#123;</span><br><span class="line">  int v3; &#x2F;&#x2F; ecx@1</span><br><span class="line">  int result; &#x2F;&#x2F; eax@2</span><br><span class="line"></span><br><span class="line">  v3 &#x3D; a2 + (a3 - a2) &#x2F; 2;</span><br><span class="line">  if ( v3 &lt;&#x3D; a1 )</span><br><span class="line">  &#123;</span><br><span class="line">    result &#x3D; 0;</span><br><span class="line">    if ( v3 &lt; a1 )</span><br><span class="line">      result &#x3D; 2 * func4(a1, v3 + 1, a3) + 1;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    result &#x3D; 2 * func4(a1, a2, v3 - 1);</span><br><span class="line">  &#125;</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	int a &#x3D; 0;</span><br><span class="line">	while(1)&#123;</span><br><span class="line">		cin &gt;&gt; a;</span><br><span class="line">		cout &lt;&lt; func4(a,0,14);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后就挨个试呗，最后发现a为14时返回值为7，满足前面对程序的分析。</p>
+<p><img src="/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/1.png" alt></p>
+<p>因此输入为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">14 7</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/2.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bin/" rel="tag"># bin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/25/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase3/" rel="next" title="二进制炸弹-phase3">
+                <i class="fa fa-chevron-left"></i> 二进制炸弹-phase3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Richard LEE</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Richard LEE</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
