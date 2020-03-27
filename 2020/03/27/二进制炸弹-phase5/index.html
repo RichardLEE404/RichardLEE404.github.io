@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="第一关通过后，还是将炸弹在gdb中读取，在函数phase_2处下断点。  disass反编译得到如下结果： 123456789101112131415161718192021222324252627282930Dump of assembler code for function phase_2:&#x3D;&gt; &#x2F;*第一部分*&#x2F;   0x08048bb4 &lt;+0&amp;g">
+<meta name="description" content="phase_5的考察点是指针，还是在phase_5下断点，然后反编译： 123456789101112131415161718192021222324Dump of assembler code for function phase_5:&#x3D;&gt; 0x08048e24 &lt;+0&gt;:		push   ebx   0x08048e25 &lt;+1&gt;:		sub    es">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二进制炸弹-phase2">
-<meta property="og:url" content="http://yoursite.com/2020/03/24/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase2/index.html">
+<meta property="og:title" content="二进制炸弹-phase5">
+<meta property="og:url" content="http://yoursite.com/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/index.html">
 <meta property="og:site_name" content="RichardLEE&#39;s Blog">
-<meta property="og:description" content="第一关通过后，还是将炸弹在gdb中读取，在函数phase_2处下断点。  disass反编译得到如下结果： 123456789101112131415161718192021222324252627282930Dump of assembler code for function phase_2:&#x3D;&gt; &#x2F;*第一部分*&#x2F;   0x08048bb4 &lt;+0&amp;g">
-<meta property="og:image" content="http://yoursite.com/2020/03/24/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase2/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/24/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase2/2.png">
-<meta property="article:published_time" content="2020-03-24T11:24:22.000Z">
-<meta property="article:modified_time" content="2020-03-24T11:26:06.974Z">
+<meta property="og:description" content="phase_5的考察点是指针，还是在phase_5下断点，然后反编译： 123456789101112131415161718192021222324Dump of assembler code for function phase_5:&#x3D;&gt; 0x08048e24 &lt;+0&gt;:		push   ebx   0x08048e25 &lt;+1&gt;:		sub    es">
+<meta property="og:image" content="http://yoursite.com/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/2.png">
+<meta property="article:published_time" content="2020-03-27T14:47:14.000Z">
+<meta property="article:modified_time" content="2020-03-27T14:49:01.790Z">
 <meta property="article:author" content="Richard LEE">
 <meta property="article:tag" content="bin">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/24/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase2/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/1.png">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/24/二进制炸弹-phase2/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/27/二进制炸弹-phase5/"/>
 
 
 
 
 
-  <title>二进制炸弹-phase2 | RichardLEE's Blog</title>
+  <title>二进制炸弹-phase5 | RichardLEE's Blog</title>
   
 
 
@@ -235,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/24/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Richard LEE">
@@ -252,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">二进制炸弹-phase2</h1>
+          <h1 class="post-title" itemprop="name headline">二进制炸弹-phase5</h1>
         
 
         <div class="post-meta">
@@ -264,8 +264,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-24T19:24:22+08:00">
-                2020-03-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-27T22:47:14+08:00">
+                2020-03-27
               </time>
             
 
@@ -302,17 +302,24 @@
       
 
       
-        <p>第一关通过后，还是将炸弹在gdb中读取，在函数phase_2处下断点。</p>
-<p><img src="/2020/03/24/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase2/1.png" alt></p>
-<p>disass反编译得到如下结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function phase_2:</span><br><span class="line">&#x3D;&gt; &#x2F;*第一部分*&#x2F;</span><br><span class="line">   0x08048bb4 &lt;+0&gt;:	    push   ebx</span><br><span class="line">   0x08048bb5 &lt;+1&gt;:	    sub    esp,0x38</span><br><span class="line">   0x08048bb8 &lt;+4&gt;:	    lea    eax,[esp+0x18]</span><br><span class="line">   0x08048bbc &lt;+8&gt;:	    DWORD  PTR [esp+0x4],eax</span><br><span class="line">   0x08048bc0 &lt;+12&gt;:	mov    eax,DWORD PTR [esp+0x40]</span><br><span class="line">   0x08048bc4 &lt;+16&gt;:	mov    DWORD PTR [esp],eax</span><br><span class="line">   0x08048bc7 &lt;+19&gt;:	call   0x80491dc &lt;read_six_numbers&gt;</span><br><span class="line">   0x08048bcc &lt;+24&gt;:	cmp    DWORD PTR [esp+0x18],0x0</span><br><span class="line">   0x08048bd1 &lt;+29&gt;:	jns    0x8048bf5 &lt;phase_2+65&gt;</span><br><span class="line">   0x08048bd3 &lt;+31&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048bd8 &lt;+36&gt;:	jmp    0x8048bf5 &lt;phase_2+65&gt;</span><br><span class="line">   &#x2F;*第二部分*&#x2F;</span><br><span class="line">   0x08048bda &lt;+38&gt;:	mov    eax,ebx</span><br><span class="line">   0x08048bdc &lt;+40&gt;:	add    eax,DWORD PTR [esp+ebx*4+0x14]</span><br><span class="line">   0x08048be0 &lt;+44&gt;:	cmp    DWORD PTR [esp+ebx*4+0x18],eax</span><br><span class="line">   0x08048be4 &lt;+48&gt;:	je     0x8048beb &lt;phase_2+55&gt;</span><br><span class="line">   0x08048be6 &lt;+50&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048beb &lt;+55&gt;:	add    ebx,0x1</span><br><span class="line">   0x08048bee &lt;+58&gt;:	cmp    ebx,0x6</span><br><span class="line">   0x08048bf1 &lt;+61&gt;:	jne    0x8048bda &lt;phase_2+38&gt;</span><br><span class="line">   &#x2F;*第三部分*&#x2F;</span><br><span class="line">   0x08048bf3 &lt;+63&gt;:	jmp    0x8048bfc &lt;phase_2+72&gt;</span><br><span class="line">   0x08048bf5 &lt;+65&gt;:	mov    ebx,0x1</span><br><span class="line">   0x08048bfa &lt;+70&gt;:	jmp    0x8048bda &lt;phase_2+38&gt;</span><br><span class="line">   0x08048bfc &lt;+72&gt;:	add    esp,0x38</span><br><span class="line">   0x08048bff &lt;+75&gt;:	pop    ebx</span><br><span class="line">   0x08048c00 &lt;+76&gt;:	ret    </span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+        <p>phase_5的考察点是指针，还是在phase_5下断点，然后反编译：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function phase_5:</span><br><span class="line">&#x3D;&gt; 0x08048e24 &lt;+0&gt;:		push   ebx</span><br><span class="line">   0x08048e25 &lt;+1&gt;:		sub    esp,0x18</span><br><span class="line">   0x08048e28 &lt;+4&gt;:		mov    ebx,DWORD PTR [esp+0x20]</span><br><span class="line">   0x08048e2c &lt;+8&gt;:		mov    DWORD PTR [esp],ebx</span><br><span class="line">   0x08048e2f &lt;+11&gt;:	call   0x804908b &lt;string_length&gt;</span><br><span class="line">   0x08048e34 &lt;+16&gt;:	cmp    eax,0x6</span><br><span class="line">   0x08048e37 &lt;+19&gt;:	je     0x8048e3e &lt;phase_5+26&gt;</span><br><span class="line">   0x08048e39 &lt;+21&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048e3e &lt;+26&gt;:	mov    edx,0x0</span><br><span class="line">   0x08048e43 &lt;+31&gt;:	mov    eax,0x0</span><br><span class="line">   0x08048e48 &lt;+36&gt;:	movzx  ecx,BYTE PTR [ebx+eax*1]</span><br><span class="line">   0x08048e4c &lt;+40&gt;:	and    ecx,0xf</span><br><span class="line">   0x08048e4f &lt;+43&gt;:	add    edx,DWORD PTR [ecx*4+0x804a280]</span><br><span class="line">   0x08048e56 &lt;+50&gt;:	add    eax,0x1</span><br><span class="line">   0x08048e59 &lt;+53&gt;:	cmp    eax,0x6</span><br><span class="line">   0x08048e5c &lt;+56&gt;:	jne    0x8048e48 &lt;phase_5+36&gt;</span><br><span class="line">   0x08048e5e &lt;+58&gt;:	cmp    edx,0x2b</span><br><span class="line">   0x08048e61 &lt;+61&gt;:	je     0x8048e68 &lt;phase_5+68&gt;</span><br><span class="line">   0x08048e63 &lt;+63&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048e68 &lt;+68&gt;:	add    esp,0x18</span><br><span class="line">   0x08048e6b &lt;+71&gt;:	pop    ebx</span><br><span class="line">   0x08048e6c &lt;+72&gt;:	ret    </span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
 
-<p>这段反汇编大致上可以分为三部分。第一部分0x08048bc7处要求输入6个数字，0x08048bcc处要求第一个数字不为0，如果不为0则跳转至0x8048bf5将ebx置为1，然后跳转到0x08048bda开始循环。</p>
-<p> 0x08048bda处将ebx的值赋给eax，然后于0x08048bdc处取esp+ebx<em>4+0x14的值于eax相加，结果存放在寄存器eax中。在 0x08048be0处比较eax和esp+ebx</em>4+0x18的值，如果相等， 0x08048beb处ebx++，ebx&lt;6则跳回0x08048bda继续循环；如果不相等则炸弹于0x08048be6处引爆。</p>
-<p>综上，我们只需要将0x08048be0处要比较的数字设置为当前数字+循环次数即可。可以输入的有：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 2 4 7 11 16</span><br><span class="line">2 3 5 8 12 17</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>分析一下这段程序，首先0x08048e34处判断输入字符串的长度是否为6位，如果不是则爆炸。0x08048e48处开始循环6次，0x08048e4c取了低四位然后相加，最后在0x08048e5e处判断edx的数值是否为43（0x2b），程序分析到此结束。</p>
+<p>现在解题的关键就是让edx == 43，首先查看0x08048e4f处的[ecx*4+0x804a280]，让ecx取0,1,2,3……</p>
+<p><img src="/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/1.png" alt></p>
+<p>这些值都是存入edx的，0x08048e4c处还有一个与运算操作，要输入得字符&amp;0x0f == ecx，ecx就是上图的$(num-1)。</p>
+<p>这样就可以进入计算环节了，我们列举一组数字（其实最简单的是8+8+8+8+8+3，只计算两次就行，但是迟迟没刷出来8，我也懒得找了……）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">43 &#x3D; 10 + 10 + 10 + 10 + 2 + 1</span><br><span class="line">   &#x3D; 0xa + 0xa + 0xa + 0xa + 0x2 + 0x1</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/03/24/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase2/2.png" alt></p>
+<p>这只是第一步，我们还需要一个ASCII码及二进制对照表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">BIN       DEC HEX</span><br><span class="line">0110 0001 97  61 a</span><br><span class="line">0110 0010 98  62 b</span><br><span class="line">0110 0011 99  63 c</span><br><span class="line">0110 0100 100 64 d</span><br><span class="line">0110 0101 101 65 e</span><br><span class="line">0110 0110 102 66 f</span><br><span class="line">0110 0111 103 67 g</span><br><span class="line">0110 1000 104 68 h</span><br><span class="line">0110 1001 105 69 i</span><br><span class="line">0110 1010 106 6A j</span><br><span class="line">0110 1011 107 6B k</span><br><span class="line">0110 1100 108 6C l</span><br><span class="line">0110 1101 109 6D m</span><br><span class="line">0110 1110 110 6E n</span><br><span class="line">0110 1111 111 6F o</span><br><span class="line">0111 0000 112 70 p</span><br><span class="line">0111 0001 113 71 q</span><br><span class="line">0111 0010 114 72 r</span><br><span class="line">0111 0011 115 73 s</span><br><span class="line">0111 0100 116 74 t</span><br><span class="line">0111 0101 117 75 u</span><br><span class="line">0111 0110 118 76 v</span><br><span class="line">0111 0111 119 77 w</span><br><span class="line">0111 1000 120 78 x</span><br><span class="line">0111 1001 121 79 y</span><br><span class="line">0111 1010 122 7A z</span><br></pre></td></tr></table></figure>
+
+<p> 0xa对应的ecx中的值为1，输入的字符ASCII的二进制表示&amp;0x0f == 1即可满足条件，经过对照上面的表 01100001&amp;0f ==1，因此输入的前四个字符为a。同理第五位第六位字符分别为p和c。</p>
+<p>因此输入为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aaaapc</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/2.png" alt></p>
 
       
     </div>
@@ -343,8 +350,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase1/" rel="next" title="二进制炸弹-phase1">
-                <i class="fa fa-chevron-left"></i> 二进制炸弹-phase1
+              <a href="/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/" rel="next" title="二进制炸弹-phase4">
+                <i class="fa fa-chevron-left"></i> 二进制炸弹-phase4
               </a>
             
           </div>
@@ -352,10 +359,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/25/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase3/" rel="prev" title="二进制炸弹-phase3">
-                二进制炸弹-phase3 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

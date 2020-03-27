@@ -228,6 +228,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Richard LEE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RichardLEE's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/" itemprop="url">二进制炸弹-phase5</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-27T22:47:14+08:00">
+                2020-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>phase_5的考察点是指针，还是在phase_5下断点，然后反编译：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function phase_5:</span><br><span class="line">&#x3D;&gt; 0x08048e24 &lt;+0&gt;:		push   ebx</span><br><span class="line">   0x08048e25 &lt;+1&gt;:		sub    esp,0x18</span><br><span class="line">   0x08048e28 &lt;+4&gt;:		mov    ebx,DWORD PTR [esp+0x20]</span><br><span class="line">   0x08048e2c &lt;+8&gt;:		mov    DWORD PTR [esp],ebx</span><br><span class="line">   0x08048e2f &lt;+11&gt;:	call   0x804908b &lt;string_length&gt;</span><br><span class="line">   0x08048e34 &lt;+16&gt;:	cmp    eax,0x6</span><br><span class="line">   0x08048e37 &lt;+19&gt;:	je     0x8048e3e &lt;phase_5+26&gt;</span><br><span class="line">   0x08048e39 &lt;+21&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048e3e &lt;+26&gt;:	mov    edx,0x0</span><br><span class="line">   0x08048e43 &lt;+31&gt;:	mov    eax,0x0</span><br><span class="line">   0x08048e48 &lt;+36&gt;:	movzx  ecx,BYTE PTR [ebx+eax*1]</span><br><span class="line">   0x08048e4c &lt;+40&gt;:	and    ecx,0xf</span><br><span class="line">   0x08048e4f &lt;+43&gt;:	add    edx,DWORD PTR [ecx*4+0x804a280]</span><br><span class="line">   0x08048e56 &lt;+50&gt;:	add    eax,0x1</span><br><span class="line">   0x08048e59 &lt;+53&gt;:	cmp    eax,0x6</span><br><span class="line">   0x08048e5c &lt;+56&gt;:	jne    0x8048e48 &lt;phase_5+36&gt;</span><br><span class="line">   0x08048e5e &lt;+58&gt;:	cmp    edx,0x2b</span><br><span class="line">   0x08048e61 &lt;+61&gt;:	je     0x8048e68 &lt;phase_5+68&gt;</span><br><span class="line">   0x08048e63 &lt;+63&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048e68 &lt;+68&gt;:	add    esp,0x18</span><br><span class="line">   0x08048e6b &lt;+71&gt;:	pop    ebx</span><br><span class="line">   0x08048e6c &lt;+72&gt;:	ret    </span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+
+<p>分析一下这段程序，首先0x08048e34处判断输入字符串的长度是否为6位，如果不是则爆炸。0x08048e48处开始循环6次，0x08048e4c取了低四位然后相加，最后在0x08048e5e处判断edx的数值是否为43（0x2b），程序分析到此结束。</p>
+<p>现在解题的关键就是让edx == 43，首先查看0x08048e4f处的[ecx*4+0x804a280]，让ecx取0,1,2,3……</p>
+<p><img src="/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/1.png" alt></p>
+<p>这些值都是存入edx的，0x08048e4c处还有一个与运算操作，要输入得字符&amp;0x0f == ecx，ecx就是上图的$(num-1)。</p>
+<p>这样就可以进入计算环节了，我们列举一组数字（其实最简单的是8+8+8+8+8+3，只计算两次就行，但是迟迟没刷出来8，我也懒得找了……）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">43 &#x3D; 10 + 10 + 10 + 10 + 2 + 1</span><br><span class="line">   &#x3D; 0xa + 0xa + 0xa + 0xa + 0x2 + 0x1</span><br></pre></td></tr></table></figure>
+
+<p>这只是第一步，我们还需要一个ASCII码及二进制对照表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">BIN       DEC HEX</span><br><span class="line">0110 0001 97  61 a</span><br><span class="line">0110 0010 98  62 b</span><br><span class="line">0110 0011 99  63 c</span><br><span class="line">0110 0100 100 64 d</span><br><span class="line">0110 0101 101 65 e</span><br><span class="line">0110 0110 102 66 f</span><br><span class="line">0110 0111 103 67 g</span><br><span class="line">0110 1000 104 68 h</span><br><span class="line">0110 1001 105 69 i</span><br><span class="line">0110 1010 106 6A j</span><br><span class="line">0110 1011 107 6B k</span><br><span class="line">0110 1100 108 6C l</span><br><span class="line">0110 1101 109 6D m</span><br><span class="line">0110 1110 110 6E n</span><br><span class="line">0110 1111 111 6F o</span><br><span class="line">0111 0000 112 70 p</span><br><span class="line">0111 0001 113 71 q</span><br><span class="line">0111 0010 114 72 r</span><br><span class="line">0111 0011 115 73 s</span><br><span class="line">0111 0100 116 74 t</span><br><span class="line">0111 0101 117 75 u</span><br><span class="line">0111 0110 118 76 v</span><br><span class="line">0111 0111 119 77 w</span><br><span class="line">0111 1000 120 78 x</span><br><span class="line">0111 1001 121 79 y</span><br><span class="line">0111 1010 122 7A z</span><br></pre></td></tr></table></figure>
+
+<p> 0xa对应的ecx中的值为1，输入的字符ASCII的二进制表示&amp;0x0f == 1即可满足条件，经过对照上面的表 01100001&amp;0f ==1，因此输入的前四个字符为a。同理第五位第六位字符分别为p和c。</p>
+<p>因此输入为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aaaapc</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/2.png" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1428,142 +1565,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/15/Confusion1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Richard LEE">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RichardLEE's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/15/Confusion1/" itemprop="url">Confusion1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-15T14:48:34+08:00">
-                2020-03-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Confusion1"><a href="#Confusion1" class="headerlink" title="Confusion1"></a>Confusion1</h2><p>好久没有做SSTI的题目了，借着这道题目回忆一下，首先提示要看明白图片并且找到用户的输入点。</p>
-<p><img src="/2020/03/15/Confusion1/1.png" alt></p>
-<p>这个图画了个大蟒蛇，基本可以确定是在暗示Python了。随便点开一个Login发现是404，查看源代码发现flag的位置:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">HTML</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//IETF//DTD HTML 2.0//EN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>404 Not Found<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>The requested URL /login.php was not found on this server.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">address</span>&gt;</span>Apache/2.4.10 (Debian) Server at vps1.blue-whale.me Port 23361<span class="tag">&lt;/<span class="name">address</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Flag @ /opt/flag_1234qwerty.txt --&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>因此进一步明确思路要读取/opt/flag_1234qwerty.txt必须要找到用户的输入点，这也是提示的第一条。根据经验应该是Python jinja2的SSTI了，在url里输入<a href="http://vps1.blue-whale.me:23361/login.php" target="_blank" rel="noopener">http://vps1.blue-whale.me:23361/login.php</a>2发现得到了回显，注入点就算是找到了。</p>
-<p><img src="/2020/03/15/Confusion1/2.png" alt></p>
-<p>回顾模板注入的操作：</p>
-<p>获取基本类-获取基本类的子类-寻找命令执行模块</p>
-<p>正常情况下构造payload：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#39;.__class__.__mro__[2].__subclasses__()[40](&quot;&#x2F;opt&#x2F;flag_1234qwerty.txt&quot;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>.<strong>class_代表基本类 __mro</strong>方法可打印出其继承关系返回的是一个元组，通过下标+<strong>subclasses</strong>的方法可以获取所有子类的列表。而<strong>subclasses</strong>()第40个是file类型的object。但是这个题把class这些字符给过滤了，因此利用flask的request.args进行绕过，最终paylaod为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#39;&#39;[request.args.a][request.args.b][2][request.args.c]()[40](&#39;&#x2F;opt&#x2F;flag_1234qwerty.txt&#39;)[request.args.d]()&#125;&#125;?a&#x3D;__class__&amp;b&#x3D;__mro__&amp;c&#x3D;__subclasses__&amp;d&#x3D;read</span><br></pre></td></tr></table></figure>
-
-
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1614,7 +1615,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
