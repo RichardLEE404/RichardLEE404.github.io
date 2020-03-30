@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="bin," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="第六关还是在phase_6处下断点，运行之后disass反编译 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475Dump of assembler code for">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二进制炸弹-phase6">
+<meta property="og:url" content="http://yoursite.com/2020/03/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase6/index.html">
+<meta property="og:site_name" content="RichardLEE&#39;s Blog">
+<meta property="og:description" content="第六关还是在phase_6处下断点，运行之后disass反编译 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475Dump of assembler code for">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase6/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase6/2.png">
+<meta property="article:published_time" content="2020-03-30T13:22:09.000Z">
+<meta property="article:modified_time" content="2020-03-30T13:25:16.000Z">
+<meta property="article:author" content="Richard LEE">
+<meta property="article:tag" content="bin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase6/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/30/二进制炸弹-phase6/"/>
+
+
+
+
+
+  <title>二进制炸弹-phase6 | RichardLEE's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RichardLEE's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Richard LEE">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RichardLEE's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">二进制炸弹-phase6</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-30T21:22:09+08:00">
+                2020-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>第六关还是在phase_6处下断点，运行之后disass反编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function phase_6:</span><br><span class="line">&#x3D;&gt; 0x08048e6d &lt;+0&gt;:		push   esi</span><br><span class="line">   0x08048e6e &lt;+1&gt;:		push   ebx</span><br><span class="line">   0x08048e6f &lt;+2&gt;:		sub    esp,0x44</span><br><span class="line">   0x08048e72 &lt;+5&gt;:		lea    eax,[esp+0x10]</span><br><span class="line">   0x08048e76 &lt;+9&gt;:		mov    DWORD PTR [esp+0x4],eax</span><br><span class="line">   0x08048e7a &lt;+13&gt;:	mov    eax,DWORD PTR [esp+0x50]</span><br><span class="line">   0x08048e7e &lt;+17&gt;:	mov    DWORD PTR [esp],eax</span><br><span class="line">   0x08048e81 &lt;+20&gt;:	call   0x80491dc &lt;read_six_numbers&gt;</span><br><span class="line">   0x08048e86 &lt;+25&gt;:	mov    esi,0x0</span><br><span class="line">   &#x2F;&#x2F;第一部分</span><br><span class="line">   0x08048e8b &lt;+30&gt;:	mov    eax,DWORD PTR [esp+esi*4+0x10]</span><br><span class="line">   0x08048e8f &lt;+34&gt;:	sub    eax,0x1</span><br><span class="line">   0x08048e92 &lt;+37&gt;:	cmp    eax,0x5</span><br><span class="line">   0x08048e95 &lt;+40&gt;:	jbe    0x8048e9c &lt;phase_6+47&gt;</span><br><span class="line">   0x08048e97 &lt;+42&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048e9c &lt;+47&gt;:	add    esi,0x1</span><br><span class="line">   0x08048e9f &lt;+50&gt;:	cmp    esi,0x6</span><br><span class="line">   0x08048ea2 &lt;+53&gt;:	jne    0x8048eab &lt;phase_6+62&gt;</span><br><span class="line">   0x08048ea4 &lt;+55&gt;:	mov    ebx,0x0</span><br><span class="line">   0x08048ea9 &lt;+60&gt;:	jmp    0x8048ee3 &lt;phase_6+118&gt;</span><br><span class="line">   0x08048eab &lt;+62&gt;:	mov    ebx,esi</span><br><span class="line">   0x08048ead &lt;+64&gt;:	mov    eax,DWORD PTR [esp+ebx*4+0x10]</span><br><span class="line">   0x08048eb1 &lt;+68&gt;:	cmp    DWORD PTR [esp+esi*4+0xc],eax</span><br><span class="line">   0x08048eb5 &lt;+72&gt;:	jne    0x8048ebc &lt;phase_6+79&gt;</span><br><span class="line">   0x08048eb7 &lt;+74&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048ebc &lt;+79&gt;:	add    ebx,0x1</span><br><span class="line">   0x08048ebf &lt;+82&gt;:	cmp    ebx,0x5</span><br><span class="line">   0x08048ec2 &lt;+85&gt;:	jle    0x8048ead &lt;phase_6+64&gt;</span><br><span class="line">   0x08048ec4 &lt;+87&gt;:	jmp    0x8048e8b &lt;phase_6+30&gt;</span><br><span class="line">   &#x2F;&#x2F;第二部分</span><br><span class="line">   0x08048ec6 &lt;+89&gt;:	mov    edx,DWORD PTR [edx+0x8]</span><br><span class="line">   0x08048ec9 &lt;+92&gt;:	add    eax,0x1</span><br><span class="line">   0x08048ecc &lt;+95&gt;:	cmp    eax,ecx</span><br><span class="line">   0x08048ece &lt;+97&gt;:	jne    0x8048ec6 &lt;phase_6+89&gt;</span><br><span class="line">   0x08048ed0 &lt;+99&gt;:	jmp    0x8048ed7 &lt;phase_6+106&gt;</span><br><span class="line">   0x08048ed2 &lt;+101&gt;:	mov    edx,0x804c13c</span><br><span class="line">   0x08048ed7 &lt;+106&gt;:	mov    DWORD PTR [esp+esi*4+0x28],edx</span><br><span class="line">   0x08048edb &lt;+110&gt;:	add    ebx,0x1</span><br><span class="line">   0x08048ede &lt;+113&gt;:	cmp    ebx,0x6</span><br><span class="line">   0x08048ee1 &lt;+116&gt;:	je     0x8048efa &lt;phase_6+141&gt;</span><br><span class="line">   0x08048ee3 &lt;+118&gt;:	mov    esi,ebx</span><br><span class="line">   0x08048ee5 &lt;+120&gt;:	mov    ecx,DWORD PTR [esp+ebx*4+0x10]</span><br><span class="line">   0x08048ee9 &lt;+124&gt;:	cmp    ecx,0x1</span><br><span class="line">   0x08048eec &lt;+127&gt;:	jle    0x8048ed2 &lt;phase_6+101&gt;</span><br><span class="line">   0x08048eee &lt;+129&gt;:	mov    eax,0x1</span><br><span class="line">   0x08048ef3 &lt;+134&gt;:	mov    edx,0x804c13c</span><br><span class="line">   0x08048ef8 &lt;+139&gt;:	jmp    0x8048ec6 &lt;phase_6+89&gt;</span><br><span class="line">   0x08048efa &lt;+141&gt;:	mov    ebx,DWORD PTR [esp+0x28]</span><br><span class="line">   0x08048efe &lt;+145&gt;:	lea    eax,[esp+0x2c]</span><br><span class="line">   0x08048f02 &lt;+149&gt;:	lea    esi,[esp+0x40]</span><br><span class="line">   0x08048f06 &lt;+153&gt;:	mov    ecx,ebx</span><br><span class="line">   0x08048f08 &lt;+155&gt;:	mov    edx,DWORD PTR [eax]</span><br><span class="line">   0x08048f0a &lt;+157&gt;:	mov    DWORD PTR [ecx+0x8],edx</span><br><span class="line">   0x08048f0d &lt;+160&gt;:	add    eax,0x4</span><br><span class="line">   0x08048f10 &lt;+163&gt;:	cmp    eax,esi</span><br><span class="line">   0x08048f12 &lt;+165&gt;:	je     0x8048f18 &lt;phase_6+171&gt;</span><br><span class="line">   0x08048f14 &lt;+167&gt;:	mov    ecx,edx</span><br><span class="line">   0x08048f16 &lt;+169&gt;:	jmp    0x8048f08 &lt;phase_6+155&gt;</span><br><span class="line">   0x08048f18 &lt;+171&gt;:	mov    DWORD PTR [edx+0x8],0x0</span><br><span class="line">   &#x2F;&#x2F;第三部分</span><br><span class="line">   0x08048f1f &lt;+178&gt;:	mov    esi,0x5</span><br><span class="line">   0x08048f24 &lt;+183&gt;:	mov    eax,DWORD PTR [ebx+0x8]</span><br><span class="line">   0x08048f27 &lt;+186&gt;:	mov    eax,DWORD PTR [eax]</span><br><span class="line">   0x08048f29 &lt;+188&gt;:	cmp    DWORD PTR [ebx],eax</span><br><span class="line">   0x08048f2b &lt;+190&gt;:	jge    0x8048f32 &lt;phase_6+197&gt;</span><br><span class="line">   0x08048f2d &lt;+192&gt;:	call   0x80491b5 &lt;explode_bomb&gt;</span><br><span class="line">   0x08048f32 &lt;+197&gt;:	mov    ebx,DWORD PTR [ebx+0x8]</span><br><span class="line">   0x08048f35 &lt;+200&gt;:	sub    esi,0x1</span><br><span class="line">   0x08048f38 &lt;+203&gt;:	jne    0x8048f24 &lt;phase_6+183&gt;</span><br><span class="line">   0x08048f3a &lt;+205&gt;:	add    esp,0x44</span><br><span class="line">   0x08048f3d &lt;+208&gt;:	pop    ebx</span><br><span class="line">   0x08048f3e &lt;+209&gt;:	pop    esi</span><br><span class="line">   0x08048f3f &lt;+210&gt;:	ret    </span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+
+<p>第一部分是一个循环，0x08048e95处[eax]-1&lt;=5则程序继续，否则引爆炸弹，0x08048e9c处[esi]+1，不等于6则循环，0x8048ea9 处循环结束跳出至0x8048ee3开始第二个循环 ，也就是程序的第二部分，其实也是个循环。</p>
+<p>0x8048ee3处ebx寄存器内的初始值是0，0x8048ee5处取出数组中第一个元素存入ecx寄存器，若小于等于1则跳转至0x8048ed2，这里存的是一个地址值0x804c13c ，0x8048ed7将地址传个了一个节点，随后ebx++；若大于1则跳转到0x8048ec6重复第二段循环。</p>
+<p>程序的第三部分还是一个循环，按照从大到小的顺序，使前一个节点中的值比后一个结点中的值大。</p>
+<p>再回到第一部分，刚刚跟随跳转跳走了，第一部分还有一半程序没有分析，0x8048ead处其实还是一个循环，也就是第一部分的大循环里面还嵌套了一个小循环，小循环于0x8048ec2 处结束循环并跳转回0x8048e8b进行第一个大循环。这一段小循环的作用是取数组中的下一个值，进行了比较并查看打印值。ebx++后如果ebx小于等于5则跳转，小循环结束。</p>
+<p>程序分析完了，这是个链表结构，各个节点存储的值为 0x4d&lt;1&gt; 、0x11a&lt;2&gt;、 0x223&lt;3&gt; 、 0x3d9&lt;4&gt; 、 0x106&lt;5&gt;、  0x202&lt;6&gt; ，现在只需要进行从大到小排序即可。</p>
+<p><img src="/2020/03/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase6/1.png" alt></p>
+<p>因此输入为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 3 6 2 5 1</span><br></pre></td></tr></table></figure>
+
+<p>至此通关！</p>
+<p><img src="/2020/03/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase6/2.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bin/" rel="tag"># bin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/27/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-phase5/" rel="next" title="二进制炸弹-phase5">
+                <i class="fa fa-chevron-left"></i> 二进制炸弹-phase5
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Richard LEE</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Richard LEE</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
