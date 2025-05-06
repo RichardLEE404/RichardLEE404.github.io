@@ -93,57 +93,57 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="QUIC协议快传"><a href="#QUIC协议快传" class="headerlink" title="QUIC协议快传"></a>QUIC协议快传</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
-<li>QUIC (Quick UDP Internet Connections) 是由Google开发的传输层协议</li>
-<li>它在UDP基础上实现了类似TCP的可靠传输功能</li>
-<li>现在已经成为HTTP&#x2F;3的基础协议</li>
+        <h1 id="QUIC&#x534F;&#x8BAE;&#x5FEB;&#x4F20;"><a href="#QUIC&#x534F;&#x8BAE;&#x5FEB;&#x4F20;" class="headerlink" title="QUIC&#x534F;&#x8BAE;&#x5FEB;&#x4F20;"></a>QUIC&#x534F;&#x8BAE;&#x5FEB;&#x4F20;</h1><h2 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;" class="headerlink" title="&#x7B80;&#x4ECB;"></a>&#x7B80;&#x4ECB;</h2><ul>
+<li>QUIC (Quick UDP Internet Connections) &#x662F;&#x7531;Google&#x5F00;&#x53D1;&#x7684;&#x4F20;&#x8F93;&#x5C42;&#x534F;&#x8BAE;</li>
+<li>&#x5B83;&#x5728;UDP&#x57FA;&#x7840;&#x4E0A;&#x5B9E;&#x73B0;&#x4E86;&#x7C7B;&#x4F3C;TCP&#x7684;&#x53EF;&#x9760;&#x4F20;&#x8F93;&#x529F;&#x80FD;</li>
+<li>&#x73B0;&#x5728;&#x5DF2;&#x7ECF;&#x6210;&#x4E3A;HTTP/3&#x7684;&#x57FA;&#x7840;&#x534F;&#x8BAE;</li>
 </ul>
-<h2 id="保证传输可靠"><a href="#保证传输可靠" class="headerlink" title="保证传输可靠"></a>保证传输可靠</h2><p>作为UDP协议，通过以下机制保障了传输可靠性：</p>
+<h2 id="&#x4FDD;&#x8BC1;&#x4F20;&#x8F93;&#x53EF;&#x9760;"><a href="#&#x4FDD;&#x8BC1;&#x4F20;&#x8F93;&#x53EF;&#x9760;" class="headerlink" title="&#x4FDD;&#x8BC1;&#x4F20;&#x8F93;&#x53EF;&#x9760;"></a>&#x4FDD;&#x8BC1;&#x4F20;&#x8F93;&#x53EF;&#x9760;</h2><p>&#x4F5C;&#x4E3A;UDP&#x534F;&#x8BAE;&#xFF0C;&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x673A;&#x5236;&#x4FDD;&#x969C;&#x4E86;&#x4F20;&#x8F93;&#x53EF;&#x9760;&#x6027;&#xFF1A;</p>
 <ul>
-<li>自己实现了确认重传机制</li>
-<li><strong>使用Packet Number (PKN) 替代TCP的序列号</strong></li>
-<li>加入了前向纠错(FEC)机制</li>
-<li>内置加密和流量控制</li>
+<li>&#x81EA;&#x5DF1;&#x5B9E;&#x73B0;&#x4E86;&#x786E;&#x8BA4;&#x91CD;&#x4F20;&#x673A;&#x5236;</li>
+<li><strong>&#x4F7F;&#x7528;Packet Number (PKN) &#x66FF;&#x4EE3;TCP&#x7684;&#x5E8F;&#x5217;&#x53F7;</strong></li>
+<li>&#x52A0;&#x5165;&#x4E86;&#x524D;&#x5411;&#x7EA0;&#x9519;(FEC)&#x673A;&#x5236;</li>
+<li>&#x5185;&#x7F6E;&#x52A0;&#x5BC6;&#x548C;&#x6D41;&#x91CF;&#x63A7;&#x5236;</li>
 </ul>
-<h2 id="丢包处理机制"><a href="#丢包处理机制" class="headerlink" title="丢包处理机制"></a>丢包处理机制</h2><ul>
-<li>使用独特的数据包编号防止重排</li>
-<li>实现了选择性确认(SACK)</li>
-<li>拥有自己的重传计时器</li>
-<li>可以快速检测和恢复丢失的数据包</li>
+<h2 id="&#x4E22;&#x5305;&#x5904;&#x7406;&#x673A;&#x5236;"><a href="#&#x4E22;&#x5305;&#x5904;&#x7406;&#x673A;&#x5236;" class="headerlink" title="&#x4E22;&#x5305;&#x5904;&#x7406;&#x673A;&#x5236;"></a>&#x4E22;&#x5305;&#x5904;&#x7406;&#x673A;&#x5236;</h2><ul>
+<li>&#x4F7F;&#x7528;&#x72EC;&#x7279;&#x7684;&#x6570;&#x636E;&#x5305;&#x7F16;&#x53F7;&#x9632;&#x6B62;&#x91CD;&#x6392;</li>
+<li>&#x5B9E;&#x73B0;&#x4E86;&#x9009;&#x62E9;&#x6027;&#x786E;&#x8BA4;(SACK)</li>
+<li>&#x62E5;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x91CD;&#x4F20;&#x8BA1;&#x65F6;&#x5668;</li>
+<li>&#x53EF;&#x4EE5;&#x5FEB;&#x901F;&#x68C0;&#x6D4B;&#x548C;&#x6062;&#x590D;&#x4E22;&#x5931;&#x7684;&#x6570;&#x636E;&#x5305;</li>
 </ul>
-<h1 id="微信传输机制"><a href="#微信传输机制" class="headerlink" title="微信传输机制"></a>微信传输机制</h1><h2 id="传输协议"><a href="#传输协议" class="headerlink" title="传输协议"></a>传输协议</h2><p>微信默认首选使用QUIC协议进行文件传输，TCP作为备选流量传输。</p>
-<p>在遇到网络故障&#x2F;网络卡顿时，自动切换至TCP传输。</p>
-<h2 id="QUIC-PKN机制"><a href="#QUIC-PKN机制" class="headerlink" title="QUIC PKN机制"></a>QUIC PKN机制</h2><p>微信使用QUIC传输文件，会根据文件大小控制PKN编号规则。</p>
-<h3 id="小包"><a href="#小包" class="headerlink" title="小包"></a>小包</h3><p>传输小文件时，QUIC的PKN在0-255内进行循环。</p>
-<p>​<img src="/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107163650-ixojeee.png" alt="image">​</p>
-<h3 id="大包"><a href="#大包" class="headerlink" title="大包"></a>大包</h3><p>当传输大文件时，QUIC的PKN无限变大。</p>
-<p>​<img src="/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107164104-di6w77f.png" alt="image">​</p>
-<h1 id="传输故障处理机制"><a href="#传输故障处理机制" class="headerlink" title="传输故障处理机制"></a>传输故障处理机制</h1><h2 id="网络性能降低"><a href="#网络性能降低" class="headerlink" title="网络性能降低"></a>网络性能降低</h2><p>网络性能降低时，微信会主动切换传输协议为TCP。QUIC协议不具备检测网络性能的能力。</p>
-<p><strong>特点：PKN序号全程顺序排列，突然开始tcp三次握手并完全切换为TCP。</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[QUIC传输] -&gt; [检测质差网络]</span><br><span class="line">     \          |</span><br><span class="line">      \         ↓ </span><br><span class="line">       \    [发送TCP探测包]</span><br><span class="line">        \        |</span><br><span class="line">         \       ↓</span><br><span class="line">          →  [确认TCP可用]</span><br><span class="line">                 |</span><br><span class="line">                 ↓</span><br><span class="line">            [切换到TCP]</span><br></pre></td></tr></table></figure>
+<h1 id="&#x5FAE;&#x4FE1;&#x4F20;&#x8F93;&#x673A;&#x5236;"><a href="#&#x5FAE;&#x4FE1;&#x4F20;&#x8F93;&#x673A;&#x5236;" class="headerlink" title="&#x5FAE;&#x4FE1;&#x4F20;&#x8F93;&#x673A;&#x5236;"></a>&#x5FAE;&#x4FE1;&#x4F20;&#x8F93;&#x673A;&#x5236;</h1><h2 id="&#x4F20;&#x8F93;&#x534F;&#x8BAE;"><a href="#&#x4F20;&#x8F93;&#x534F;&#x8BAE;" class="headerlink" title="&#x4F20;&#x8F93;&#x534F;&#x8BAE;"></a>&#x4F20;&#x8F93;&#x534F;&#x8BAE;</h2><p>&#x5FAE;&#x4FE1;&#x9ED8;&#x8BA4;&#x9996;&#x9009;&#x4F7F;&#x7528;QUIC&#x534F;&#x8BAE;&#x8FDB;&#x884C;&#x6587;&#x4EF6;&#x4F20;&#x8F93;&#xFF0C;TCP&#x4F5C;&#x4E3A;&#x5907;&#x9009;&#x6D41;&#x91CF;&#x4F20;&#x8F93;&#x3002;</p>
+<p>&#x5728;&#x9047;&#x5230;&#x7F51;&#x7EDC;&#x6545;&#x969C;/&#x7F51;&#x7EDC;&#x5361;&#x987F;&#x65F6;&#xFF0C;&#x81EA;&#x52A8;&#x5207;&#x6362;&#x81F3;TCP&#x4F20;&#x8F93;&#x3002;</p>
+<h2 id="QUIC-PKN&#x673A;&#x5236;"><a href="#QUIC-PKN&#x673A;&#x5236;" class="headerlink" title="QUIC PKN&#x673A;&#x5236;"></a>QUIC PKN&#x673A;&#x5236;</h2><p>&#x5FAE;&#x4FE1;&#x4F7F;&#x7528;QUIC&#x4F20;&#x8F93;&#x6587;&#x4EF6;&#xFF0C;&#x4F1A;&#x6839;&#x636E;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#x63A7;&#x5236;PKN&#x7F16;&#x53F7;&#x89C4;&#x5219;&#x3002;</p>
+<h3 id="&#x5C0F;&#x5305;"><a href="#&#x5C0F;&#x5305;" class="headerlink" title="&#x5C0F;&#x5305;"></a>&#x5C0F;&#x5305;</h3><p>&#x4F20;&#x8F93;&#x5C0F;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;QUIC&#x7684;PKN&#x5728;0-255&#x5185;&#x8FDB;&#x884C;&#x5FAA;&#x73AF;&#x3002;</p>
+<p>&#x200B;<img src="/2025/05/06/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107163650-ixojeee.png" alt="image">&#x200B;</p>
+<h3 id="&#x5927;&#x5305;"><a href="#&#x5927;&#x5305;" class="headerlink" title="&#x5927;&#x5305;"></a>&#x5927;&#x5305;</h3><p>&#x5F53;&#x4F20;&#x8F93;&#x5927;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;QUIC&#x7684;PKN&#x65E0;&#x9650;&#x53D8;&#x5927;&#x3002;</p>
+<p>&#x200B;<img src="/2025/05/06/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107164104-di6w77f.png" alt="image">&#x200B;</p>
+<h1 id="&#x4F20;&#x8F93;&#x6545;&#x969C;&#x5904;&#x7406;&#x673A;&#x5236;"><a href="#&#x4F20;&#x8F93;&#x6545;&#x969C;&#x5904;&#x7406;&#x673A;&#x5236;" class="headerlink" title="&#x4F20;&#x8F93;&#x6545;&#x969C;&#x5904;&#x7406;&#x673A;&#x5236;"></a>&#x4F20;&#x8F93;&#x6545;&#x969C;&#x5904;&#x7406;&#x673A;&#x5236;</h1><h2 id="&#x7F51;&#x7EDC;&#x6027;&#x80FD;&#x964D;&#x4F4E;"><a href="#&#x7F51;&#x7EDC;&#x6027;&#x80FD;&#x964D;&#x4F4E;" class="headerlink" title="&#x7F51;&#x7EDC;&#x6027;&#x80FD;&#x964D;&#x4F4E;"></a>&#x7F51;&#x7EDC;&#x6027;&#x80FD;&#x964D;&#x4F4E;</h2><p>&#x7F51;&#x7EDC;&#x6027;&#x80FD;&#x964D;&#x4F4E;&#x65F6;&#xFF0C;&#x5FAE;&#x4FE1;&#x4F1A;&#x4E3B;&#x52A8;&#x5207;&#x6362;&#x4F20;&#x8F93;&#x534F;&#x8BAE;&#x4E3A;TCP&#x3002;QUIC&#x534F;&#x8BAE;&#x4E0D;&#x5177;&#x5907;&#x68C0;&#x6D4B;&#x7F51;&#x7EDC;&#x6027;&#x80FD;&#x7684;&#x80FD;&#x529B;&#x3002;</p>
+<p><strong>&#x7279;&#x70B9;&#xFF1A;PKN&#x5E8F;&#x53F7;&#x5168;&#x7A0B;&#x987A;&#x5E8F;&#x6392;&#x5217;&#xFF0C;&#x7A81;&#x7136;&#x5F00;&#x59CB;tcp&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x5E76;&#x5B8C;&#x5168;&#x5207;&#x6362;&#x4E3A;TCP&#x3002;</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[QUIC&#x4F20;&#x8F93;] -&gt; [&#x68C0;&#x6D4B;&#x8D28;&#x5DEE;&#x7F51;&#x7EDC;]</span><br><span class="line">     \          |</span><br><span class="line">      \         &#x2193; </span><br><span class="line">       \    [&#x53D1;&#x9001;TCP&#x63A2;&#x6D4B;&#x5305;]</span><br><span class="line">        \        |</span><br><span class="line">         \       &#x2193;</span><br><span class="line">          &#x2192;  [&#x786E;&#x8BA4;TCP&#x53EF;&#x7528;]</span><br><span class="line">                 |</span><br><span class="line">                 &#x2193;</span><br><span class="line">            [&#x5207;&#x6362;&#x5230;TCP]</span><br></pre></td></tr></table></figure>
 
-<p>​<img src="/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107164520-mwc8nwh.png" alt="image">​</p>
-<p>3077至3079号包具有非常明显的三次握手特征，随后将传输协议完全切换为TCP。</p>
-<h2 id="网络临时中断并恢复"><a href="#网络临时中断并恢复" class="headerlink" title="网络临时中断并恢复"></a>网络临时中断并恢复</h2><p>传输过程中，网络出现短暂的中断并快速恢复。</p>
-<p><strong>特点：故障期间，网关对主机发送ICMP提示网络不可达，QUIC的PKN继续顺序增长。故障结束进行QUIC的重传。</strong></p>
-<p>网络中断前，服务器给本机的回包长度为75：</p>
-<p>​<img src="/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107171456-wkoo46l.png" alt="image">​</p>
-<p>网络中断期间，PKN序号继续持续增长，同时主机标记出长度为71的包为发送失败的包：</p>
-<p>​<img src="/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107171852-5dh84w3.png" alt="image">​</p>
-<p>网络恢复后，服务器给本机的回包为78，进行数据重传，重传后回包长度变回75，PKN重新计数：</p>
-<p>​<img src="/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107172412-jckbch6.png" alt="image">​</p>
-<p><strong>QUIC协议的载荷长度不是固定值，但是在网络中断前后能看出明显的变化，变化的即为重传包。</strong></p>
-<h2 id="网络中断使PKN乱序"><a href="#网络中断使PKN乱序" class="headerlink" title="网络中断使PKN乱序"></a>网络中断使PKN乱序</h2><p>如果网络中断使PKN序号彻底错乱，微信将切换传输协议为TCP。</p>
-<p><strong>特点：PKN序号开始错乱，开始tcp三次握手并完全切换为TCP。</strong></p>
-<p>​<img src="/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107173730-xfd91yj.png" alt="image">​</p>
-<p>PKN号由于网络中断已经无法顺序排列，QUIC协议中断，转为TCP传输。</p>
-<p><em>猜测微信的机制时如果PKN出现错号，从第10个包开始TCP握手。</em></p>
-<p>​<img src="/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107174126-dbt651x.png" alt="image">​</p>
+<p>&#x200B;<img src="/2025/05/06/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107164520-mwc8nwh.png" alt="image">&#x200B;</p>
+<p>3077&#x81F3;3079&#x53F7;&#x5305;&#x5177;&#x6709;&#x975E;&#x5E38;&#x660E;&#x663E;&#x7684;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x7279;&#x5F81;&#xFF0C;&#x968F;&#x540E;&#x5C06;&#x4F20;&#x8F93;&#x534F;&#x8BAE;&#x5B8C;&#x5168;&#x5207;&#x6362;&#x4E3A;TCP&#x3002;</p>
+<h2 id="&#x7F51;&#x7EDC;&#x4E34;&#x65F6;&#x4E2D;&#x65AD;&#x5E76;&#x6062;&#x590D;"><a href="#&#x7F51;&#x7EDC;&#x4E34;&#x65F6;&#x4E2D;&#x65AD;&#x5E76;&#x6062;&#x590D;" class="headerlink" title="&#x7F51;&#x7EDC;&#x4E34;&#x65F6;&#x4E2D;&#x65AD;&#x5E76;&#x6062;&#x590D;"></a>&#x7F51;&#x7EDC;&#x4E34;&#x65F6;&#x4E2D;&#x65AD;&#x5E76;&#x6062;&#x590D;</h2><p>&#x4F20;&#x8F93;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x7F51;&#x7EDC;&#x51FA;&#x73B0;&#x77ED;&#x6682;&#x7684;&#x4E2D;&#x65AD;&#x5E76;&#x5FEB;&#x901F;&#x6062;&#x590D;&#x3002;</p>
+<p><strong>&#x7279;&#x70B9;&#xFF1A;&#x6545;&#x969C;&#x671F;&#x95F4;&#xFF0C;&#x7F51;&#x5173;&#x5BF9;&#x4E3B;&#x673A;&#x53D1;&#x9001;ICMP&#x63D0;&#x793A;&#x7F51;&#x7EDC;&#x4E0D;&#x53EF;&#x8FBE;&#xFF0C;QUIC&#x7684;PKN&#x7EE7;&#x7EED;&#x987A;&#x5E8F;&#x589E;&#x957F;&#x3002;&#x6545;&#x969C;&#x7ED3;&#x675F;&#x8FDB;&#x884C;QUIC&#x7684;&#x91CD;&#x4F20;&#x3002;</strong></p>
+<p>&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x524D;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x7ED9;&#x672C;&#x673A;&#x7684;&#x56DE;&#x5305;&#x957F;&#x5EA6;&#x4E3A;75&#xFF1A;</p>
+<p>&#x200B;<img src="/2025/05/06/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107171456-wkoo46l.png" alt="image">&#x200B;</p>
+<p>&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x671F;&#x95F4;&#xFF0C;PKN&#x5E8F;&#x53F7;&#x7EE7;&#x7EED;&#x6301;&#x7EED;&#x589E;&#x957F;&#xFF0C;&#x540C;&#x65F6;&#x4E3B;&#x673A;&#x6807;&#x8BB0;&#x51FA;&#x957F;&#x5EA6;&#x4E3A;71&#x7684;&#x5305;&#x4E3A;&#x53D1;&#x9001;&#x5931;&#x8D25;&#x7684;&#x5305;&#xFF1A;</p>
+<p>&#x200B;<img src="/2025/05/06/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107171852-5dh84w3.png" alt="image">&#x200B;</p>
+<p>&#x7F51;&#x7EDC;&#x6062;&#x590D;&#x540E;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x7ED9;&#x672C;&#x673A;&#x7684;&#x56DE;&#x5305;&#x4E3A;78&#xFF0C;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x91CD;&#x4F20;&#xFF0C;&#x91CD;&#x4F20;&#x540E;&#x56DE;&#x5305;&#x957F;&#x5EA6;&#x53D8;&#x56DE;75&#xFF0C;PKN&#x91CD;&#x65B0;&#x8BA1;&#x6570;&#xFF1A;</p>
+<p>&#x200B;<img src="/2025/05/06/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107172412-jckbch6.png" alt="image">&#x200B;</p>
+<p><strong>QUIC&#x534F;&#x8BAE;&#x7684;&#x8F7D;&#x8377;&#x957F;&#x5EA6;&#x4E0D;&#x662F;&#x56FA;&#x5B9A;&#x503C;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x524D;&#x540E;&#x80FD;&#x770B;&#x51FA;&#x660E;&#x663E;&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x53D8;&#x5316;&#x7684;&#x5373;&#x4E3A;&#x91CD;&#x4F20;&#x5305;&#x3002;</strong></p>
+<h2 id="&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x4F7F;PKN&#x4E71;&#x5E8F;"><a href="#&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x4F7F;PKN&#x4E71;&#x5E8F;" class="headerlink" title="&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x4F7F;PKN&#x4E71;&#x5E8F;"></a>&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x4F7F;PKN&#x4E71;&#x5E8F;</h2><p>&#x5982;&#x679C;&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x4F7F;PKN&#x5E8F;&#x53F7;&#x5F7B;&#x5E95;&#x9519;&#x4E71;&#xFF0C;&#x5FAE;&#x4FE1;&#x5C06;&#x5207;&#x6362;&#x4F20;&#x8F93;&#x534F;&#x8BAE;&#x4E3A;TCP&#x3002;</p>
+<p><strong>&#x7279;&#x70B9;&#xFF1A;PKN&#x5E8F;&#x53F7;&#x5F00;&#x59CB;&#x9519;&#x4E71;&#xFF0C;&#x5F00;&#x59CB;tcp&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x5E76;&#x5B8C;&#x5168;&#x5207;&#x6362;&#x4E3A;TCP&#x3002;</strong></p>
+<p>&#x200B;<img src="/2025/05/06/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107173730-xfd91yj.png" alt="image">&#x200B;</p>
+<p>PKN&#x53F7;&#x7531;&#x4E8E;&#x7F51;&#x7EDC;&#x4E2D;&#x65AD;&#x5DF2;&#x7ECF;&#x65E0;&#x6CD5;&#x987A;&#x5E8F;&#x6392;&#x5217;&#xFF0C;QUIC&#x534F;&#x8BAE;&#x4E2D;&#x65AD;&#xFF0C;&#x8F6C;&#x4E3A;TCP&#x4F20;&#x8F93;&#x3002;</p>
+<p><em>&#x731C;&#x6D4B;&#x5FAE;&#x4FE1;&#x7684;&#x673A;&#x5236;&#x65F6;&#x5982;&#x679C;PKN&#x51FA;&#x73B0;&#x9519;&#x53F7;&#xFF0C;&#x4ECE;&#x7B2C;10&#x4E2A;&#x5305;&#x5F00;&#x59CB;TCP&#x63E1;&#x624B;&#x3002;</em></p>
+<p>&#x200B;<img src="/2025/05/06/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/image-20241107174126-dbt651x.png" alt="image">&#x200B;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/05/06/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/" data-id="cmac5qj410000roz88w674ltd" data-title="微信文件传输机制" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/05/06/%E5%BE%AE%E4%BF%A1%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6/" data-id="cmac5yofj0000akz8a2glgnj8" data-title="微信文件传输机制" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
